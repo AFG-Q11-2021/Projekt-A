@@ -14,18 +14,25 @@ public class Spieler implements SpielerInterface
     
     public int karteZiehen()
     {
-        karte = new Karte();
-        karten[kartenanzahl] = 
+        Karte karte = new Karte();
+        karten[kartenanzahl] = karte;
         kartenanzahl ++;
-        return 
+        return karte.wertGeben();
     }
     
     public int kartenwertBerechnen()
     {
-        
+        int kartenwert = 0;
+        for(int i = 0; i<kartenanzahl; i++)
+        {
+            kartenwert = kartenwert + karten[i].wertGeben();
+        }
+        return kartenwert;
     }
     
-    public int spielerbudgetBerechnen()
-    {
-    }
+    /*
+     * public int spielerbudgetBerechnen()
+     *{
+     *}
+     */
 }
