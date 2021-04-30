@@ -31,10 +31,13 @@ public class Spiel
     public boolean getSpielGestartet(){
         return spielGestartet;
     }
+    
     public void setSpieleranzahl(){
         for(int i = 0; i<spieleranzahl;i++){
             spieler = new Spieler();
-            
+        }
+    }
+
     public void kartenwertPrüfen(){
         if(Spieler.kartenwertBerechnen() > 21){
             spielVerloren = true;
