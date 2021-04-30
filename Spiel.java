@@ -32,6 +32,7 @@ public class Spiel
         return spielGestartet;
     }
     
+<<<<<<< HEAD
 
     public void kartenwertPrüfen(){
         if(Spieler.kartenwertBerechnen() > 21){
@@ -54,6 +55,11 @@ public class Spiel
     public void setSpieleranzahl(){
         for(int i = 0; i<spieleranzahl;i++){
             spieler = new Spieler();
+=======
+    public void kartenwertPrüfen(){
+        if(Spieler.kartenwertBerechnen() > 21){
+            spielVerloren = true;
+>>>>>>> 1d5aaeefa4aa76ebb9b54f39fa2be159ada42f38
         }
     }
 }
