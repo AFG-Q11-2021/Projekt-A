@@ -19,17 +19,25 @@ public class Spiel
     
 
     public Spiel(/*int newSpieleranzahl*/){
+        
         //spieleranzahl = newSpieleranzahl;
-        scanner = new Scanner(System.in);
-        eingabe = scanner.nextLine();
-        System.out.print("Möchtest du das Spiel starten? Ja / Nein");
-        setSpieleranzahl();
+        //setSpieleranzahl();
+        setSpielStarten();
     }
 
     // GUI-Button drücken, zum Spielstart
     public void setSpielStarten(){
+        System.out.print("Möchtest du das Spiel starten? Ja / Nein");
+        scanner = new Scanner(System.in);
+        eingabe = scanner.nextLine();
         if(eingabe == "Ja"){
             System.out.print("Spiel wurde gestartet.");
+            spielGestartet = true;
+        } else if(eingabe == "Nein"){
+            System.out.print("Spiel wird abgebrochen");
+            scanner.close();
+        }else{
+            System.out.print("Es kam zu einem Fehler.");
         }
     }
 
