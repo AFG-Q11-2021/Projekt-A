@@ -14,38 +14,29 @@ public class Spiel
     boolean spielVerloren = false;
     Spieler spieler;
     int spieleranzahl;
-    
+
     public Spiel(int newSpieleranzahl){
         spieleranzahl = newSpieleranzahl;
         System.out.print("Möchtest du das Spiel starten? ");
         setSpieleranzahl();
     }
-    
-    
+
     // GUI-Button drücken, zum Spielstart
     public void setSpielStarten(){
-        
+
     }
-    
+
     // Gibt zurück ob das Spiel läuft
     public boolean getSpielGestartet(){
         return spielGestartet;
     }
-    
-<<<<<<< HEAD
 
     public void kartenwertPrüfen(){
         if(Spieler.kartenwertBerechnen() > 21){
             spielVerloren = true;
         }
     }
-    
-    
-    
-    
-    
-    
-    
+
     
     
     
@@ -55,11 +46,13 @@ public class Spiel
     public void setSpieleranzahl(){
         for(int i = 0; i<spieleranzahl;i++){
             spieler = new Spieler();
-=======
+        }
+    }
+
     public void kartenwertPrüfen(){
         if(Spieler.kartenwertBerechnen() > 21){
             spielVerloren = true;
->>>>>>> 1d5aaeefa4aa76ebb9b54f39fa2be159ada42f38
+
         }
     }
 }
