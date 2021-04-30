@@ -2,6 +2,9 @@
  * Organisiert das Spiel
  * am 30.04.2021
  * von Joel und Paul
+ * 
+ * Methode kartenwertPrüfen
+ * von Magdalena und Julian am 30.04.
  */
 import java.util.Scanner;
 
@@ -28,10 +31,13 @@ public class Spiel
     public boolean getSpielGestartet(){
         return spielGestartet;
     }
-    
     public void setSpieleranzahl(){
         for(int i = 0; i<spieleranzahl;i++){
             spieler = new Spieler();
+            
+    public void kartenwertPrüfen(){
+        if(Spieler.kartenwertBerechnen() > 21){
+            spielVerloren = true;
         }
     }
 }
