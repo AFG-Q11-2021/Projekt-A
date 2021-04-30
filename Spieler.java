@@ -1,13 +1,31 @@
 /*
- * Interface für Speler & Dealer
- * 30.04.2021
  * Amelie & Vroni
  */
-
-public interface Spieler
+public class Spieler implements SpielerInterface
 {
-    public int KartenwertBerechnen();
-    //berechnet Kartensumme, die der Spieler in der Hand hat
-    public int SpielerbudgetBerechnen();
-    //berechnet das Budget, welches der Spieler hat
+    private Karte[] karten;
+    private int kartenanzahl;
+    
+    public Spieler()
+    {
+        karten = new Karte[22];
+        kartenanzahl = 0;
+    }
+    
+    public int karteZiehen()
+    {
+        karte = new Karte();
+        karten[kartenanzahl] = 
+        kartenanzahl ++;
+        return 
+    }
+    
+    public int kartenwertBerechnen()
+    {
+        
+    }
+    
+    public int spielerbudgetBerechnen()
+    {
+    }
 }
