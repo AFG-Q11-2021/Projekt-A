@@ -3,15 +3,19 @@
  * am 30.04.2021
  * von Joel und Paul
  */
+import java.util.Scanner;
 
 public class Spiel
 {
     boolean spielGestartet = false;
     boolean spielVerloren = false;
-    //int spieleranzahl;
+    Spieler spieler;
+    int spieleranzahl;
     
-    public Spiel(){
-        //new Spieler();
+    public Spiel(int newSpieleranzahl){
+        spieleranzahl = newSpieleranzahl;
+        System.out.print("Möchtest du das Spiel starten? ");
+        setSpieleranzahl();
     }
     
     
@@ -23,5 +27,11 @@ public class Spiel
     // Gibt zurück ob das Spiel läuft
     public boolean getSpielGestartet(){
         return spielGestartet;
+    }
+    
+    public void setSpieleranzahl(){
+        for(int i = 0; i<spieleranzahl;i++){
+            spieler = new Spieler();
+        }
     }
 }
