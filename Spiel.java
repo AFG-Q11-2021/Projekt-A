@@ -36,28 +36,12 @@ public class Spiel
             spieler = new Spieler();
         }
     }
-/* 
+
     public void kartenwertPrüfen(){
         if(Spieler.kartenwertBerechnen() > 21){
             spielVerloren = true;
         }
     }
 
-    
-    
-    
-    
-    
 
-    
-
-    
-   
-    public void kartenwertPrüfen(){
-        if(Spieler.kartenwertBerechnen() > 21){
-            spielVerloren = true;
-
-        }
-    }
-    */
 }
