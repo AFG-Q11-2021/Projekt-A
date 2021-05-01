@@ -11,33 +11,34 @@ import java.util.Scanner;
 public class Spiel
 {
     boolean spielGestartet = false;
-    boolean spielVerloren = false;
-    int spieleranzahl;
     private String eingabe;
     private Spieler spieler;
     private Scanner scanner;
-    
 
-    public Spiel(/*int newSpieleranzahl*/){
-        
-        //spieleranzahl = newSpieleranzahl;
-        //setSpieleranzahl();
+    public Spiel(){
+        spieler = new Spieler();
+
         setSpielStarten();
+        laufendesSpiel();
     }
 
     // GUI-Button drücken, zum Spielstart
     public void setSpielStarten(){
-        System.out.print("Möchtest du das Spiel starten? Ja / Nein");
+        System.out.print("Möchtest du das Spiel starten? Ja / Nein \n");
         scanner = new Scanner(System.in);
         eingabe = scanner.nextLine();
         if(eingabe.equalsIgnoreCase("Ja")){
-            System.out.print("Spiel wurde gestartet.");
+            System.out.print("Spiel wurde gestartet. \n");
             spielGestartet = true;
+            scanner.close();
         } else if(eingabe.equalsIgnoreCase("Nein")){
             System.out.print("Spiel wird abgebrochen");
             scanner.close();
+            spielBeendet();
         }else{
             System.out.print("Es kam zu einem Fehler.");
+            scanner.close();
+            spielBeendet();
         }
     }
 
@@ -45,16 +46,49 @@ public class Spiel
     public boolean getSpielGestartet(){
         return spielGestartet;
     }
-    
-    public void setSpieleranzahl(){
-        for(int i = 0; i<spieleranzahl;i++){
-            spieler = new Spieler();
+
+    public void laufendesSpiel(){
+        if(spielGestartet==true){
+            System.out.print("Möchtest du eine Karte ziehen? Ja / Nein \n");
+            System.out.print("");
+            scanner = new Scanner(System.in);
+            eingabe = scanner.nextLine();
+            if(eingabe.equalsIgnoreCase("Ja")){
+                spieler.karteZiehen();
+                System.out.print("Dein aktueller Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
+                System.out.print("");
+                if(verloren() == true){
+                    System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
+                    System.out.print("Du hast leider über 21");
+                    spielBeendet();
+                }else {
+                    laufendesSpiel();
+                }
+            }
+        }else {
+            System.out.print("Es kam zu einem Fehler.");
+        }
+
+    }
+
+    public void spielBeendet(){
+        try
+        {
+            Thread.sleep(5000);
+            spielGestartet = false;
+            System.exit(0);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
         }
     }
 
-    public void kartenwertPrüfen(){
+    public boolean verloren(){
         if(spieler.kartenwertBerechnen() > 21){
-            spielVerloren = true;
+            return true;
+        } else {
+            return false;
         }
     }
 }
