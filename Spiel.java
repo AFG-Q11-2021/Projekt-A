@@ -30,10 +30,10 @@ public class Spiel
         System.out.print("Möchtest du das Spiel starten? Ja / Nein");
         scanner = new Scanner(System.in);
         eingabe = scanner.nextLine();
-        if(eingabe == "Ja"){
+        if(eingabe.equalsIgnoreCase("Ja")){
             System.out.print("Spiel wurde gestartet.");
             spielGestartet = true;
-        } else if(eingabe == "Nein"){
+        } else if(eingabe.equalsIgnoreCase("Nein")){
             System.out.print("Spiel wird abgebrochen");
             scanner.close();
         }else{
