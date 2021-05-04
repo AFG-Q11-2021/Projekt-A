@@ -5,7 +5,7 @@
  * 
  * Methode kartenwertPrüfen
  * von Magdalena und Julian am 30.04.
- */
+ *
 import java.util.Scanner;
 
 public class Spiel
@@ -42,6 +42,5 @@ public class Spiel
             spielVerloren = true;
         }
     }
-
-
 }
+*/
