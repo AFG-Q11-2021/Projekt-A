@@ -62,6 +62,7 @@ public class Spiel
                 if(verloren() == true){
                     System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
                     System.out.print("Du hast leider über 21");
+                    
                     spielBeendet();
                 }else {
                     laufendesSpiel();
@@ -88,6 +89,8 @@ public class Spiel
 
     public boolean verloren(){
         if(spieler.kartenwertBerechnen() > 21){
+            return true;
+        } else if(dealer.dealerSpielt() > spieler.kartenwertBerechnen()){
             return true;
         } else {
             return false;
