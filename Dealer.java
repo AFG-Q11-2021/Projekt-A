@@ -5,6 +5,7 @@ public class Dealer implements SpielerInterface
 {
     private Karte[] karten;
     private int kartenanzahl;
+    private boolean dealerZuHoch;
     
     public Dealer()
     {
@@ -28,5 +29,19 @@ public class Dealer implements SpielerInterface
             kartenwert = kartenwert + karten[i].wertGeben();
         }
         return kartenwert;
+    }
+    
+    public int dealerSpielt()
+    {
+        karteZiehen();
+        if(kartenwertBerechnen() < 17)
+        {
+            dealerSpielt();
+        }
+        else if(kartenwertBerechnen() <= 21)
+        {
+             return kartenwertBerechnen();   
+        }
+        return 0;
     }
 }

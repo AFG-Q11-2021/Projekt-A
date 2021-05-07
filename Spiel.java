@@ -5,7 +5,7 @@
  * 
  * Methode kartenwertPrüfen
  * von Magdalena und Julian am 30.04.
- *
+ */
 import java.util.Scanner;
 
 public class Spiel
@@ -14,6 +14,8 @@ public class Spiel
     private String eingabe;
     private Spieler spieler;
     private Scanner scanner;
+    private Dealer dealer;
+    
 
     public Spiel(){
         spieler = new Spieler();
@@ -91,5 +93,9 @@ public class Spiel
             return false;
         }
     }
+    
+    public int spielerKartenwert()
+    {
+        return spieler.kartenwertBerechnen();
+    }
 }
-*/
