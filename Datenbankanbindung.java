@@ -38,5 +38,14 @@ public class Datenbankanbindung
             System.out.println("Es gab einen Fehler mit der Datenbank: " + e);
         }
     }
-
+    
+    public void benutzerLöschen(){}
+    
+    public void benutzernameÄndern(){}
+    
+    public void passwortÄndern(){}
+    
+    public void spielergeldHinzufügen(){}
+    
+    
 }
