@@ -33,14 +33,17 @@ public class Dealer implements SpielerInterface
     
     public int dealerSpielt()
     {
-        karteZiehen();
-        if(kartenwertBerechnen() < 17)
+        while(kartenwertBerechnen() < 17)
         {
-            dealerSpielt();
-        }
-        else if(kartenwertBerechnen() <= 21)
-        {
-             return kartenwertBerechnen();   
+            karteZiehen();
+            if(kartenwertBerechnen() > 21)
+            {
+                return 0;
+            }
+            else if(kartenwertBerechnen() >= 17)
+            {
+                return kartenwertBerechnen();   
+            }
         }
         return 0;
     }
