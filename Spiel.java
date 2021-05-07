@@ -67,10 +67,24 @@ public class Spiel
                 }else {
                     laufendesSpiel();
                 }
-            }else if(dealer.dealerSpielt() > spieler.kartenwertBerechnen()){
-                System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
-                System.out.print("Der Dealer hat:"+ dealer.kartenwertBerechnen()+ "\n");
-                System.out.print("Du hast gegen den Dealer verloren.");
+            }else if(eingabe.equalsIgnoreCase("Nein")){
+                if(dealer.dealerSpielt() > spieler.kartenwertBerechnen()){
+                    System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
+                    System.out.print("Der Dealer hat:"+ dealer.kartenwertBerechnen()+ "\n");
+                    System.out.print("Du hast gegen den Dealer verloren." + "\n");
+                } else {
+                    if(dealer.kartenwertBerechnen() > 21)
+                    {
+                        System.out.print("Dealer hat überzogen. Er hat: "+ dealer.kartenwertBerechnen() +"\n");
+                        System.out.print("Du hast gewonnen!\n");
+                    }
+                    else
+                    {
+                        System.out.print("Dealer hat: " + dealer.kartenwertBerechnen()+ "\n");
+                    }
+                }
+            } else {
+
             }
         }else {
             System.out.print("Es kam zu einem Fehler.");
