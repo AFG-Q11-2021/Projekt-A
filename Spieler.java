@@ -5,11 +5,13 @@ public class Spieler implements SpielerInterface
 {
     private Karte[] karten;
     private int kartenanzahl;
+    private int budget;
     
     public Spieler()
     {
         karten = new Karte[22];
         kartenanzahl = 0;
+        budget = 1000;
     }
     
     public int karteZiehen()
@@ -30,9 +32,15 @@ public class Spieler implements SpielerInterface
         return kartenwert;
     }
     
-    /*
-     * public int spielerbudgetBerechnen()
-     *{
-     *}
-     */
+    public int budgetErhoehen(int erhoehung)
+    {
+        budget = budget + erhoehung;
+        return budget;
+    }
+    
+    public int budgetVerringern(int verringerung)
+    {
+        budget = budget - verringerung;
+        return budget;
+    }
 }
