@@ -74,6 +74,7 @@ public class Gui
           knopf4.addActionListener(new ActionListener() {
                  public void actionPerformed(ActionEvent e) {
                      System.out.println("Ok Button4 clicked.");
+                     textleiste.append("lo");
                  }          
           }
           );
@@ -89,6 +90,7 @@ public class Gui
         
         fenster.pack();
         
+        fenster.setSize(1000,600);
         
         fenster.setVisible(true);
         
