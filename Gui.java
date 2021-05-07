@@ -18,7 +18,7 @@ public class Gui
     
      
     
-    public void guizweitlösunweitlösung(){
+    public void gui(){
     
         fenster = new JFrame("Blackjack-Demo");
         
