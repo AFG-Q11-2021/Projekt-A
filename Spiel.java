@@ -15,10 +15,10 @@ public class Spiel
     private Spieler spieler;
     private Scanner scanner;
     private Dealer dealer;
-    
 
     public Spiel(){
         spieler = new Spieler();
+        dealer = new Dealer();
 
         setSpielStarten();
         laufendesSpiel();
@@ -62,11 +62,15 @@ public class Spiel
                 if(verloren() == true){
                     System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
                     System.out.print("Du hast leider über 21");
-                    
+
                     spielBeendet();
                 }else {
                     laufendesSpiel();
                 }
+            }else if(dealer.dealerSpielt() > spieler.kartenwertBerechnen()){
+                System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
+                System.out.print("Der Dealer hat:"+ dealer.kartenwertBerechnen()+ "\n");
+                System.out.print("Du hast gegen den Dealer verloren.");
             }
         }else {
             System.out.print("Es kam zu einem Fehler.");
@@ -90,13 +94,11 @@ public class Spiel
     public boolean verloren(){
         if(spieler.kartenwertBerechnen() > 21){
             return true;
-        } else if(dealer.dealerSpielt() > spieler.kartenwertBerechnen()){
-            return true;
         } else {
             return false;
         }
     }
-    
+
     public int spielerKartenwert()
     {
         return spieler.kartenwertBerechnen();
