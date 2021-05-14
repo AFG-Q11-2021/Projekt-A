@@ -3,10 +3,10 @@
 public class Karte
 {
     private int wert;
-    
+    private String farbe;
     public Karte()
     {
-        wert = 1 + (int)(Math.random() * 11);
+        //wert = 1 + (int)(Math.random() * 11);
     }
     
     public int wertGeben()
@@ -14,5 +14,9 @@ public class Karte
         return wert;
     }
     
+    public String farbeGeben()
+    {
+        return farbe;
+    }
     
 }
