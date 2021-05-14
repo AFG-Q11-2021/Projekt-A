@@ -4,8 +4,10 @@ public class Karte
 {
     private int wert;
     private String farbe;
-    public Karte()
+    public Karte(int newWert, String newFarbe)
     {
+        wert = newWert;
+        farbe = newFarbe;
         //wert = 1 + (int)(Math.random() * 11);
     }
     
