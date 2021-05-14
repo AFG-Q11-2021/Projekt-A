@@ -17,7 +17,22 @@ public class Kartendeck
             {
                 if(i == 1)
                 {
-                    kartendeck[k] = new Karte();
+                    kartendeck[k] = new Karte(k, "Herz");
+                }
+                
+                if(i == 2)
+                {
+                    kartendeck[k] = new Karte(k, "Pik");
+                }
+                
+                if(i == 3)
+                {
+                    kartendeck[k] = new Karte(k, "Kreuz");
+                }
+                
+                if(i == 4)
+                {
+                    kartendeck[k] = new Karte(k, "Karo");
                 }
             }
         }
