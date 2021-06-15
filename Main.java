@@ -2,7 +2,7 @@ public class Main
 {
     public Main()
     {
-        new Gui();
+        //new Gui();
         new Spiel();
     }
     
