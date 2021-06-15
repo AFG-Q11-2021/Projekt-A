@@ -15,6 +15,7 @@ public class Gui
     private JButton knopf1,knopf2,knopf3,knopf4;
     private JPanel leisteRechts;
     private JTextArea textleiste;
+    
     public Gui(){
         fenster = new JFrame("Blackjack-Demo");
 
