@@ -3,7 +3,7 @@
  * Julian & Magdalena 
  * 14.05.2021
  * 
- */
+
 public class Kartendeck 
 {
     private Karte[][] kartendeck;
@@ -26,3 +26,4 @@ public class Kartendeck
     }
 }
 
+ */

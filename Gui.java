@@ -16,7 +16,9 @@ public class Gui
     private JPanel leisteRechts;
     private JTextArea textleiste;
     
-     
+    public Gui(){
+        gui();
+    }
     
     public void gui(){
     
