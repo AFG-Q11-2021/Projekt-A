@@ -5,6 +5,9 @@
  * 
  * Methode kartenwertPrüfen
  * von Magdalena und Julian am 30.04.
+ * 
+ * Output für das Gui 
+ * von Sasha und Raphael am 18.06.
  */
 import java.util.Scanner;
 import java.awt.*;
@@ -39,23 +42,36 @@ public class Spiel implements ActionListener
         if(e.getSource() == gui.knopf3Geben())
         {
             System.out.print("Spiel wurde gestartet. \n");
+            gui.textleiste.setText("Spiel wurde gestartet");
             spielGestartet = true;
         }
         if(e.getSource() == gui.knopf4Geben())
         {
+            
+            
+           
+            //gui.beendenBestaetigen();
+            
+            
+            
             System.out.print("Spiel wird abgebrochen");
             spielBeendet();
         }
         if(spielGestartet==true){
             System.out.print("Möchtest du eine Karte ziehen? Ja / Nein \n");
             System.out.print("");
+            gui.textleiste.setText("Möchtest du eine Karte ziehen? Ja / Nein");
             if(e.getSource() == gui.knopf1Geben()){
                 spieler.karteZiehen();
                 System.out.print("Dein aktueller Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
                 System.out.print("");
+                gui.textleiste.setText("Dein aktueller Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
                 if(verloren() == true){
                     System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
                     System.out.print("Du hast leider über 21");
+                    
+                    gui.textleiste.setText("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
+                    gui.textleiste.setText("Du hast leider über 21");
 
                     spielBeendet();
                 }else {
@@ -66,15 +82,21 @@ public class Spiel implements ActionListener
                     System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
                     System.out.print("Der Dealer hat:"+ dealer.kartenwertBerechnen()+ "\n");
                     System.out.print("Du hast gegen den Dealer verloren." + "\n");
+                    gui.textleiste.setText("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
+                    gui.textleiste.setText("Der Dealer hat:"+ dealer.kartenwertBerechnen()+ "\n");
+                    gui.textleiste.setText("Du hast gegen den Dealer verloren." + "\n");                  
                 } else {
                     if(dealer.kartenwertBerechnen() > 21)
                     {
                         System.out.print("Dealer hat überzogen. Er hat: "+ dealer.kartenwertBerechnen() +"\n");
                         System.out.print("Du hast gewonnen!\n");
+                        gui.textleiste.setText("Dealer hat überzogen. Er hat: "+ dealer.kartenwertBerechnen() +"\n");
+                        gui.textleiste.setText("Du hast gewonnen!\n");
                     }
                     else
                     {
                         System.out.print("Dealer hat: " + dealer.kartenwertBerechnen()+ "\n");
+                        gui.textleiste.setText("Dealer hat: " + dealer.kartenwertBerechnen()+ "\n");
                     }
                 }
             } else {
@@ -82,6 +104,7 @@ public class Spiel implements ActionListener
             }
         }else {
             System.out.print("Es kam zu einem Fehler.");
+            gui.textleiste.setText("Es kam zu einem Fehler");
         }
     }
     /* public void setSpielStarten(){
