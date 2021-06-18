@@ -10,7 +10,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import javax.swing.border.BevelBorder;
+
 
 public class Gui 
 {
@@ -79,31 +79,28 @@ public class Gui
     {
         return knopf4;
     }
-    /*
+    
     public void beendenBestaetigen()
     {
-        JMenuItem item;
-        
-        beendenMenu = new JPopupMenu("Beenden?");
-        
-        beendenMenu.add(item = new JMenuItem("Settings"));
-        beendenMenu.setLabel("Justification");
-        beendenMenu.setBorder(new BevelBorder(BevelBorder.RAISED));
+       fenster = new JFrame("Beenden?");
+       
        leisteUntenBeenden = new JPanel();
         
-        beendenJaKnopf = new JButton("Ja");
+        beendenJaKnopf = new JButton("Beenden");
         beendenJaKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
         leisteUntenBeenden.add(beendenJaKnopf);
         
-        beendenMenu.add(BorderLayout.EAST, leisteRechts);
-        beendenMenu.setSize(100,60);
-        beendenMenu.pack();
-        beendenMenu.show();
         
+        beendenNeinKnopf = new JButton("Nein");
+        beendenNeinKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
+        leisteUntenBeenden.add(beendenNeinKnopf);
         
-        
+        fenster.add(BorderLayout.CENTER,leisteUntenBeenden);
+        fenster.pack();
+        fenster.setSize(100,60);
+        fenster.setVisible(true);
     }
-    */
+    
 }
 
 

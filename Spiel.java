@@ -51,12 +51,12 @@ public class Spiel implements ActionListener
             
             
            
-            //gui.beendenBestaetigen();
+            gui.beendenBestaetigen();
             
             
             
             System.out.print("Spiel wird abgebrochen");
-            spielBeendet();
+            //spielBeendet();
         }
         
         if(spielGestartet==true){
