@@ -62,6 +62,8 @@ public class Gui
         fenster.setSize(1000,600);
         fenster.setVisible(true);
         
+        
+        
 
     }
     public JButton knopf1Geben()
