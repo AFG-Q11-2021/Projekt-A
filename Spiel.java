@@ -42,7 +42,7 @@ public class Spiel implements ActionListener
         if(e.getSource() == gui.knopf3Geben())
         {
             System.out.print("Spiel wurde gestartet. \n");
-            gui.textleiste.setText("Spiel wurde gestartet");
+            gui.textleiste.setText("Spiel wurde gestartet  \n");
             spielGestartet = true;
         }
         
@@ -55,14 +55,14 @@ public class Spiel implements ActionListener
             
             
             
-            System.out.print("Spiel wird abgebrochen");
+            System.out.print("Spiel wird abgebrochen  \n");
             spielBeendet();
         }
         
         if(spielGestartet==true){
             System.out.print("Möchtest du eine Karte ziehen? Ja / Nein \n");
             System.out.print("");
-            gui.textleiste.setText("Möchtest du eine Karte ziehen? Ja / Nein");
+            gui.textleiste.setText("Möchtest du eine Karte ziehen? Ja / Nein  \n");
             if(e.getSource() == gui.knopf1Geben()){
                 spieler.karteZiehen();
                 System.out.print("Dein aktueller Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
@@ -70,10 +70,10 @@ public class Spiel implements ActionListener
                 gui.textleiste.setText("Dein aktueller Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
                 if(verloren() == true){
                     System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
-                    System.out.print("Du hast leider über 21");
+                    System.out.print("Du hast leider über 21  \n");
                     
                     gui.textleiste.setText("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
-                    gui.textleiste.setText("Du hast leider über 21");
+                    gui.textleiste.setText("Du hast leider über 21 \n");
 
                     spielBeendet();
                 } /*else {
@@ -105,8 +105,8 @@ public class Spiel implements ActionListener
 
             }
         }else {
-            System.out.print("Es kam zu einem Fehler.");
-            gui.textleiste.setText("Es kam zu einem Fehler");
+            System.out.print("Es kam zu einem Fehler. \n");
+            gui.textleiste.setText("Es kam zu einem Fehler. \n");
         }
     }
     /* public void setSpielStarten(){

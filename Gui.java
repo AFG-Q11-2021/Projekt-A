@@ -58,25 +58,28 @@ public class Gui
         fenster.pack();
         fenster.setSize(1000,600);
         fenster.setVisible(true);
-        
-
     }
+    
     public JButton knopf1Geben()
     {
         return knopf1;
     }
+    
     public JButton knopf2Geben()
     {
         return knopf2;
     }
+    
     public JButton knopf3Geben()
     {
         return knopf3;
     }
+    
     public JButton knopf4Geben()
     {
         return knopf4;
     }
+    
     /*
     public void beendenBestaetigen()
     {
@@ -97,9 +100,6 @@ public class Gui
         beendenMenu.setSize(100,60);
         beendenMenu.pack();
         beendenMenu.show();
-        
-        
-        
     }
     */
 }
