@@ -45,6 +45,7 @@ public class Spiel implements ActionListener
             gui.textleiste.setText("Spiel wurde gestartet");
             spielGestartet = true;
         }
+        
         if(e.getSource() == gui.knopf4Geben())
         {
             
@@ -57,6 +58,7 @@ public class Spiel implements ActionListener
             System.out.print("Spiel wird abgebrochen");
             spielBeendet();
         }
+        
         if(spielGestartet==true){
             System.out.print("Möchtest du eine Karte ziehen? Ja / Nein \n");
             System.out.print("");
@@ -74,9 +76,9 @@ public class Spiel implements ActionListener
                     gui.textleiste.setText("Du hast leider über 21");
 
                     spielBeendet();
-                }else {
+                } /*else {
                     actionPerformed(e);
-                }
+                }*/ 
             }else if(e.getSource() == gui.knopf2Geben()){
                 if(dealer.dealerSpielt() > spieler.kartenwertBerechnen()){
                     System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");

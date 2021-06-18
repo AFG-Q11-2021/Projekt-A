@@ -14,19 +14,16 @@ import javax.swing.border.BevelBorder;
 
 public class Gui 
 {
-
     private JFrame fenster;
     private JButton knopf1,knopf2,knopf3,knopf4,beendenJaKnopf,beendenNeinKnopf;
     private JPanel leisteRechts,leisteUntenBeenden;
     public JPopupMenu beendenMenu; 
     public JTextArea textleiste;
     
-    
-    
     public Gui(){   
 
         
-       //erzeugt das Fenster und alle Elemente des GUIs
+        //erzeugt das Fenster und alle Elemente des GUIs
        
         fenster = new JFrame("Blackjack-Demo");
 
