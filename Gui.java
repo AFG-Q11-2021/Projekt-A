@@ -53,7 +53,7 @@ public class Gui
         
 
         fenster.add(BorderLayout.EAST, leisteRechts);
-        textleiste  = new JTextArea();
+        textleiste  = new JTextArea(5, 1);
         fenster.add(BorderLayout.SOUTH, textleiste);
         fenster.pack();
         fenster.setSize(1000,600);
