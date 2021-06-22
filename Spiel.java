@@ -98,14 +98,12 @@ public class Spiel implements ActionListener
 
         }
         
-        //Bestätigen des Beendens
+        //Bestätigen des Beenden
         if(e.getSource() == gui.beendenNeinKnopfGeben())
         {
             
             gui.textleiste.append("Beenden abgebrochen \n");
-            gui.beendenBestaetigenSchließen();
-            System.out.println("Test");
-            
+            gui.beendenBestaetigenSchließen();            
         }
         else if(e.getSource() == gui.beendenJaKnopfGeben())
         {
@@ -115,37 +113,6 @@ public class Spiel implements ActionListener
         }
     }
 
-    //Knöpfe für das Popup-Beenden-Fenster
-   /*
-    public void actionPerformedBeenden(ActionEvent b)
-    {
-        if(b.getSource() == gui.beendenNeinKnopfGeben())
-        {
-            gui.textleiste.append("2");
-            
-            gui.textleiste.append("Beenden abgebrochen \n");
-            gui.beendenBestaetigenSchließen();
-            System.out.println("Test");
-            
-        }
-        else if(b.getSource() == gui.beendenJaKnopfGeben())
-        {
-            gui.textleiste.append("Beende \n");
-            gui.beendenBestaetigenSchließen();
-            System.out.println("Test2");
-            spielBeendet();
-        }
-        else 
-        {
-            //return b.getSource();
-            gui.textleiste.append("uwu");
-        }
-
-    }
-    
-    */
-   
-    // Gibt zurück ob das Spiel läuft
     public boolean getSpielGestartet()
     {
         return spielGestartet;

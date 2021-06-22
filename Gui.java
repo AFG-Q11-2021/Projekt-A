@@ -6,10 +6,12 @@
  * am 18.06.
  * von Sasha, Raphael & Magdalena
  */
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import javax.imageio.*;
+import java.awt.Toolkit;
+import java.awt.Image;
 
 public class Gui 
 {
@@ -18,12 +20,22 @@ public class Gui
     private JPanel leisteRechts,leisteUntenBeenden;
     private JScrollPane scrollTextleiste;
     public JTextArea textleiste;
+    private Image image;
 
     public Gui(){   
+        /*
+        
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("C:\\Users\\marsm\\Desktop\\InfoProjekt\\InfoProjekt\\res\\icon.png"));
+        fenster.setIconImage(image);
+          */      
+
+         
+
+        
         //erzeugt das Fenster und alle Elemente des GUIs
         fenster = new JFrame("Blackjack-Demo");
         leisteRechts = new JPanel();
-        
+
         knopfHit = new JButton("Hit");
         knopfHit.setFont(new Font("Arial", Font.PLAIN, 12));
         leisteRechts.add(knopfHit);
@@ -45,14 +57,13 @@ public class Gui
 
         beendenNeinKnopf = new JButton("Nein");
         beendenNeinKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
-        
+
         textleiste  = new JTextArea();
-        
+
         scrollTextleiste = new JScrollPane(textleiste);
         scrollTextleiste.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         fenster.add(scrollTextleiste);
-        
-        
+
         
         fenster.add(BorderLayout.EAST, leisteRechts);
         //fenster.add(BorderLayout.SOUTH, textleiste);
@@ -81,8 +92,8 @@ public class Gui
     {
         return knopfStop;
     }
-    
-       public JButton beendenJaKnopfGeben()
+
+    public JButton beendenJaKnopfGeben()
     {
         return beendenJaKnopf;
     }
@@ -91,7 +102,7 @@ public class Gui
     {
         return beendenNeinKnopf;
     }
-    
+
     public void beendenBestaetigen()
     {
         fensterBeenden = new JFrame("Beenden?");
@@ -108,7 +119,6 @@ public class Gui
 
     }
 
- 
 
     public void beendenBestaetigenSchließen()
     {
