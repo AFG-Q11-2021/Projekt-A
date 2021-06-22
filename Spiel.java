@@ -8,6 +8,9 @@
  * 
  * Output für das Gui 
  * von Sasha und Raphael am 18.06.
+ * 
+ * Code organisiert und weiter am Popup-Fenster gearbeitet
+ * von Raphael am 22.06.
  */
 import java.util.Scanner;
 import java.awt.*;
@@ -26,7 +29,6 @@ public class Spiel implements ActionListener
     public Spiel(){
         spieler = new Spieler();
         dealer = new Dealer();
-
         gui = new Gui();
         
         
@@ -34,35 +36,35 @@ public class Spiel implements ActionListener
         gui.knopf2Geben().addActionListener(this);
         gui.knopf3Geben().addActionListener(this);
         gui.knopf4Geben().addActionListener(this);
+        
+        gui.beendenJaKnopfGeben().addActionListener(this);
+        gui.beendenNeinKnopfGeben().addActionListener(this);
     }
 
     // GUI-Button drücken, zum Spielstart
     public void actionPerformed(ActionEvent e)
     {
+        
         if(e.getSource() == gui.knopf3Geben())
         {
             System.out.print("Spiel wurde gestartet. \n");
-            gui.textleiste.setText("Spiel wurde gestartet");
+            gui.textleiste.setText("Spiel wurde gestartet  \n");
             spielGestartet = true;
         }
         
         if(e.getSource() == gui.knopf4Geben())
         {
-            
-            
-           
+ 
+            System.out.print("Spiel wird abgebrochen  \n");
+            //spielBeendet();
             gui.beendenBestaetigen();
             
-            
-            
-            System.out.print("Spiel wird abgebrochen");
-            //spielBeendet();
         }
         
         if(spielGestartet==true){
             System.out.print("Möchtest du eine Karte ziehen? Ja / Nein \n");
             System.out.print("");
-            gui.textleiste.setText("Möchtest du eine Karte ziehen? Ja / Nein");
+            gui.textleiste.setText("Möchtest du eine Karte ziehen? Ja / Nein  \n");
             if(e.getSource() == gui.knopf1Geben()){
                 spieler.karteZiehen();
                 System.out.print("Dein aktueller Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
@@ -70,10 +72,10 @@ public class Spiel implements ActionListener
                 gui.textleiste.setText("Dein aktueller Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
                 if(verloren() == true){
                     System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
-                    System.out.print("Du hast leider über 21");
+                    System.out.print("Du hast leider über 21  \n");
                     
                     gui.textleiste.setText("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
-                    gui.textleiste.setText("Du hast leider über 21");
+                    gui.textleiste.setText("Du hast leider über 21 \n");
 
                     spielBeendet();
                 } /*else {
@@ -105,76 +107,38 @@ public class Spiel implements ActionListener
 
             }
         }else {
-            System.out.print("Es kam zu einem Fehler.");
-            gui.textleiste.setText("Es kam zu einem Fehler");
+            System.out.print("Es kam zu einem Fehler. \n");
+            gui.textleiste.setText("Es kam zu einem Fehler. \n");
         }
     }
-    /* public void setSpielStarten(){
-     *   System.out.print("Möchtest du das Spiel starten? Ja / Nein \n");
-     *   scanner = new Scanner(System.in);
-        eingabe = scanner.nextLine();
-        if(eingabe.equalsIgnoreCase("Ja")){
-            System.out.print("Spiel wurde gestartet. \n");
-            spielGestartet = true;
-            scanner.close();
-        } else if(eingabe.equalsIgnoreCase("Nein")){
-            System.out.print("Spiel wird abgebrochen");
-            scanner.close();
-            spielBeendet();
-        }else{
-            System.out.print("Es kam zu einem Fehler.");
-            scanner.close();
-            spielBeendet();
-        }
-    */
-
+    
+    //Knöpfe für das Popup-Beenden-Fenster
+     public void actionPerformedBeenden(ActionEvent b)
+    {
+        
+            
+        
+            if(b.getSource() == gui.beendenNeinKnopfGeben())
+            {
+                gui.textleiste.setText("Beenden abgebrochen \n");
+                System.out.println("test");
+                gui.beendenBestaetigenSchließen();
+            }
+            else if(b.getSource() == gui.beendenJaKnopfGeben())
+            {
+                gui.textleiste.setText("Beende \n");
+                gui.beendenBestaetigenSchließen();
+                spielBeendet();
+            }
+                   
+        
+    }
+    
     // Gibt zurück ob das Spiel läuft
     public boolean getSpielGestartet()
     {
         return spielGestartet;
     }
-
-    /*public void laufendesSpiel(ActionEvent e)
-    {
-        if(spielGestartet==true){
-            System.out.print("Möchtest du eine Karte ziehen? Ja / Nein \n");
-            System.out.print("");
-            if(e.getSource() == gui.knopf1Geben()){
-                spieler.karteZiehen();
-                System.out.print("Dein aktueller Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
-                System.out.print("");
-                if(verloren() == true){
-                    System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
-                    System.out.print("Du hast leider über 21");
-
-                    spielBeendet();
-                }else {
-                    laufendesSpiel(e);
-                }
-            }else if(e.getSource() == gui.knopf2Geben()){
-                if(dealer.dealerSpielt() > spieler.kartenwertBerechnen()){
-                    System.out.print("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
-                    System.out.print("Der Dealer hat:"+ dealer.kartenwertBerechnen()+ "\n");
-                    System.out.print("Du hast gegen den Dealer verloren." + "\n");
-                } else {
-                    if(dealer.kartenwertBerechnen() > 21)
-                    {
-                        System.out.print("Dealer hat überzogen. Er hat: "+ dealer.kartenwertBerechnen() +"\n");
-                        System.out.print("Du hast gewonnen!\n");
-                    }
-                    else
-                    {
-                        System.out.print("Dealer hat: " + dealer.kartenwertBerechnen()+ "\n");
-                    }
-                }
-            } else {
-
-            }
-        }else {
-            System.out.print("Es kam zu einem Fehler.");
-        }
-
-    }*/
 
     public void spielBeendet(){
         try
