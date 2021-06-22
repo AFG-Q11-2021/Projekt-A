@@ -15,6 +15,7 @@ public class Kartendeck
     public Kartendeck()
     {
         kartendeck = new Karte[52];
+        kartendeckGroeße = 52;
         int zaehler = 0;
         for(int farbe = 1; farbe<=4; farbe++){
             for(int wert = 1; wert<=13; wert++){
@@ -25,20 +26,24 @@ public class Kartendeck
         kartenNeuMischen();
     }
     
-    public void karteZiehen(){
-        
+    public Karte karteZiehen(){
+        if(kartendeckGroeße == 0){
+            kartenNeuMischen();
+        }
+        kartendeckGroeße--;
+        return kartendeck[kartendeckGroeße];
     }
     
     public void kartenNeuMischen(){
         Karte zwischenspeicher;
-        kartendeckGroeße = 52;
-        Random random = new Random();
-        int zufall1 = 1 + random.nextInt(52);
-        int zufall2 = 1 + random.nextInt(52);        
-        for(int i = 0; kartendeckGroeße < i; i++){
-            zwischenspeicher = kartendeck[zufall1];
-            kartendeck[zufall1] = kartendeck[zufall2];
-            kartendeck[zufall2] = zwischenspeicher;
+        Random random = new Random();     
+        for(int i=51; i>=0; i--){
+            int zufall = 1 + random.nextInt(51);
+            if(zufall != i){
+                zwischenspeicher = kartendeck[i];
+                kartendeck[i] = kartendeck[zufall];
+                kartendeck[zufall] = zwischenspeicher;
+            }
         }
     }
     
@@ -49,5 +54,11 @@ public class Kartendeck
             System.out.print("Wert: " + kartendeck[i].wertGeben() + " + ");
             System.out.print("Farbe: " + kartendeck[i].farbeGeben() + "\n");
         }
+    }
+    
+    public void testen2(){
+        System.out.print("Test 2 ergab: \n");
+        System.out.print("Wert: " + karteZiehen().wertGeben() + " + ");
+        System.out.print("Farbe: " + karteZiehen().farbeGeben() + "\n");
     }
 }
