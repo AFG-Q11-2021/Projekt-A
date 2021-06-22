@@ -1,7 +1,7 @@
 /* 
  * 
- * Julian & Magdalena 
- * 14.05.2021
+ * Paul & Joel
+ * 18.06.2021
  * 
  */
 import java.util.Random;
@@ -14,10 +14,10 @@ public class Kartendeck
 
     public Kartendeck()
     {
-        int zaehler = 0;
         kartendeck = new Karte[52];
-        for(int farbe = 0; farbe<4; farbe++){
-            for(int wert = 0; wert<14; wert++){
+        int zaehler = 0;
+        for(int farbe = 1; farbe<=4; farbe++){
+            for(int wert = 1; wert<=13; wert++){
                 kartendeck[zaehler]= new Karte(farbe, wert);
                 zaehler++;
             }
@@ -46,6 +46,8 @@ public class Kartendeck
         for(int i = 0; i < 52; i++){
             kartendeck[i].wertGeben();
             kartendeck[i].farbeGeben();
+            System.out.print("Wert: " + kartendeck[i].wertGeben() + " + ");
+            System.out.print("Farbe: " + kartendeck[i].farbeGeben() + "\n");
         }
     }
 }

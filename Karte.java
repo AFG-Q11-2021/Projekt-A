@@ -3,7 +3,7 @@
 public class Karte
 {
     private static int KREUZ=0, PIK=1, HERZ=2, KARO=3;
-    private static int BUBE=11, DAME=12, KOENIG=13, ASS=14;
+    private static int BUBE=11, DAME=12, KOENIG=13, ASS=1;
     private int wert, farbe;
     public Karte(/*,int newWert String newFarbe*/)
     {

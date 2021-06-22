@@ -16,18 +16,17 @@ public class Gui
     private JFrame fenster, fensterBeenden;
     private JButton knopf1,knopf2,knopf3,knopf4,beendenJaKnopf,beendenNeinKnopf;
     private JPanel leisteRechts,leisteUntenBeenden;
-    public JPopupMenu beendenMenu; 
+    private JScrollPane scrollTextleiste;
     public JTextArea textleiste;
 
     public Gui(){   
-
         //erzeugt das Fenster und alle Elemente des GUIs
         fenster = new JFrame("Blackjack-Demo");
         leisteRechts = new JPanel();
+        
         knopf1 = new JButton("Hit");
         knopf1.setFont(new Font("Arial", Font.PLAIN, 12));
         leisteRechts.add(knopf1);
-
 
         knopf2 = new JButton("Stand");
         knopf2.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -37,29 +36,30 @@ public class Gui
         knopf3.setFont(new Font("Arial", Font.PLAIN, 12));
         leisteRechts.add(knopf3);
 
-
         knopf4 = new JButton ("Stop");
         knopf4.setFont(new Font("Arial", Font.PLAIN, 12));
         leisteRechts.add(knopf4);
 
-        
         beendenJaKnopf = new JButton("Beenden");
         beendenJaKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
 
-        
-               
-        
         beendenNeinKnopf = new JButton("Nein");
         beendenNeinKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
         
-
-        fenster.add(BorderLayout.EAST, leisteRechts);
         textleiste  = new JTextArea();
-        fenster.add(BorderLayout.SOUTH, textleiste);
+        
+        scrollTextleiste = new JScrollPane(textleiste);
+        scrollTextleiste.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        fenster.add(scrollTextleiste);
+        
+        
+        
+        fenster.add(BorderLayout.EAST, leisteRechts);
+        //fenster.add(BorderLayout.SOUTH, textleiste);
         fenster.pack();
         fenster.setSize(1000,600);
-        fenster.setVisible(true);
 
+        fenster.setVisible(true);
     }
 
     public JButton knopf1Geben()
@@ -90,7 +90,7 @@ public class Gui
 
         leisteUntenBeenden.add(beendenJaKnopf);
         leisteUntenBeenden.add(beendenNeinKnopf);
-        
+
         fensterBeenden.add(BorderLayout.CENTER,leisteUntenBeenden);
         fensterBeenden.pack();
         fensterBeenden.setSize(200,80);
@@ -113,9 +113,7 @@ public class Gui
         System.out.println("test");
         fensterBeenden.setVisible(false);
         fensterBeenden.dispose();
-        
     }
 
 }
-
 
