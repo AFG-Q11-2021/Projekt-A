@@ -22,16 +22,8 @@ public class Gui
     public JTextArea textleiste;
     private Image image;
 
-    public Gui(){   
-        /*
-        
-        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("C:\\Users\\marsm\\Desktop\\InfoProjekt\\InfoProjekt\\res\\icon.png"));
-        fenster.setIconImage(image);
-          */      
+    public Gui(){       
 
-         
-
-        
         //erzeugt das Fenster und alle Elemente des GUIs
         fenster = new JFrame("Blackjack-Demo");
         leisteRechts = new JPanel();
@@ -69,6 +61,9 @@ public class Gui
         //fenster.add(BorderLayout.SOUTH, textleiste);
         fenster.pack();
         fenster.setSize(1000,600);
+        
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\Icon.png"));
+        fenster.setIconImage(image);
 
         fenster.setVisible(true);
     }
