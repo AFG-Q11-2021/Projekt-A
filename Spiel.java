@@ -12,8 +12,6 @@
  * Code organisiert und weiter am Popup-Fenster gearbeitet
  * von Raphael am 22.06.
  */
-
-import java.util.Scanner;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
@@ -21,9 +19,7 @@ import java.awt.event.*;
 public class Spiel implements ActionListener
 {
     boolean spielGestartet = false;
-    private String eingabe;
     private Spieler spieler;
-    private Scanner scanner;
     private Dealer dealer;
     private Gui gui;
 
@@ -32,10 +28,10 @@ public class Spiel implements ActionListener
         dealer = new Dealer();
         gui = new Gui();
 
-        gui.knopf1Geben().addActionListener(this);
-        gui.knopf2Geben().addActionListener(this);
-        gui.knopf3Geben().addActionListener(this);
-        gui.knopf4Geben().addActionListener(this);
+        gui.knopfHitGeben().addActionListener(this);
+        gui.knopfStandGeben().addActionListener(this);
+        gui.knopfStartGeben().addActionListener(this);
+        gui.knopfStopGeben().addActionListener(this);
 
         gui.beendenJaKnopfGeben().addActionListener(this);
         gui.beendenNeinKnopfGeben().addActionListener(this);
@@ -45,24 +41,23 @@ public class Spiel implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
 
-        if(e.getSource() == gui.knopf3Geben())
+        if(e.getSource() == gui.knopfStartGeben())
         {
             gui.textleiste.append("Spiel wurde gestartet. \n");
 
             spielGestartet = true;
         }
 
-        if(e.getSource() == gui.knopf4Geben())
+        if(e.getSource() == gui.knopfStopGeben())
         {
-            //spielBeendet();
             gui.beendenBestaetigen();
         }
 
         if(spielGestartet==true) 
         {
-            gui.textleiste.append("Möchtest du eine Karte ziehen? Ja / Nein  \n");
+            gui.textleiste.append("Möchtest du eine Karte ziehen? \n");
 
-            if(e.getSource() == gui.knopf1Geben())
+            if(e.getSource() == gui.knopfHitGeben())
             {
                 spieler.karteZiehen();
                 gui.textleiste.append("Dein aktueller Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
@@ -74,7 +69,7 @@ public class Spiel implements ActionListener
                 } 
 
             }
-            else if(e.getSource() == gui.knopf2Geben())
+            else if(e.getSource() == gui.knopfStandGeben())
             {
                 if(dealer.dealerSpielt() > spieler.kartenwertBerechnen())
                 {
@@ -102,27 +97,54 @@ public class Spiel implements ActionListener
             gui.textleiste.append("Es kam zu einem Fehler. \n");
 
         }
+        
+        //Bestätigen des Beendens
+        if(e.getSource() == gui.beendenNeinKnopfGeben())
+        {
+            
+            gui.textleiste.append("Beenden abgebrochen \n");
+            gui.beendenBestaetigenSchließen();
+            System.out.println("Test");
+            
+        }
+        else if(e.getSource() == gui.beendenJaKnopfGeben())
+        {
+            gui.textleiste.append("Beende \n");
+            gui.beendenBestaetigenSchließen();
+            spielBeendet();
+        }
     }
 
     //Knöpfe für das Popup-Beenden-Fenster
+   /*
     public void actionPerformedBeenden(ActionEvent b)
     {
-
-        
         if(b.getSource() == gui.beendenNeinKnopfGeben())
         {
-            gui.textleiste.setText("Beenden abgebrochen \n");
+            gui.textleiste.append("2");
+            
+            gui.textleiste.append("Beenden abgebrochen \n");
             gui.beendenBestaetigenSchließen();
+            System.out.println("Test");
+            
         }
         else if(b.getSource() == gui.beendenJaKnopfGeben())
         {
-            gui.textleiste.setText("Beende \n");
+            gui.textleiste.append("Beende \n");
             gui.beendenBestaetigenSchließen();
+            System.out.println("Test2");
             spielBeendet();
+        }
+        else 
+        {
+            //return b.getSource();
+            gui.textleiste.append("uwu");
         }
 
     }
     
+    */
+   
     // Gibt zurück ob das Spiel läuft
     public boolean getSpielGestartet()
     {

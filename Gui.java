@@ -14,7 +14,7 @@ import java.awt.event.*;
 public class Gui 
 {
     private JFrame fenster, fensterBeenden;
-    private JButton knopf1,knopf2,knopf3,knopf4,beendenJaKnopf,beendenNeinKnopf;
+    private JButton knopfHit,knopfStand,knopfStart,knopfStop,beendenJaKnopf,beendenNeinKnopf;
     private JPanel leisteRechts,leisteUntenBeenden;
     private JScrollPane scrollTextleiste;
     public JTextArea textleiste;
@@ -24,21 +24,21 @@ public class Gui
         fenster = new JFrame("Blackjack-Demo");
         leisteRechts = new JPanel();
         
-        knopf1 = new JButton("Hit");
-        knopf1.setFont(new Font("Arial", Font.PLAIN, 12));
-        leisteRechts.add(knopf1);
+        knopfHit = new JButton("Hit");
+        knopfHit.setFont(new Font("Arial", Font.PLAIN, 12));
+        leisteRechts.add(knopfHit);
 
-        knopf2 = new JButton("Stand");
-        knopf2.setFont(new Font("Arial", Font.PLAIN, 12));
-        leisteRechts.add(knopf2);
+        knopfStand = new JButton("Stand");
+        knopfStand.setFont(new Font("Arial", Font.PLAIN, 12));
+        leisteRechts.add(knopfStand);
 
-        knopf3 = new JButton("Start");
-        knopf3.setFont(new Font("Arial", Font.PLAIN, 12));
-        leisteRechts.add(knopf3);
+        knopfStart = new JButton("Start");
+        knopfStart.setFont(new Font("Arial", Font.PLAIN, 12));
+        leisteRechts.add(knopfStart);
 
-        knopf4 = new JButton ("Stop");
-        knopf4.setFont(new Font("Arial", Font.PLAIN, 12));
-        leisteRechts.add(knopf4);
+        knopfStop = new JButton ("Stop");
+        knopfStop.setFont(new Font("Arial", Font.PLAIN, 12));
+        leisteRechts.add(knopfStop);
 
         beendenJaKnopf = new JButton("Beenden");
         beendenJaKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -62,26 +62,36 @@ public class Gui
         fenster.setVisible(true);
     }
 
-    public JButton knopf1Geben()
+    public JButton knopfHitGeben()
     {
-        return knopf1;
+        return knopfHit;
     }
 
-    public JButton knopf2Geben()
+    public JButton knopfStandGeben()
     {
-        return knopf2;
+        return knopfStand;
     }
 
-    public JButton knopf3Geben()
+    public JButton knopfStartGeben()
     {
-        return knopf3;
+        return knopfStart;
     }
 
-    public JButton knopf4Geben()
+    public JButton knopfStopGeben()
     {
-        return knopf4;
+        return knopfStop;
+    }
+    
+       public JButton beendenJaKnopfGeben()
+    {
+        return beendenJaKnopf;
     }
 
+    public JButton beendenNeinKnopfGeben()
+    {
+        return beendenNeinKnopf;
+    }
+    
     public void beendenBestaetigen()
     {
         fensterBeenden = new JFrame("Beenden?");
@@ -98,21 +108,15 @@ public class Gui
 
     }
 
-    public JButton beendenJaKnopfGeben()
-    {
-        return beendenJaKnopf;
-    }
-
-    public JButton beendenNeinKnopfGeben()
-    {
-        return beendenNeinKnopf;
-    }
+ 
 
     public void beendenBestaetigenSchließen()
     {
         System.out.println("test");
         fensterBeenden.setVisible(false);
         fensterBeenden.dispose();
+        fenster.setVisible(false);
+        fenster.dispose();
     }
 
 }
