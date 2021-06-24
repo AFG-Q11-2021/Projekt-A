@@ -15,7 +15,7 @@ import java.awt.Image;
 
 public class Gui 
 {
-    private JFrame fenster, fensterBeenden;
+    public JFrame fenster, fensterBeenden;
     private JButton knopfHit,knopfStand,knopfStart,knopfStop,beendenJaKnopf,beendenNeinKnopf;
     private JPanel leisteRechts,leisteUntenBeenden;
     private JScrollPane scrollTextleiste;
@@ -117,11 +117,9 @@ public class Gui
 
     public void beendenBestaetigenSchließen()
     {
-        System.out.println("test");
         fensterBeenden.setVisible(false);
         fensterBeenden.dispose();
-        fenster.setVisible(false);
-        fenster.dispose();
+        
     }
 
 }

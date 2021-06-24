@@ -1,8 +1,7 @@
 public class Main
 {
-    public Main()
+    public Main(String[] args)
     {
-        //new Gui();
         new Spiel();
     }
     

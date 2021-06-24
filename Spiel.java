@@ -100,8 +100,7 @@ public class Spiel implements ActionListener
         
         //Bestätigen des Beenden
         if(e.getSource() == gui.beendenNeinKnopfGeben())
-        {
-            
+        {   
             gui.textleiste.append("Beenden abgebrochen \n");
             gui.beendenBestaetigenSchließen();            
         }
@@ -109,6 +108,8 @@ public class Spiel implements ActionListener
         {
             gui.textleiste.append("Beende \n");
             gui.beendenBestaetigenSchließen();
+            gui.fenster.setVisible(false);
+            gui.fenster.dispose();
             spielBeendet();
         }
     }
