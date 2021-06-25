@@ -15,13 +15,14 @@ import java.awt.Image;
 
 public class Gui 
 {
-    public JFrame fenster, fensterBeenden;
     private JButton knopfHit,knopfStand,knopfStart,knopfStop,beendenJaKnopf,beendenNeinKnopf;
     private JPanel leisteRechts,leisteUntenBeenden;
     private JScrollPane scrollTextleiste;
-    public JTextArea textleiste;
     private Image image;
-
+    public JTextArea textleiste;
+    public JFrame fenster;
+    private JDialog beendenFenster;
+    
     public Gui(){       
 
         //erzeugt das Fenster und alle Elemente des GUIs
@@ -100,26 +101,24 @@ public class Gui
 
     public void beendenBestaetigen()
     {
-        fensterBeenden = new JFrame("Beenden?");
-
+        beendenFenster = new JDialog();
+        beendenFenster.setLocation(500,350);
+        beendenFenster.setSize(200,75);
+        beendenFenster.setVisible(true);
+        beendenFenster.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        beendenFenster.setResizable(false);
+        
         leisteUntenBeenden = new JPanel();
-
+        beendenFenster.add(BorderLayout.CENTER,leisteUntenBeenden);
         leisteUntenBeenden.add(beendenJaKnopf);
         leisteUntenBeenden.add(beendenNeinKnopf);
-
-        fensterBeenden.add(BorderLayout.CENTER,leisteUntenBeenden);
-        fensterBeenden.pack();
-        fensterBeenden.setSize(200,80);
-        fensterBeenden.setVisible(true);
-
     }
 
 
     public void beendenBestaetigenSchließen()
     {
-        fensterBeenden.setVisible(false);
-        fensterBeenden.dispose();
-        
+        beendenFenster.setVisible(false);
+        beendenFenster.dispose();
     }
 
 }
