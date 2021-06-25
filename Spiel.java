@@ -24,6 +24,8 @@ public class Spiel implements ActionListener
     private Gui gui;
 
     public Spiel(){
+        gui.laF();
+        
         spieler = new Spieler();
         dealer = new Dealer();
         gui = new Gui();
@@ -34,7 +36,7 @@ public class Spiel implements ActionListener
         gui.knopfStopGeben().addActionListener(this);
 
         gui.beendenJaKnopfGeben().addActionListener(this);
-        gui.beendenNeinKnopfGeben().addActionListener(this);
+        gui.beendenNeinKnopfGeben().addActionListener(this);        
     }
 
     // GUI-Button drücken, zum Spielstart
