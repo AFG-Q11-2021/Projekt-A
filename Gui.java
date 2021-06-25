@@ -8,24 +8,26 @@
  */
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
-import javax.imageio.*;
-import java.awt.Toolkit;
-import java.awt.Image;
 
 public class Gui 
 {
-    private JButton knopfHit,knopfStand,knopfStart,knopfStop,beendenJaKnopf,beendenNeinKnopf;
+    private JButton knopfHit,knopfStand,knopfStart,knopfStop;
+    private JButton beendenJaKnopf,beendenNeinKnopf;
     private JPanel leisteRechts,leisteUntenBeenden;
     private JScrollPane scrollTextleiste;
     private Image image;
     public JTextArea textleiste;
     public JFrame fenster;
     private JDialog beendenFenster;
-    
-    public Gui(){       
 
-        //erzeugt das Fenster und alle Elemente des GUIs
+    public Gui(){       
+       guiErzeugen();
+    }
+    
+    public void guiErzeugen()
+    {
+         //erzeugt das Fenster und alle Elemente des GUIs
+         
         fenster = new JFrame("Blackjack-Demo");
         leisteRechts = new JPanel();
 
@@ -57,16 +59,33 @@ public class Gui
         scrollTextleiste.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         fenster.add(scrollTextleiste);
 
-        
         fenster.add(BorderLayout.EAST, leisteRechts);
-        //fenster.add(BorderLayout.SOUTH, textleiste);
         fenster.pack();
         fenster.setSize(1000,600);
-        
+
         Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\Icon.png"));
         fenster.setIconImage(image);
 
         fenster.setVisible(true);
+    }
+
+    //setzt das look and feel des Guis
+    public static void laF() {
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } 
+        catch (UnsupportedLookAndFeelException e) {
+            System.out.println("LaF fehler");
+        }
+        catch (ClassNotFoundException e) {
+            System.out.println("LaF fehler");
+        }
+        catch (InstantiationException e) {
+            System.out.println("LaF fehler");
+        }
+        catch (IllegalAccessException e) {
+            System.out.println("LaF fehler");
+        }
     }
 
     public JButton knopfHitGeben()
@@ -107,13 +126,12 @@ public class Gui
         beendenFenster.setVisible(true);
         beendenFenster.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         beendenFenster.setResizable(false);
-        
+
         leisteUntenBeenden = new JPanel();
         beendenFenster.add(BorderLayout.CENTER,leisteUntenBeenden);
         leisteUntenBeenden.add(beendenJaKnopf);
         leisteUntenBeenden.add(beendenNeinKnopf);
     }
-
 
     public void beendenBestaetigenSchließen()
     {
