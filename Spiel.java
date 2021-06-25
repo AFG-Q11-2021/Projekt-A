@@ -3,9 +3,6 @@
  * am 30.04.2021
  * von Joel und Paul
  * 
- * Methode kartenwertPrüfen
- * von Magdalena und Julian am 30.04.
- * 
  * Output für das Gui 
  * von Sasha und Raphael am 18.06.
  * 
@@ -25,7 +22,7 @@ public class Spiel implements ActionListener
 
     public Spiel(){
         gui.laF();
-        
+
         spieler = new Spieler();
         dealer = new Dealer();
         gui = new Gui();
@@ -52,6 +49,7 @@ public class Spiel implements ActionListener
             dealer.karteZiehen();
             gui.textleiste.append("Dein aktueller Kartenwert beträgt " + spieler.getKartenwert() + ".\n");
             gui.textleiste.append("Der aktuelle Kartenwert vom Dealer beträgt " + dealer.getKartenwert() + ".\n");
+            gui.textleiste.append("Möchtest du eine Karte ziehen? \n");
             spielGestartet = true;
         }
 
@@ -59,34 +57,33 @@ public class Spiel implements ActionListener
         {
             gui.beendenBestaetigen();
         }
-        
+
         if(spielGestartet==true) 
         {
-            gui.textleiste.append("Möchtest du eine Karte ziehen? \n");
             if(e.getSource() == gui.knopfHitGeben())
             {
                 spieler.karteZiehen();
                 gui.textleiste.append("Dein aktueller Kartenwert: " + spieler.getKartenwert() + "\n");
+                gui.textleiste.append("Möchtest du eine Karte ziehen? \n");
                 if(verloren() == true)
                 {
                     gui.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
                     gui.textleiste.append("Du hast leider über 21 \n");
-                    //spielBeendet();
-                } 
-
+                    
+                }
             }
-            
+
             if(e.getSource() == gui.knopfStandGeben())
             {
                 while(dealer.getKartenwert() <17){
                     dealer.karteZiehen();
                 }
-                
-                if(dealer.getKartenwert() > spieler.getKartenwert())
+
+                if(dealer.getKartenwert() > spieler.getKartenwert() && dealer.getKartenwert() <= 21)
                 {
                     gui.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
                     gui.textleiste.append("Der Dealer hat:"+ dealer.getKartenwert()+ "\n");
-                    gui.textleiste.append("Du hast gegen den Dealer verloren." + "\n");                  
+                    gui.textleiste.append("Du hast gegen den Dealer verloren." + "\n");
                 }
                 else if(dealer.getKartenwert() > 21)
                 {
@@ -102,7 +99,7 @@ public class Spiel implements ActionListener
         }
         else 
         {
-            
+
             gui.textleiste.append("Es kam zu einem Fehler. \n");
 
         }
@@ -110,22 +107,17 @@ public class Spiel implements ActionListener
         //Bestätigen des Beenden
         if(e.getSource() == gui.beendenNeinKnopfGeben())
         {   
-            gui.textleiste.append("Beenden abgebrochen \n");
-            gui.beendenBestaetigenSchließen();            
+        gui.textleiste.append("Beenden abgebrochen \n");
+        gui.beendenBestaetigenSchließen();            
         }
         else if(e.getSource() == gui.beendenJaKnopfGeben())
         {
-            gui.textleiste.append("Beende \n");
-            gui.beendenBestaetigenSchließen();
-            gui.fenster.setVisible(false);
-            gui.fenster.dispose();
-            spielBeendet();
+        gui.textleiste.append("Beende \n");
+        gui.beendenBestaetigenSchließen();
+        gui.fenster.setVisible(false);
+        gui.fenster.dispose();
+        spielBeendet();
         }*/
-    }
-
-    public boolean getSpielGestartet()
-    {
-        return spielGestartet;
     }
 
     public void spielBeendet(){
@@ -140,12 +132,14 @@ public class Spiel implements ActionListener
             Thread.currentThread().interrupt();
         }
     }
-    public boolean verloren(){
+
+    public boolean verloren()
+    {
         if(spieler.getKartenwert() > 21)
         {
             return true;
-        } 
-        else
+        }
+        else 
         {
             return false;
         }
