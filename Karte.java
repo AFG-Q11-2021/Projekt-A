@@ -4,22 +4,16 @@ public class Karte
 {
     private static int KREUZ=0, PIK=1, HERZ=2, KARO=3;
     private static int BUBE=11, DAME=12, KOENIG=13, ASS=1;
-    private int wert, farbe;
-    public Karte(/*,int newWert String newFarbe*/)
-    {
-        //wert = newWert;
-        //farbe = newFarbe;
-        wert = 1 + (int)(Math.random() * 11);
-    }
+    private int index, farbe;
     
-    public Karte(int newFarbe, int newWert){
+    public Karte(int newFarbe, int newIndex){
         farbe = newFarbe;
-        wert = newWert;
+        index = newIndex;
     }
     
-    public int wertGeben()
+    public int indexGeben()
     {
-        return wert;
+        return index;
     }
     
     public int farbeGeben(){

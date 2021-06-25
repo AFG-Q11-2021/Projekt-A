@@ -44,7 +44,12 @@ public class Spiel implements ActionListener
         if(e.getSource() == gui.knopfStartGeben())
         {
             gui.textleiste.append("Spiel wurde gestartet. \n");
-
+            spieler.karteZiehen();
+            spieler.karteZiehen();
+            dealer.karteZiehen();
+            dealer.karteZiehen();
+            gui.textleiste.append("Dein aktueller Kartenwert beträgt " + spieler.getKartenwert() + ".\n");
+            gui.textleiste.append("Der aktuelle Kartenwert vom Dealer beträgt " + dealer.getKartenwert() + ".\n");
             spielGestartet = true;
         }
 
@@ -52,7 +57,7 @@ public class Spiel implements ActionListener
         {
             gui.beendenBestaetigen();
         }
-
+        /*
         if(spielGestartet==true) 
         {
             gui.textleiste.append("Möchtest du eine Karte ziehen? \n");
@@ -111,7 +116,7 @@ public class Spiel implements ActionListener
             gui.fenster.setVisible(false);
             gui.fenster.dispose();
             spielBeendet();
-        }
+        }*/
     }
 
     public boolean getSpielGestartet()
@@ -131,7 +136,7 @@ public class Spiel implements ActionListener
             Thread.currentThread().interrupt();
         }
     }
-
+    /*
     public boolean verloren(){
         if(spieler.kartenwertBerechnen() > 21){
             return true;
@@ -139,9 +144,5 @@ public class Spiel implements ActionListener
             return false;
         }
     }
-
-    public int spielerKartenwert()
-    {
-        return spieler.kartenwertBerechnen();
-    }
+    */
 }

@@ -3,33 +3,41 @@
  */
 public class Spieler implements SpielerInterface
 {
-    private Karte[] karten;
+    private Kartendeck kartendeck;
     private int kartenanzahl;
     private int budget;
+    private int kartenwert;
     
     public Spieler()
     {
-        karten = new Karte[22];
+        kartendeck = new Kartendeck();
         kartenanzahl = 0;
+        kartenwert = 0;
         budget = 1000;
     }
     
-    public int karteZiehen()
+    public void karteZiehen()
     {
-        Karte karte = new Karte();
-        karten[kartenanzahl] = karte;
-        kartenanzahl ++;
-        return karte.wertGeben();
+        Karte gezogeneKarte = kartendeck.karteZiehen();
+        if(gezogeneKarte.indexGeben() >= 11)
+        {
+            kartenwert = kartenwert + 10;
+        }
+        else
+        {
+            kartenwert = kartenwert + gezogeneKarte.indexGeben();
+        }
+        kartenanzahl++;
     }
     
-    public int kartenwertBerechnen()
+    public int getKartenwert()
     {
-        int kartenwert = 0;
-        for(int i = 0; i<kartenanzahl; i++)
-        {
-            kartenwert = kartenwert + karten[i].wertGeben();
-        }
         return kartenwert;
+    }
+    
+    public int getKartenanzahl()
+    {
+        return kartenanzahl;
     }
     
     public int budgetErhoehen(int erhoehung)
