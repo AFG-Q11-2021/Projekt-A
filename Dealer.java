@@ -3,48 +3,39 @@
  */
 public class Dealer implements SpielerInterface
 {
-    private Karte[] karten;
+    private Kartendeck kartendeck;
     private int kartenanzahl;
+    private int kartenwert;
     private boolean dealerZuHoch;
-    
+
     public Dealer()
     {
-        karten = new Karte[22];
+        kartendeck = new Kartendeck();
         kartenanzahl = 0;
+        kartenwert = 0;
     }
-    
-    public int karteZiehen()
+
+    public void karteZiehen()
     {
-        Karte karte = new Karte();
-        karten[kartenanzahl] = karte;
-        kartenanzahl ++;
-        return karte.wertGeben();
-    }
-    
-    public int kartenwertBerechnen()
-    {
-        int kartenwert = 0;
-        for(int i = 0; i<kartenanzahl; i++)
+        Karte gezogeneKarte = kartendeck.karteZiehen();
+        if(gezogeneKarte.indexGeben() >= 11)
         {
-            kartenwert = kartenwert + karten[i].wertGeben();
+            kartenwert = kartenwert + 10;
         }
+        else
+        {
+            kartenwert = kartenwert + gezogeneKarte.indexGeben();
+        }
+        kartenanzahl++;
+    }
+
+    public int getKartenwert()
+    {
         return kartenwert;
     }
     
-    public int dealerSpielt()
+    public int getKartenanzahl()
     {
-        while(kartenwertBerechnen() < 17)
-        {
-            karteZiehen();
-            if(kartenwertBerechnen() > 21)
-            {
-                return 0;
-            }
-            else if(kartenwertBerechnen() >= 17)
-            {
-                return kartenwertBerechnen();   
-            }
-        }
-        return 0;
+        return kartenanzahl;
     }
 }

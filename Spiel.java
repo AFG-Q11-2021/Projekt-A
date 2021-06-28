@@ -3,9 +3,6 @@
  * am 30.04.2021
  * von Joel und Paul
  * 
- * Methode kartenwertPrüfen
- * von Magdalena und Julian am 30.04.
- * 
  * Output für das Gui 
  * von Sasha und Raphael am 18.06.
  * 
@@ -28,7 +25,7 @@ public class Spiel implements ActionListener
         
         //setzt das Look and Feel
         gui.laF();
-        
+
         spieler = new Spieler();
         dealer = new Dealer();
         gui = new Gui();
@@ -49,7 +46,13 @@ public class Spiel implements ActionListener
         if(e.getSource() == gui.knopfStartGeben())
         {
             gui.textleiste.append("Spiel wurde gestartet. \n");
-
+            spieler.karteZiehen();
+            spieler.karteZiehen();
+            dealer.karteZiehen();
+            dealer.karteZiehen();
+            gui.textleiste.append("Dein aktueller Kartenwert beträgt " + spieler.getKartenwert() + ".\n");
+            gui.textleiste.append("Der aktuelle Kartenwert vom Dealer beträgt " + dealer.getKartenwert() + ".\n");
+            gui.textleiste.append("Möchtest du eine Karte ziehen? \n");
             spielGestartet = true;
         }
 
@@ -63,50 +66,52 @@ public class Spiel implements ActionListener
 
         if(spielGestartet==true) 
         {
-            gui.textleiste.append("Möchtest du eine Karte ziehen? \n");
-
             if(e.getSource() == gui.knopfHitGeben())
             {
                 spieler.karteZiehen();
-                gui.textleiste.append("Dein aktueller Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
+                gui.textleiste.append("Dein aktueller Kartenwert: " + spieler.getKartenwert() + "\n");
+                gui.textleiste.append("Möchtest du eine Karte ziehen? \n");
                 if(verloren() == true)
                 {
-                    gui.textleiste.append("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
+                    gui.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
                     gui.textleiste.append("Du hast leider über 21 \n");
-                    //spielBeendet();
-                } 
-
-            }
-            else if(e.getSource() == gui.knopfStandGeben())
-            {
-                if(dealer.dealerSpielt() > spieler.kartenwertBerechnen())
-                {
-                    gui.textleiste.append("Dein Kartenwert: " + spieler.kartenwertBerechnen() + "\n");
-                    gui.textleiste.append("Der Dealer hat:"+ dealer.kartenwertBerechnen()+ "\n");
-                    gui.textleiste.append("Du hast gegen den Dealer verloren." + "\n");                  
+                    
                 }
-                else 
+            }
+
+            if(e.getSource() == gui.knopfStandGeben())
+            {
+                while(dealer.getKartenwert() <17){
+                    dealer.karteZiehen();
+                }
+
+                if(dealer.getKartenwert() > spieler.getKartenwert() && dealer.getKartenwert() <= 21)
                 {
-                    if(dealer.kartenwertBerechnen() > 21)
-                    {
-                        gui.textleiste.append("Dealer hat überzogen. Er hat: "+ dealer.kartenwertBerechnen() +"\n");
-                        gui.textleiste.append("Du hast gewonnen!\n");
-                    }
-                    else
-                    {
-                        gui.textleiste.append("Dealer hat: " + dealer.kartenwertBerechnen()+ "\n");
-                    }
+                    gui.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
+                    gui.textleiste.append("Der Dealer hat:"+ dealer.getKartenwert()+ "\n");
+                    gui.textleiste.append("Du hast gegen den Dealer verloren." + "\n");
+                }
+                else if(dealer.getKartenwert() > 21)
+                {
+                    gui.textleiste.append("Dealer hat überzogen. Er hat: "+ dealer.getKartenwert() +"\n");
+                    gui.textleiste.append("Du hast gewonnen!\n");
+                }
+                else
+                {
+                    gui.textleiste.append("Dealer hat: " + dealer.getKartenwert()+ "\n");
+                    gui.textleiste.append("Du hast gewonnen!\n");
                 }
             } 
         }
         else 
         {
-            
+
             gui.textleiste.append("Es kam zu einem Fehler. \n");
 
         }
         
         //Bestätigen des Beenden
+
         if(e.getSource() == popupBeendenFenster.popupNeinKnopfGeben())
         {
             gui.textleiste.append("Beenden abgebrochen \n");
@@ -124,8 +129,16 @@ public class Spiel implements ActionListener
 
     public boolean getSpielGestartet()
     {
+        gui.textleiste.append("Beende \n");
+        gui.beendenBestaetigenSchließen();
+        gui.fenster.setVisible(false);
+        gui.fenster.dispose();
+        spielBeendet();
+        
         return spielGestartet;
-    }
+        }
+
+    
 
     public void spielBeendet(){
         try
@@ -140,16 +153,15 @@ public class Spiel implements ActionListener
         }
     }
 
-    public boolean verloren(){
-        if(spieler.kartenwertBerechnen() > 21){
+    public boolean verloren()
+    {
+        if(spieler.getKartenwert() > 21)
+        {
             return true;
-        } else {
+        }
+        else 
+        {
             return false;
         }
-    }
-
-    public int spielerKartenwert()
-    {
-        return spieler.kartenwertBerechnen();
     }
 }

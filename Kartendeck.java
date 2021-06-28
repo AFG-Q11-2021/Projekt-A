@@ -18,8 +18,8 @@ public class Kartendeck
         kartendeckGroeße = 52;
         int zaehler = 0;
         for(int farbe = 1; farbe<=4; farbe++){
-            for(int wert = 1; wert<=13; wert++){
-                kartendeck[zaehler]= new Karte(farbe, wert);
+            for(int index = 1; index<=13; index++){
+                kartendeck[zaehler]= new Karte(farbe, index);
                 zaehler++;
             }
         }
@@ -49,16 +49,16 @@ public class Kartendeck
     
     public void testen(){
         for(int i = 0; i < 52; i++){
-            kartendeck[i].wertGeben();
+            kartendeck[i].indexGeben();
             kartendeck[i].farbeGeben();
-            System.out.print("Wert: " + kartendeck[i].wertGeben() + " + ");
+            System.out.print("Index: " + kartendeck[i].indexGeben() + " + ");
             System.out.print("Farbe: " + kartendeck[i].farbeGeben() + "\n");
         }
     }
     
     public void testen2(){
         System.out.print("Test 2 ergab: \n");
-        System.out.print("Wert: " + karteZiehen().wertGeben() + " + ");
+        System.out.print("Index: " + karteZiehen().indexGeben() + " + ");
         System.out.print("Farbe: " + karteZiehen().farbeGeben() + "\n");
     }
 }
