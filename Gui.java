@@ -12,29 +12,36 @@ import javax.swing.*;
 public class Gui 
 {
     private JButton knopfHit,knopfStand,knopfStart,knopfStop;
-    private JButton beendenJaKnopf,beendenNeinKnopf;
-    private JPanel leisteRechts,leisteUntenBeenden;
+    private JPanel leisteRechts;
     private JScrollPane scrollTextleiste;
-    private Image image;
     public JTextArea textleiste;
     public JFrame fenster;
+    private Image image;
+    
     private JDialog beendenFenster;
-
+    private JPanel leisteUntenBeenden;
+    public JButton popupJaKnopf,popupNeinKnopf;
+    
     public Gui(){       
-       guiErzeugen();
+       
     }
     
-    public void guiErzeugen()
+     //erzeugt das Fenster und alle Elemente des GUIs
+    public void fensterErzeugen(String fensterName)
     {
-         //erzeugt das Fenster und alle Elemente des GUIs
-         
-        fenster = new JFrame("Blackjack-Demo");
+        fenster = new JFrame(fensterName);
+        
+        //setzt das Icon des Fensters
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\Icon.png"));
+        fenster.setIconImage(image);
+        
         leisteRechts = new JPanel();
 
         knopfHit = new JButton("Hit");
+        knopfHit.setSize(300,300);
         knopfHit.setFont(new Font("Arial", Font.PLAIN, 12));
         leisteRechts.add(knopfHit);
-
+        
         knopfStand = new JButton("Stand");
         knopfStand.setFont(new Font("Arial", Font.PLAIN, 12));
         leisteRechts.add(knopfStand);
@@ -46,13 +53,7 @@ public class Gui
         knopfStop = new JButton ("Stop");
         knopfStop.setFont(new Font("Arial", Font.PLAIN, 12));
         leisteRechts.add(knopfStop);
-
-        beendenJaKnopf = new JButton("Beenden");
-        beendenJaKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
-
-        beendenNeinKnopf = new JButton("Nein");
-        beendenNeinKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
-
+        
         textleiste  = new JTextArea();
 
         scrollTextleiste = new JScrollPane(textleiste);
@@ -62,10 +63,6 @@ public class Gui
         fenster.add(BorderLayout.EAST, leisteRechts);
         fenster.pack();
         fenster.setSize(1000,600);
-
-        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\Icon.png"));
-        fenster.setIconImage(image);
-
         fenster.setVisible(true);
     }
 
@@ -87,6 +84,7 @@ public class Gui
             System.out.println("LaF fehler");
         }
     }
+    
 
     public JButton knopfHitGeben()
     {
@@ -108,19 +106,28 @@ public class Gui
         return knopfStop;
     }
 
-    public JButton beendenJaKnopfGeben()
+        public JButton popupJaKnopfGeben()
     {
-        return beendenJaKnopf;
+        return popupJaKnopf;
     }
-
-    public JButton beendenNeinKnopfGeben()
+    
+    public JButton popupNeinKnopfGeben()
     {
-        return beendenNeinKnopf;
+        return popupNeinKnopf;
     }
-
-    public void beendenBestaetigen()
-    {
+    
+    
+    public void beendenBestaetigen(String knopfJaName, String knopfNeinName)
+    {        
+        //JDialog popupFenster = new JDialog(fenster,titel);
         beendenFenster = new JDialog();
+        
+        popupJaKnopf = new JButton(knopfJaName);
+        popupJaKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
+
+        popupNeinKnopf = new JButton(knopfNeinName);
+        popupNeinKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
+        
         beendenFenster.setLocation(500,350);
         beendenFenster.setSize(200,75);
         beendenFenster.setVisible(true);
@@ -129,8 +136,8 @@ public class Gui
 
         leisteUntenBeenden = new JPanel();
         beendenFenster.add(BorderLayout.CENTER,leisteUntenBeenden);
-        leisteUntenBeenden.add(beendenJaKnopf);
-        leisteUntenBeenden.add(beendenNeinKnopf);
+        leisteUntenBeenden.add(popupJaKnopf);
+        leisteUntenBeenden.add(popupNeinKnopf);
     }
 
     public void beendenBestaetigenSchließen()

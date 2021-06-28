@@ -22,21 +22,24 @@ public class Spiel implements ActionListener
     private Spieler spieler;
     private Dealer dealer;
     private Gui gui;
+    private PopupBeendenFenster popupBeendenFenster;
 
     public Spiel(){
+        
+        //setzt das Look and Feel
         gui.laF();
         
         spieler = new Spieler();
         dealer = new Dealer();
         gui = new Gui();
-
+        popupBeendenFenster = new PopupBeendenFenster();
+        
+        
+        gui.fensterErzeugen("Blackjack-Demo");
         gui.knopfHitGeben().addActionListener(this);
         gui.knopfStandGeben().addActionListener(this);
         gui.knopfStartGeben().addActionListener(this);
-        gui.knopfStopGeben().addActionListener(this);
-
-        gui.beendenJaKnopfGeben().addActionListener(this);
-        gui.beendenNeinKnopfGeben().addActionListener(this);        
+        gui.knopfStopGeben().addActionListener(this);        
     }
 
     // GUI-Button drücken, zum Spielstart
@@ -52,7 +55,10 @@ public class Spiel implements ActionListener
 
         if(e.getSource() == gui.knopfStopGeben())
         {
-            gui.beendenBestaetigen();
+            popupBeendenFenster.beendenBestaetigen("Beenden","Abbrechen");
+            
+            popupBeendenFenster.popupJaKnopfGeben().addActionListener(this);
+            popupBeendenFenster.popupNeinKnopfGeben().addActionListener(this);
         }
 
         if(spielGestartet==true) 
@@ -101,15 +107,15 @@ public class Spiel implements ActionListener
         }
         
         //Bestätigen des Beenden
-        if(e.getSource() == gui.beendenNeinKnopfGeben())
-        {   
+        if(e.getSource() == popupBeendenFenster.popupNeinKnopfGeben())
+        {
             gui.textleiste.append("Beenden abgebrochen \n");
-            gui.beendenBestaetigenSchließen();            
+            popupBeendenFenster.beendenBestaetigenSchließen();            
         }
-        else if(e.getSource() == gui.beendenJaKnopfGeben())
+        else if(e.getSource() == popupBeendenFenster.popupJaKnopfGeben())
         {
             gui.textleiste.append("Beende \n");
-            gui.beendenBestaetigenSchließen();
+            popupBeendenFenster.beendenBestaetigenSchließen();
             gui.fenster.setVisible(false);
             gui.fenster.dispose();
             spielBeendet();
