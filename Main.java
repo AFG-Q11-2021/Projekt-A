@@ -1,9 +1,7 @@
 public class Main
 {
-    public Main(String[] args)
+    public Main()
     {
         new Spiel();
-    }
-    
-    
+    }    
 }

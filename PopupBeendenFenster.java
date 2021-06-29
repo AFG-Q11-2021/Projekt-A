@@ -4,8 +4,8 @@ import javax.swing.*;
 public class PopupBeendenFenster extends Gui
 {
     @Override
-    public void beendenBestaetigen(String knopfJaName, String knopfNeinName)
+    public void popupFensterErzeugen(String knopfJaName, String knopfNeinName)
     { 
-        super.beendenBestaetigen(knopfJaName,knopfNeinName);
+        super.popupFensterErzeugen(knopfJaName,knopfNeinName);
     }
 }

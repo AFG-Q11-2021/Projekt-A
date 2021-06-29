@@ -20,6 +20,8 @@ public class Spiel implements ActionListener
     private Dealer dealer;
     private Gui gui;
     private PopupBeendenFenster popupBeendenFenster;
+    private SpielFenster spielFenster;
+    private StartMenue startMenue;
 
     public Spiel(){
         
@@ -30,35 +32,43 @@ public class Spiel implements ActionListener
         dealer = new Dealer();
         gui = new Gui();
         popupBeendenFenster = new PopupBeendenFenster();
+        spielFenster = new SpielFenster();
         
         
-        gui.fensterErzeugen("Blackjack-Demo");
-        gui.knopfHitGeben().addActionListener(this);
-        gui.knopfStandGeben().addActionListener(this);
-        gui.knopfStartGeben().addActionListener(this);
-        gui.knopfStopGeben().addActionListener(this);        
+        startMenue = new StartMenue();
+        startMenue.fensterErzeugen("Blackjack-Demo-Start");
+        startMenue.knopfSpielstartGeben().addActionListener(this);
+        startMenue.knopfSpielstartAbbrechenGeben().addActionListener(this);
+        
+       
+        spielFenster.fensterErzeugen("Blackjack-Demo");
+        spielFenster.knopfHitGeben().addActionListener(this);
+        spielFenster.knopfStandGeben().addActionListener(this);
+        spielFenster.knopfStartGeben().addActionListener(this);
+        spielFenster.knopfStopGeben().addActionListener(this);        
     }
 
     // GUI-Button drücken, zum Spielstart
     public void actionPerformed(ActionEvent e)
     {
-
-        if(e.getSource() == gui.knopfStartGeben())
+        if(e.getSource() == spielFenster.knopfStartGeben())
         {
-            gui.textleiste.append("Spiel wurde gestartet. \n");
+            spielFenster.textleiste.append("Spiel wurde gestartet. \n");
             spieler.karteZiehen();
             spieler.karteZiehen();
             dealer.karteZiehen();
             dealer.karteZiehen();
-            gui.textleiste.append("Dein aktueller Kartenwert beträgt " + spieler.getKartenwert() + ".\n");
-            gui.textleiste.append("Der aktuelle Kartenwert vom Dealer beträgt " + dealer.getKartenwert() + ".\n");
-            gui.textleiste.append("Möchtest du eine Karte ziehen? \n");
+            spielFenster.textleiste.append("Dein aktueller Kartenwert beträgt " + spieler.getKartenwert() + ".\n");
+            spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
+            spielFenster.textleiste.append("Der aktuelle Kartenwert vom Dealer beträgt " + dealer.getKartenwert() + ".\n");
+            spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
+            spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
             spielGestartet = true;
         }
 
-        if(e.getSource() == gui.knopfStopGeben())
+        if(e.getSource() == spielFenster.knopfStopGeben())
         {
-            popupBeendenFenster.beendenBestaetigen("Beenden","Abbrechen");
+            popupBeendenFenster.popupFensterErzeugen("Beenden","Abbrechen");
             
             popupBeendenFenster.popupJaKnopfGeben().addActionListener(this);
             popupBeendenFenster.popupNeinKnopfGeben().addActionListener(this);
@@ -66,20 +76,22 @@ public class Spiel implements ActionListener
 
         if(spielGestartet==true) 
         {
-            if(e.getSource() == gui.knopfHitGeben())
+            if(e.getSource() == spielFenster.knopfHitGeben())
             {
                 spieler.karteZiehen();
-                gui.textleiste.append("Dein aktueller Kartenwert: " + spieler.getKartenwert() + "\n");
-                gui.textleiste.append("Möchtest du eine Karte ziehen? \n");
+                spielFenster.textleiste.append("Dein aktueller Kartenwert: " + spieler.getKartenwert() + "\n");
+                spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
+                spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
                 if(verloren() == true)
                 {
-                    gui.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
-                    gui.textleiste.append("Du hast leider über 21 \n");
+                    spielFenster.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
+                    spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
+                    spielFenster.textleiste.append("Du hast leider über 21 \n");
                     
                 }
             }
 
-            if(e.getSource() == gui.knopfStandGeben())
+            if(e.getSource() == spielFenster.knopfStandGeben())
             {
                 while(dealer.getKartenwert() <17){
                     dealer.karteZiehen();
@@ -87,26 +99,29 @@ public class Spiel implements ActionListener
 
                 if(dealer.getKartenwert() > spieler.getKartenwert() && dealer.getKartenwert() <= 21)
                 {
-                    gui.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
-                    gui.textleiste.append("Der Dealer hat:"+ dealer.getKartenwert()+ "\n");
-                    gui.textleiste.append("Du hast gegen den Dealer verloren." + "\n");
+                    spielFenster.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
+                    spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
+                    spielFenster.textleiste.append("Der Dealer hat:"+ dealer.getKartenwert()+ "\n");
+                    spielFenster.textleiste.append("Du hast gegen den Dealer verloren." + "\n");
                 }
                 else if(dealer.getKartenwert() > 21)
                 {
-                    gui.textleiste.append("Dealer hat überzogen. Er hat: "+ dealer.getKartenwert() +"\n");
-                    gui.textleiste.append("Du hast gewonnen!\n");
+                    spielFenster.textleiste.append("Dealer hat überzogen. Er hat: "+ dealer.getKartenwert() +"\n");
+                    spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
+                    spielFenster.textleiste.append("Du hast gewonnen!\n");
                 }
                 else
                 {
-                    gui.textleiste.append("Dealer hat: " + dealer.getKartenwert()+ "\n");
-                    gui.textleiste.append("Du hast gewonnen!\n");
+                    spielFenster.textleiste.append("Dealer hat: " + dealer.getKartenwert()+ "\n");
+                    spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
+                    spielFenster.textleiste.append("Du hast gewonnen!\n");
                 }
             } 
         }
         else 
         {
 
-            gui.textleiste.append("Es kam zu einem Fehler. \n");
+            spielFenster.textleiste.append("Es kam zu einem Fehler. \n");
 
         }
         
@@ -114,25 +129,25 @@ public class Spiel implements ActionListener
 
         if(e.getSource() == popupBeendenFenster.popupNeinKnopfGeben())
         {
-            gui.textleiste.append("Beenden abgebrochen \n");
-            popupBeendenFenster.beendenBestaetigenSchließen();            
+            spielFenster.textleiste.append("Beenden abgebrochen \n");
+            popupBeendenFenster.popupFensterErzeugenSchließen();            
         }
         else if(e.getSource() == popupBeendenFenster.popupJaKnopfGeben())
         {
-            gui.textleiste.append("Beende \n");
-            popupBeendenFenster.beendenBestaetigenSchließen();
-            gui.fenster.setVisible(false);
-            gui.fenster.dispose();
+            spielFenster.textleiste.append("Beende \n");
+            popupBeendenFenster.popupFensterErzeugenSchließen();
+            spielFenster.fenster.setVisible(false);
+            spielFenster.fenster.dispose();
             spielBeendet();
         }
     }
 
     public boolean getSpielGestartet()
     {
-        gui.textleiste.append("Beende \n");
-        gui.beendenBestaetigenSchließen();
-        gui.fenster.setVisible(false);
-        gui.fenster.dispose();
+        spielFenster.textleiste.append("Beende \n");
+        spielFenster.popupFensterErzeugenSchließen();
+        spielFenster.fenster.setVisible(false);
+        spielFenster.fenster.dispose();
         spielBeendet();
         
         return spielGestartet;

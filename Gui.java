@@ -11,56 +11,31 @@ import javax.swing.*;
 
 public class Gui 
 {
-    private JButton knopfHit,knopfStand,knopfStart,knopfStop;
-    private JPanel leisteRechts;
-    private JScrollPane scrollTextleiste;
-    public JTextArea textleiste;
+    
+        private JButton knopfHit,knopfStand,knopfStart,knopfStop;
+        private JPanel leisteRechts;
+        private JScrollPane scrollTextleiste;
+        public JTextArea textleiste;
+        
     public JFrame fenster;
     private Image image;
     
     private JDialog beendenFenster;
-    private JPanel leisteUntenBeenden;
-    public JButton popupJaKnopf,popupNeinKnopf;
+        private JPanel leisteUntenBeenden;
+        public JButton popupJaKnopf,popupNeinKnopf;
     
-    public Gui(){       
+    public Gui()
+    {       
        
     }
     
      //erzeugt das Fenster und alle Elemente des GUIs
     public void fensterErzeugen(String fensterName)
     {
-        fenster = new JFrame(fensterName);
-        
         //setzt das Icon des Fensters
         Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\Icon.png"));
         fenster.setIconImage(image);
         
-        leisteRechts = new JPanel();
-
-        knopfHit = new JButton("Hit");
-        knopfHit.setSize(300,300);
-        knopfHit.setFont(new Font("Arial", Font.PLAIN, 12));
-        leisteRechts.add(knopfHit);
-        
-        knopfStand = new JButton("Stand");
-        knopfStand.setFont(new Font("Arial", Font.PLAIN, 12));
-        leisteRechts.add(knopfStand);
-
-        knopfStart = new JButton("Start");
-        knopfStart.setFont(new Font("Arial", Font.PLAIN, 12));
-        leisteRechts.add(knopfStart);
-
-        knopfStop = new JButton ("Stop");
-        knopfStop.setFont(new Font("Arial", Font.PLAIN, 12));
-        leisteRechts.add(knopfStop);
-        
-        textleiste  = new JTextArea();
-
-        scrollTextleiste = new JScrollPane(textleiste);
-        scrollTextleiste.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        fenster.add(scrollTextleiste);
-
-        fenster.add(BorderLayout.EAST, leisteRechts);
         fenster.pack();
         fenster.setSize(1000,600);
         fenster.setVisible(true);
@@ -85,27 +60,7 @@ public class Gui
         }
     }
     
-
-    public JButton knopfHitGeben()
-    {
-        return knopfHit;
-    }
-
-    public JButton knopfStandGeben()
-    {
-        return knopfStand;
-    }
-
-    public JButton knopfStartGeben()
-    {
-        return knopfStart;
-    }
-
-    public JButton knopfStopGeben()
-    {
-        return knopfStop;
-    }
-
+    
         public JButton popupJaKnopfGeben()
     {
         return popupJaKnopf;
@@ -116,8 +71,7 @@ public class Gui
         return popupNeinKnopf;
     }
     
-    
-    public void beendenBestaetigen(String knopfJaName, String knopfNeinName)
+    public void popupFensterErzeugen(String knopfJaName, String knopfNeinName)
     {        
         //JDialog popupFenster = new JDialog(fenster,titel);
         beendenFenster = new JDialog();
@@ -140,7 +94,7 @@ public class Gui
         leisteUntenBeenden.add(popupNeinKnopf);
     }
 
-    public void beendenBestaetigenSchließen()
+    public void popupFensterErzeugenSchließen()
     {
         beendenFenster.setVisible(false);
         beendenFenster.dispose();
