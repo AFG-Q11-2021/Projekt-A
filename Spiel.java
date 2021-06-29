@@ -23,8 +23,7 @@ public class Spiel implements ActionListener
     private SpielFenster spielFenster;
     private StartMenue startMenue;
 
-    public Spiel(){
-        
+    public Spiel(){ 
         //setzt das Look and Feel
         gui.laF();
 
@@ -139,6 +138,15 @@ public class Spiel implements ActionListener
             spielFenster.fenster.setVisible(false);
             spielFenster.fenster.dispose();
             spielBeendet();
+        }
+        
+        if(e.getSource() == startMenue.knopfSpielstartGeben())
+        {
+            System.out.println("1");
+        }
+        else if(e.getSource() == startMenue.knopfSpielstartAbbrechenGeben())
+        {
+            System.out.println("2");
         }
     }
 

@@ -11,18 +11,13 @@ import javax.swing.*;
 
 public class Gui 
 {
-    
-        private JButton knopfHit,knopfStand,knopfStart,knopfStop;
-        private JPanel leisteRechts;
-        private JScrollPane scrollTextleiste;
-        public JTextArea textleiste;
-        
+
     public JFrame fenster;
     private Image image;
     
     private JDialog beendenFenster;
-        private JPanel leisteUntenBeenden;
-        public JButton popupJaKnopf,popupNeinKnopf;
+    private JPanel leisteUntenBeenden;
+    public JButton popupJaKnopf,popupNeinKnopf;
     
     public Gui()
     {       
