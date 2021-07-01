@@ -31,7 +31,12 @@ public class Gui
         fenster.setIconImage(image);
         
         fenster.pack();
-        fenster.setSize(1000,600);
+        
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().getWidth());
+        int ySize = ((int) tk.getScreenSize().getHeight());     
+        fenster.setSize(xSize,ySize);
+        
         fenster.setVisible(true);
     }
 

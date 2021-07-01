@@ -29,27 +29,35 @@ public class Spiel implements ActionListener
 
         spieler = new Spieler();
         dealer = new Dealer();
-        gui = new Gui();
         popupBeendenFenster = new PopupBeendenFenster();
         spielFenster = new SpielFenster();
-        
-        
+
         startMenue = new StartMenue();
         startMenue.fensterErzeugen("Blackjack-Demo-Start");
         startMenue.knopfSpielstartGeben().addActionListener(this);
-        startMenue.knopfSpielstartAbbrechenGeben().addActionListener(this);
-        
-       
-        spielFenster.fensterErzeugen("Blackjack-Demo");
-        spielFenster.knopfHitGeben().addActionListener(this);
-        spielFenster.knopfStandGeben().addActionListener(this);
-        spielFenster.knopfStartGeben().addActionListener(this);
-        spielFenster.knopfStopGeben().addActionListener(this);        
+        startMenue.knopfSpielstartAbbrechenGeben().addActionListener(this);        
     }
 
     // GUI-Button drücken, zum Spielstart
     public void actionPerformed(ActionEvent e)
-    {
+    {   
+        if(e.getSource() == startMenue.knopfSpielstartGeben())
+        {
+            spielFenster.fensterErzeugen("Blackjack-Demo");
+            spielFenster.knopfHitGeben().addActionListener(this);
+            spielFenster.knopfStandGeben().addActionListener(this);
+            spielFenster.knopfStartGeben().addActionListener(this);
+            spielFenster.knopfStopGeben().addActionListener(this);
+            
+            startMenue.fenster.setVisible(false);
+            startMenue.fenster.dispose();
+        }
+        else if(e.getSource() == startMenue.knopfSpielstartAbbrechenGeben())
+        {
+            startMenue.fenster.setVisible(false);
+            startMenue.fenster.dispose();
+        }
+
         if(e.getSource() == spielFenster.knopfStartGeben())
         {
             spielFenster.textleiste.append("Spiel wurde gestartet. \n");
@@ -82,7 +90,7 @@ public class Spiel implements ActionListener
         if(e.getSource() == spielFenster.knopfStopGeben())
         {
             popupBeendenFenster.popupFensterErzeugen("Beenden","Abbrechen");
-            
+
             popupBeendenFenster.popupJaKnopfGeben().addActionListener(this);
             popupBeendenFenster.popupNeinKnopfGeben().addActionListener(this);
         }
@@ -100,8 +108,13 @@ public class Spiel implements ActionListener
                 {
                     spielFenster.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
                     spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
+<<<<<<< HEAD
                     spielFenster.textleiste.append("Du hast leider über 21 und somit verloren ... \nLust auf noch ein Spiel? \n");
                     spielBeendet();
+=======
+                    spielFenster.textleiste.append("Du hast leider über 21 \n");
+
+>>>>>>> c9113e50a158511fc9fe82db1fc7a41e5bd8e117
                 }
             }
 
@@ -142,9 +155,15 @@ public class Spiel implements ActionListener
         }
         else 
         {
+<<<<<<< HEAD
             spielFenster.textleiste.append("ERROR \nDas Spiel wurde noch nicht gestartet, somit kann keiner dieser Knöpfe gedrückt werden. \n");
+=======
+
+            //spielFenster.textleiste.append("Es kam zu einem Fehler. \n");
+
+>>>>>>> c9113e50a158511fc9fe82db1fc7a41e5bd8e117
         }
-        
+
         //Bestätigen des Beenden
 
         if(e.getSource() == popupBeendenFenster.popupNeinKnopfGeben())
@@ -160,15 +179,6 @@ public class Spiel implements ActionListener
             spielFenster.fenster.dispose();
             spielBeendet();
         }
-        
-        if(e.getSource() == startMenue.knopfSpielstartGeben())
-        {
-            System.out.println("1");
-        }
-        else if(e.getSource() == startMenue.knopfSpielstartAbbrechenGeben())
-        {
-            System.out.println("2");
-        }
     }
 
     public boolean getSpielGestartet()
@@ -178,7 +188,7 @@ public class Spiel implements ActionListener
         spielFenster.fenster.setVisible(false);
         spielFenster.fenster.dispose();
         spielBeendet();
-        
+
         return spielGestartet;
     }
 

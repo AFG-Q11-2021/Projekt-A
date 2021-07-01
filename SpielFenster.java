@@ -64,7 +64,17 @@ public class SpielFenster extends Gui
 
         fenster.add(BorderLayout.SOUTH, leisteUnten);
         fenster.add(BorderLayout.EAST, leisteRechts);
+
+        
+        
         super.fensterErzeugen(fensterName);
+
+    }
+    
+    public void fullscreenAktivieren()
+    {
+        fenster.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        fenster.setUndecorated(true);
     }
 
     public JButton knopfHitGeben()

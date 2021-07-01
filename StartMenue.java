@@ -7,14 +7,19 @@
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
+import java.awt.event.ItemListener;
+
 public class StartMenue extends Gui
 {
     private JButton knopfSpielstart, knopfSpielstartAbbrechen;
     private JPanel spielstartPanel;
+    public JCheckBox fullscreenKnopf;
+    public boolean fullscreen;
 
     public StartMenue()
     {
-
+        //fullscreen = false;
     }
     
     public JButton knopfSpielstartGeben()
@@ -33,7 +38,12 @@ public class StartMenue extends Gui
         fenster = new JFrame(fensterName);
         
         spielstartPanel = new JPanel();
-         
+              
+        fullscreenKnopf = new JCheckBox("Fullscreen?");
+        fullscreenKnopf.setMnemonic(KeyEvent.VK_C); 
+        fullscreenKnopf.setSelected(true);
+        spielstartPanel.add(fullscreenKnopf);
+        
         Image spielstartIcon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\knopfSpielstart.png"));
         knopfSpielstart = new JButton(new ImageIcon(spielstartIcon));
         knopfSpielstart.setFont(new Font("Arial", Font.PLAIN, 24));        
@@ -49,4 +59,13 @@ public class StartMenue extends Gui
         super.fensterErzeugen(fensterName);
     }
     
+    /*
+    public void itemStateChanged(ItemEvent e)
+    {
+        Object source = e.getItemSelectable();
+        if(source == fullscreenKnopf)fullscreen = true;
+        if (e.getStateChange() == ItemEvent.DESELECTED) fullscreen = false;
+ 
+    }
+    */
 }
