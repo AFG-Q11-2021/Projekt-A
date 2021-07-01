@@ -41,6 +41,7 @@ public class Spiel implements ActionListener
     // GUI-Button drücken, zum Spielstart
     public void actionPerformed(ActionEvent e)
     {   
+        //erzeugt das Spielfenster und die dafür benötigten knöpfe; schließt das Startmenü
         if(e.getSource() == startMenue.knopfSpielstartGeben())
         {
             spielFenster.fensterErzeugen("Blackjack-Demo");
@@ -57,7 +58,7 @@ public class Spiel implements ActionListener
             startMenue.fenster.setVisible(false);
             startMenue.fenster.dispose();
         }
-
+        
         if(e.getSource() == spielFenster.knopfStartGeben())
         {
             spielFenster.textleiste.append("Spiel wurde gestartet. \n");
@@ -94,7 +95,6 @@ public class Spiel implements ActionListener
                     spielFenster.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
                     spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
                     spielFenster.textleiste.append("Du hast leider über 21 \n");
-
                 }
             }
 
@@ -133,7 +133,6 @@ public class Spiel implements ActionListener
         }
 
         //Bestätigen des Beenden
-
         if(e.getSource() == popupBeendenFenster.popupNeinKnopfGeben())
         {
             spielFenster.textleiste.append("Beenden abgebrochen \n");

@@ -8,4 +8,14 @@ public class PopupBeendenFenster extends Gui
     { 
         super.popupFensterErzeugen(knopfJaName,knopfNeinName);
     }
+
+    public JButton popupJaKnopfGeben()
+    {
+        return popupJaKnopf;
+    }
+
+    public JButton popupNeinKnopfGeben()
+    {
+        return popupNeinKnopf;
+    }
 }
