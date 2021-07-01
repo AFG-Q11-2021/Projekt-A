@@ -15,13 +15,13 @@ import java.awt.event.*;
 
 public class Spiel implements ActionListener
 {
-     boolean spielGestartet = false;
-     private Spieler spieler;
-     private Dealer dealer;
-     private Gui gui;
-     private PopupBeendenFenster popupBeendenFenster;
-     private SpielFenster spielFenster;
-     private StartMenue startMenue;
+    boolean spielGestartet = false;
+    private Spieler spieler;
+    private Dealer dealer;
+    private Gui gui;
+    private PopupBeendenFenster popupBeendenFenster;
+    private SpielFenster spielFenster;
+    private StartMenue startMenue;
 
     public Spiel(){ 
         //setzt das Look and Feel
@@ -49,44 +49,44 @@ public class Spiel implements ActionListener
             spielFenster.knopfStandGeben().addActionListener(this);
             spielFenster.knopfStartGeben().addActionListener(this);
             spielFenster.knopfStopGeben().addActionListener(this);
-            
+
             startMenue.fenster.setVisible(false);
             startMenue.fenster.dispose();
+            
+            spielGestartet = true;
         }
         else if(e.getSource() == startMenue.knopfSpielstartAbbrechenGeben())
         {
             startMenue.fenster.setVisible(false);
             startMenue.fenster.dispose();
         }
-        
 
         if(e.getSource() == spielFenster.knopfStartGeben())
         {
             spielGestartet = true;
             spielFenster.textleiste.append("Spiel wurde gestartet. \n");
-            
+
             spieler.karteZiehen();
             spieler.karteZiehen();
             spielFenster.textleiste.append("Dein aktueller Kartenwert beträgt " + spieler.getKartenwert() + ".\n");
             spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
             if (spieler.getKartenwert() == 21)
-                {
-                    spielFenster.textleiste.append("Du hast einen Blackjack und somit gewonnen!\nLust auf noch ein Spiel? \n"); 
-                    spielBeendet();
-                }
-            
+            {
+                spielFenster.textleiste.append("Du hast einen Blackjack und somit gewonnen!\nLust auf noch ein Spiel? \n"); 
+                spielBeendet();
+            }
+
             dealer.karteZiehen();
             dealer.karteZiehen();
             spielFenster.textleiste.append("Der aktuelle Kartenwert vom Dealer beträgt " + dealer.getKartenwert() + ".\n");
             spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
             if (spieler.getKartenwert() == 21)
-                {
-                    spielFenster.textleiste.append("Der Dealer hat einen Blackjack und somit hast du verloren...\nLust auf noch ein Spiel?\n");
-                    spielBeendet();
-                }
-            
+            {
+                spielFenster.textleiste.append("Der Dealer hat einen Blackjack und somit hast du verloren...\nLust auf noch ein Spiel?\n");
+                spielBeendet();
+            }
+
             spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
-           
         }
 
         if(e.getSource() == spielFenster.knopfStopGeben())
@@ -105,7 +105,7 @@ public class Spiel implements ActionListener
                 spielFenster.textleiste.append("Dein aktueller Kartenwert: " + spieler.getKartenwert() + "\n");
                 spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
                 spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
-                
+
                 if(verloren() == true)
                 {
                     spielFenster.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
@@ -130,7 +130,7 @@ public class Spiel implements ActionListener
                     spielFenster.textleiste.append("Du hast gegen den Dealer verloren." + "\n");
                     spielBeendet();
                 }
-                
+
                 else if(dealer.getKartenwert() > 21)
                 {
                     spielFenster.textleiste.append("Dealer hat überzogen. Er hat: "+ dealer.getKartenwert() +"\n");
@@ -138,7 +138,7 @@ public class Spiel implements ActionListener
                     spielFenster.textleiste.append("Du hast gewonnen!\nLust auf noch ein Spiel? \n");
                     spielBeendet();
                 }
-                
+
                 else
                 {
                     spielFenster.textleiste.append("Dealer hat: " + dealer.getKartenwert()+ "\n");
