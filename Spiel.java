@@ -53,15 +53,29 @@ public class Spiel implements ActionListener
         if(e.getSource() == spielFenster.knopfStartGeben())
         {
             spielFenster.textleiste.append("Spiel wurde gestartet. \n");
+            
             spieler.karteZiehen();
             spieler.karteZiehen();
-            dealer.karteZiehen();
-            dealer.karteZiehen();
             spielFenster.textleiste.append("Dein aktueller Kartenwert beträgt " + spieler.getKartenwert() + ".\n");
             spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
+            if (spieler.getKartenwert() == 21)
+                {
+                    spielFenster.textleiste.append("Du hast einen Blackjack und somit gewonnen!\nLust auf noch ein Spiel? \n"); 
+                    spielBeendet();
+                }
+            
+            dealer.karteZiehen();
+            dealer.karteZiehen();
             spielFenster.textleiste.append("Der aktuelle Kartenwert vom Dealer beträgt " + dealer.getKartenwert() + ".\n");
             spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
+            if (spieler.getKartenwert() == 21)
+                {
+                    spielFenster.textleiste.append("Der Dealer hat einen Blackjack und somit hast du verloren...\nLust auf noch ein Spiel?\n");
+                    spielBeendet();
+                }
+            
             spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
+            
             spielGestartet = true;
         }
 
@@ -81,12 +95,13 @@ public class Spiel implements ActionListener
                 spielFenster.textleiste.append("Dein aktueller Kartenwert: " + spieler.getKartenwert() + "\n");
                 spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
                 spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
+                
                 if(verloren() == true)
                 {
                     spielFenster.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
                     spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
-                    spielFenster.textleiste.append("Du hast leider über 21 \n");
-                    
+                    spielFenster.textleiste.append("Du hast leider über 21 und somit verloren ... \nLust auf noch ein Spiel? \n");
+                    spielBeendet();
                 }
             }
 
@@ -102,26 +117,32 @@ public class Spiel implements ActionListener
                     spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
                     spielFenster.textleiste.append("Der Dealer hat:"+ dealer.getKartenwert()+ "\n");
                     spielFenster.textleiste.append("Du hast gegen den Dealer verloren." + "\n");
+                    spielGestartet = false;
+                    //spielBeendet();
                 }
+                
                 else if(dealer.getKartenwert() > 21)
                 {
                     spielFenster.textleiste.append("Dealer hat überzogen. Er hat: "+ dealer.getKartenwert() +"\n");
                     spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
-                    spielFenster.textleiste.append("Du hast gewonnen!\n");
+                    spielFenster.textleiste.append("Du hast gewonnen!\nLust auf noch ein Spiel? \n");
+                    spielGestartet = false;
+                    //spielBeendet();
                 }
+                
                 else
                 {
                     spielFenster.textleiste.append("Dealer hat: " + dealer.getKartenwert()+ "\n");
                     spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
-                    spielFenster.textleiste.append("Du hast gewonnen!\n");
+                    spielFenster.textleiste.append("Du hast gewonnen!\nLust auf noch ein Spiel? \n");
+                    spielGestartet = false;
+                    //spielBeendet();
                 }
             } 
         }
         else 
         {
-
-            spielFenster.textleiste.append("Es kam zu einem Fehler. \n");
-
+            spielFenster.textleiste.append("ERROR \nDas Spiel wurde noch nicht gestartet, somit kann keiner dieser Knöpfe gedrückt werden. \n");
         }
         
         //Bestätigen des Beenden
@@ -159,9 +180,7 @@ public class Spiel implements ActionListener
         spielBeendet();
         
         return spielGestartet;
-        }
-
-    
+    }
 
     public void spielBeendet(){
         try

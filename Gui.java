@@ -20,8 +20,7 @@ public class Gui
     public JButton popupJaKnopf,popupNeinKnopf;
     
     public Gui()
-    {       
-       
+    {          
     }
     
      //erzeugt das Fenster und alle Elemente des GUIs
