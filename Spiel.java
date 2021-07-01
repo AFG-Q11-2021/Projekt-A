@@ -15,13 +15,13 @@ import java.awt.event.*;
 
 public class Spiel implements ActionListener
 {
-    boolean spielGestartet = false;
-    private Spieler spieler;
-    private Dealer dealer;
-    private Gui gui;
-    private PopupBeendenFenster popupBeendenFenster;
-    private SpielFenster spielFenster;
-    private StartMenue startMenue;
+     boolean spielGestartet = false;
+     private Spieler spieler;
+     private Dealer dealer;
+     private Gui gui;
+     private PopupBeendenFenster popupBeendenFenster;
+     private SpielFenster spielFenster;
+     private StartMenue startMenue;
 
     public Spiel(){ 
         //setzt das Look and Feel
@@ -41,6 +41,7 @@ public class Spiel implements ActionListener
     // GUI-Button drücken, zum Spielstart
     public void actionPerformed(ActionEvent e)
     {   
+        //erzeugt das Spielfenster und die dafür benötigten Knöpfe; schließt das Startmenü
         if(e.getSource() == startMenue.knopfSpielstartGeben())
         {
             spielFenster.fensterErzeugen("Blackjack-Demo");
@@ -57,6 +58,7 @@ public class Spiel implements ActionListener
             startMenue.fenster.setVisible(false);
             startMenue.fenster.dispose();
         }
+        
 
         if(e.getSource() == spielFenster.knopfStartGeben())
         {
@@ -108,13 +110,9 @@ public class Spiel implements ActionListener
                 {
                     spielFenster.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
                     spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
-<<<<<<< HEAD
+
                     spielFenster.textleiste.append("Du hast leider über 21 und somit verloren ... \nLust auf noch ein Spiel? \n");
                     spielBeendet();
-=======
-                    spielFenster.textleiste.append("Du hast leider über 21 \n");
-
->>>>>>> c9113e50a158511fc9fe82db1fc7a41e5bd8e117
                 }
             }
 
@@ -130,8 +128,7 @@ public class Spiel implements ActionListener
                     spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
                     spielFenster.textleiste.append("Der Dealer hat:"+ dealer.getKartenwert()+ "\n");
                     spielFenster.textleiste.append("Du hast gegen den Dealer verloren." + "\n");
-                    spielGestartet = false;
-                    //spielBeendet();
+                    spielBeendet();
                 }
                 
                 else if(dealer.getKartenwert() > 21)
@@ -139,8 +136,7 @@ public class Spiel implements ActionListener
                     spielFenster.textleiste.append("Dealer hat überzogen. Er hat: "+ dealer.getKartenwert() +"\n");
                     spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
                     spielFenster.textleiste.append("Du hast gewonnen!\nLust auf noch ein Spiel? \n");
-                    spielGestartet = false;
-                    //spielBeendet();
+                    spielBeendet();
                 }
                 
                 else
@@ -148,24 +144,16 @@ public class Spiel implements ActionListener
                     spielFenster.textleiste.append("Dealer hat: " + dealer.getKartenwert()+ "\n");
                     spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
                     spielFenster.textleiste.append("Du hast gewonnen!\nLust auf noch ein Spiel? \n");
-                    spielGestartet = false;
-                    //spielBeendet();
+                    spielBeendet();
                 }
             } 
         }
         else 
         {
-<<<<<<< HEAD
             spielFenster.textleiste.append("ERROR \nDas Spiel wurde noch nicht gestartet, somit kann keiner dieser Knöpfe gedrückt werden. \n");
-=======
-
-            //spielFenster.textleiste.append("Es kam zu einem Fehler. \n");
-
->>>>>>> c9113e50a158511fc9fe82db1fc7a41e5bd8e117
         }
 
         //Bestätigen des Beenden
-
         if(e.getSource() == popupBeendenFenster.popupNeinKnopfGeben())
         {
             spielFenster.textleiste.append("Beenden abgebrochen \n");
@@ -192,17 +180,9 @@ public class Spiel implements ActionListener
         return spielGestartet;
     }
 
-    public void spielBeendet(){
-        try
-        {
-            Thread.sleep(5000);
-            spielGestartet = false;
-            System.exit(0);
-        }
-        catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
-        }
+    public void spielBeendet()
+    {
+        spielGestartet = false;
     }
 
     public boolean verloren()
