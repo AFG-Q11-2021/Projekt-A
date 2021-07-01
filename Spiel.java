@@ -62,6 +62,7 @@ public class Spiel implements ActionListener
 
         if(e.getSource() == spielFenster.knopfStartGeben())
         {
+            spielGestartet = true;
             spielFenster.textleiste.append("Spiel wurde gestartet. \n");
             
             spieler.karteZiehen();
@@ -85,8 +86,7 @@ public class Spiel implements ActionListener
                 }
             
             spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
-            
-            spielGestartet = true;
+           
         }
 
         if(e.getSource() == spielFenster.knopfStopGeben())
@@ -126,7 +126,7 @@ public class Spiel implements ActionListener
                 {
                     spielFenster.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
                     spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
-                    spielFenster.textleiste.append("Der Dealer hat:"+ dealer.getKartenwert()+ "\n");
+                    spielFenster.textleiste.append("Der Dealer hat: "+ dealer.getKartenwert()+ "\n");
                     spielFenster.textleiste.append("Du hast gegen den Dealer verloren." + "\n");
                     spielBeendet();
                 }
