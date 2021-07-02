@@ -4,7 +4,7 @@
  * von Sasha und Raphael
  * Popup Menü beim beenden + Textarea
  * am 18.06.
- * von Sasha, Raphael & Magdalena
+ * von Sascha, Raphael & Magdalena
  */
 import java.awt.*;
 import javax.swing.*;
