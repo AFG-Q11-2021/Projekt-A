@@ -1,8 +1,7 @@
 /* 
- * 
- * Paul & Joel
- * 18.06.2021
- * 
+ * Klasse Kartendeck:
+ * Verwaltet alle Karten
+ * von Paul und Joel
  */
 import java.util.Random;
 

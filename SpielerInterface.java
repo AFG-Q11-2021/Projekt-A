@@ -1,5 +1,5 @@
 /*
- * Interface für Speler & Dealer
+ * Interface für Spieler & Dealer
  * 30.04.2021
  * Amelie & Vroni
  */
