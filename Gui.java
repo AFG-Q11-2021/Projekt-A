@@ -13,6 +13,7 @@ public class Gui
 {
 
     public JFrame fenster;
+    public JFrame kartenbild;
     private Image image;
 
     private JDialog beendenFenster;
@@ -99,6 +100,18 @@ public class Gui
     {
         beendenFenster.setVisible(false);
         beendenFenster.dispose();
+    }
+    
+    // Erzeugt Karten auf dem Spielertisch, sobald einer gezogen wurde.
+    public void kartenErzeugen(int farbe, int index)
+    {
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\karten\\" + farbe + "-" + index + ".png"));
+        kartenbild.setIconImage(image);
+        
+        kartenbild.setSize(80,116);
+        
+        kartenbild.pack();
+        kartenbild.setVisible(true);
     }
 
 }
