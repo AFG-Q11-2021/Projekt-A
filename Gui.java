@@ -102,7 +102,7 @@ public class Gui
         beendenFenster.dispose();
     }
     
-    // Erzeugt Karten auf dem Spielertisch, sobald einer gezogen wurde.
+    // Erzeugt Karten auf dem Spielertisch, sobald eine gezogen wurde.
     public void kartenErzeugen(int farbe, int index)
     {
         Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\karten\\" + farbe + "-" + index + ".png"));
