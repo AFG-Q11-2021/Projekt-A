@@ -26,7 +26,7 @@ public class SpielFenster extends Gui
 
         leisteRechts = new JPanel();
         leisteUnten = new JPanel();
-
+        
         dealerWertPane = new JTextPane();
         leisteRechts.add(dealerWertPane);
 
