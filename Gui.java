@@ -14,25 +14,32 @@ public class Gui
 
     public JFrame fenster;
     private Image image;
-    
+
     private JDialog beendenFenster;
     private JPanel leisteUntenBeenden;
     public JButton popupJaKnopf,popupNeinKnopf;
-    
+
     public Gui()
-    {       
-       
+    {          
+
     }
-    
-     //erzeugt das Fenster und alle Elemente des GUIs
+
+    //erzeugt das Fenster und alle Elemente des GUIs
     public void fensterErzeugen(String fensterName)
     {
         //setzt das Icon des Fensters
         Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\Icon.png"));
         fenster.setIconImage(image);
-        
+
         fenster.pack();
-        fenster.setSize(1000,600);
+
+
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().getWidth());
+        int ySize = ((int) tk.getScreenSize().getHeight());     
+        fenster.setSize(xSize,ySize);
+
+
         fenster.setVisible(true);
     }
 
@@ -54,39 +61,38 @@ public class Gui
             System.out.println("LaF fehler");
         }
     }
-    
-    
-        public JButton popupJaKnopfGeben()
+
+    public JButton popupJaKnopfGeben()
     {
         return popupJaKnopf;
     }
-    
+
     public JButton popupNeinKnopfGeben()
     {
         return popupNeinKnopf;
     }
-    
+
     public void popupFensterErzeugen(String knopfJaName, String knopfNeinName)
     {        
         //JDialog popupFenster = new JDialog(fenster,titel);
         beendenFenster = new JDialog();
+        leisteUntenBeenden = new JPanel();
         
+        beendenFenster.add(BorderLayout.CENTER,leisteUntenBeenden); 
+
         popupJaKnopf = new JButton(knopfJaName);
         popupJaKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
+        leisteUntenBeenden.add(popupJaKnopf);
 
         popupNeinKnopf = new JButton(knopfNeinName);
         popupNeinKnopf.setFont(new Font("Arial", Font.PLAIN, 12));
-        
+        leisteUntenBeenden.add(popupNeinKnopf);
+
         beendenFenster.setLocation(500,350);
-        beendenFenster.setSize(200,75);
+        beendenFenster.setSize(250,75);
         beendenFenster.setVisible(true);
         beendenFenster.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         beendenFenster.setResizable(false);
-
-        leisteUntenBeenden = new JPanel();
-        beendenFenster.add(BorderLayout.CENTER,leisteUntenBeenden);
-        leisteUntenBeenden.add(popupJaKnopf);
-        leisteUntenBeenden.add(popupNeinKnopf);
     }
 
     public void popupFensterErzeugenSchließen()
