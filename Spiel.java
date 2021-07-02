@@ -22,6 +22,7 @@ public class Spiel implements ActionListener
     private PopupBeendenFenster popupBeendenFenster;
     private SpielFenster spielFenster;
     private StartMenue startMenue;
+    private PopupNeustartFenster popupNeustartFenster;
 
     public Spiel(){ 
         //setzt das Look and Feel
@@ -31,6 +32,8 @@ public class Spiel implements ActionListener
         dealer = new Dealer();
         popupBeendenFenster = new PopupBeendenFenster();
         spielFenster = new SpielFenster();
+        popupNeustartFenster = new PopupNeustartFenster();
+        
 
         startMenue = new StartMenue();
         startMenue.fensterErzeugen("Blackjack-Demo-Start");
@@ -113,7 +116,8 @@ public class Spiel implements ActionListener
                     spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
 
                     spielFenster.textleiste.append("Du hast leider über 21 und somit verloren ... \nLust auf noch ein Spiel? \n");
-                    spielBeendet();
+
+                    popupNeustartFenster.popupFensterErzeugen("Neustart","Beenden");
                 }
             }
 
