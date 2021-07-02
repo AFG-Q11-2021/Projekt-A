@@ -10,7 +10,6 @@ public class Kartendeck
 {
     private Karte[] kartendeck;
     private int kartendeckGroeße;
-    //private int z = 0;
 
     public Kartendeck()
     {

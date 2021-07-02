@@ -6,7 +6,7 @@ public class Spieler implements SpielerInterface
     private Kartendeck kartendeck;
     private int kartenanzahl;
     private int budget;
-    private int kartenwert;
+    public int kartenwert;
     
     public Spieler()
     {
