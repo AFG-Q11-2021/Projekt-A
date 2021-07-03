@@ -6,7 +6,6 @@ public class Dealer implements SpielerInterface
     private Kartendeck kartendeck;
     private int kartenanzahl;
     public int kartenwert;
-    private boolean dealerZuHoch;
 
     public Dealer()
     {

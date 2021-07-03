@@ -1,13 +1,15 @@
 /*
  * Organisation des Spiels
- * am 30.04.2021
- * von Joel und Paul
+ * von Joel und Paul am 30.04.2021
  * 
  * Output für das Gui 
  * von Sasha und Raphael am 18.06.
  * 
  * Code organisiert und weiter am Popup-Fenster gearbeitet
  * von Raphael am 22.06.
+ * 
+ * Fehlersuche und Überarbeiterung 
+ * von Magdalena 
  */
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -194,14 +196,7 @@ public class Spiel implements ActionListener
 
     public boolean verloren()
     {
-        if(spieler.getKartenwert() > 21)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return spieler.getKartenwert() > 21;
     }
 
     //ermöglicht einen Neustart, setzt alles auf Anfang
