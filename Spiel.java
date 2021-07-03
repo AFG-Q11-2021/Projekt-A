@@ -11,7 +11,8 @@
  * Fehlersuche und Überarbeiterung 
  * von Magdalena 
  */
-import java.awt.*;
+
+//import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 
@@ -171,20 +172,20 @@ public class Spiel implements ActionListener
         spielFenster.textleiste.append("Dein aktueller Kartenwert beträgt " + spieler.getKartenwert() + ".\n");
         spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
         if (spieler.getKartenwert() == 21)
-            {
-                spielFenster.textleiste.append("Du hast einen Blackjack und somit gewonnen!\nLust auf noch ein Spiel? \n"); 
-                spielBeendet();
-            }
+        {
+            spielFenster.textleiste.append("Du hast einen Blackjack und somit gewonnen!\nLust auf noch ein Spiel? \n"); 
+            spielBeendet();
+        }
 
         dealer.karteZiehen();
         dealer.karteZiehen();
         spielFenster.textleiste.append("Der aktuelle Kartenwert vom Dealer beträgt " + dealer.getKartenwert() + ".\n");
         spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
         if (spieler.getKartenwert() == 21)
-            {
-                spielFenster.textleiste.append("Der Dealer hat einen Blackjack und somit hast du verloren...\nLust auf noch ein Spiel?\n");
-                spielBeendet();
-            }
+        {
+            spielFenster.textleiste.append("Der Dealer hat einen Blackjack und somit hast du verloren...\nLust auf noch ein Spiel?\n");
+            spielBeendet();
+        }
 
         spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
     }
