@@ -1,15 +1,18 @@
 /*
  * Organisation des Spiels
- * am 30.04.2021
- * von Joel und Paul
+ * von Joel und Paul am 30.04.2021
  * 
  * Output für das Gui 
  * von Sasha und Raphael am 18.06.
  * 
  * Code organisiert und weiter am Popup-Fenster gearbeitet
  * von Raphael am 22.06.
+ * 
+ * Fehlersuche und Überarbeiterung 
+ * von Magdalena 
  */
-import java.awt.*;
+
+//import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 
@@ -22,6 +25,7 @@ public class Spiel implements ActionListener
     private PopupBeendenFenster popupBeendenFenster;
     private SpielFenster spielFenster;
     private StartMenue startMenue;
+
     private PopupNeustartFenster popupNeustartFenster;
     private Kartendeck kartendeck;
 
@@ -35,6 +39,7 @@ public class Spiel implements ActionListener
         spielFenster = new SpielFenster();
         popupNeustartFenster = new PopupNeustartFenster();    
         kartendeck = new Kartendeck() ;
+
         startMenue = new StartMenue();
 
         startMenue.fensterErzeugen("Blackjack-Demo-Start");
@@ -56,46 +61,14 @@ public class Spiel implements ActionListener
 
             startMenue.fenster.setVisible(false);
             startMenue.fenster.dispose();
-
-            spielGestartet = true;
-            spielFenster.textleiste.append("Spiel wurde gestartet. \n");
-
-            spieler.karteZiehen();
-            spieler.karteZiehen();
-            spielFenster.textleiste.append("Dein aktueller Kartenwert beträgt " + spieler.getKartenwert() + ".\n");
-            spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
-            if (spieler.getKartenwert() == 21)
-            {
-                spielFenster.textleiste.append("Du hast einen Blackjack und somit gewonnen!\nLust auf noch ein Spiel? \n"); 
-                spielBeendet();
-            }
-
-            dealer.karteZiehen();
-            dealer.karteZiehen();
-            spielFenster.textleiste.append("Der aktuelle Kartenwert vom Dealer beträgt " + dealer.getKartenwert() + ".\n");
-            spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
-            if (spieler.getKartenwert() == 21)
-            {
-                spielFenster.textleiste.append("Der Dealer hat einen Blackjack und somit hast du verloren...\nLust auf noch ein Spiel?\n");
-                spielBeendet();
-            }
-
-            spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
+            
+            start();
         }
 
         else if(e.getSource() == startMenue.knopfSpielstartAbbrechenGeben())
         {
             startMenue.fenster.setVisible(false);
             startMenue.fenster.dispose();
-        }
-
-        //erzeugt das Popup nach dem Klicken von "Beenden"
-        if(e.getSource() == spielFenster.knopfStopGeben())
-        {
-            popupBeendenFenster.popupFensterErzeugen("Beenden","Abbrechen");
-
-            popupBeendenFenster.popupJaKnopfGeben().addActionListener(this);
-            popupBeendenFenster.popupNeinKnopfGeben().addActionListener(this); 
         }
 
         if(spielGestartet==true) 
@@ -132,7 +105,10 @@ public class Spiel implements ActionListener
                     spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
                     spielFenster.textleiste.append("Der Dealer hat: "+ dealer.getKartenwert()+ "\n");
                     spielFenster.textleiste.append("Du hast gegen den Dealer verloren.\nLust auf noch ein Spiel? \n");
-                    spielBeendet();
+                    //spielBeendet();
+                    popupNeustartFenster.popupFensterErzeugen("Neustart","Beenden");
+                    popupNeustartFenster.popupJaKnopfGeben().addActionListener(this);
+                    popupNeustartFenster.popupNeinKnopfGeben().addActionListener(this); 
                 }
 
                 else if(dealer.getKartenwert() > 21)
@@ -140,7 +116,10 @@ public class Spiel implements ActionListener
                     spielFenster.textleiste.append("Dealer hat überzogen. Er hat: "+ dealer.getKartenwert() +"\n");
                     spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
                     spielFenster.textleiste.append("Du hast gewonnen!\nLust auf noch ein Spiel? \n");
-                    spielBeendet();
+                    //spielBeendet();
+                    popupNeustartFenster.popupFensterErzeugen("Neustart","Beenden");
+                    popupNeustartFenster.popupJaKnopfGeben().addActionListener(this);
+                    popupNeustartFenster.popupNeinKnopfGeben().addActionListener(this); 
                 }
 
                 else
@@ -148,7 +127,10 @@ public class Spiel implements ActionListener
                     spielFenster.textleiste.append("Dealer hat: " + dealer.getKartenwert()+ "\n");
                     spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
                     spielFenster.textleiste.append("Du hast gewonnen!\nLust auf noch ein Spiel? \n");
-                    spielBeendet();
+                    //spielBeendet();
+                    popupNeustartFenster.popupFensterErzeugen("Neustart","Beenden");
+                    popupNeustartFenster.popupJaKnopfGeben().addActionListener(this);
+                    popupNeustartFenster.popupNeinKnopfGeben().addActionListener(this); 
                 }
             } 
         }
@@ -157,6 +139,15 @@ public class Spiel implements ActionListener
             spielFenster.textleiste.append("ERROR \nDas Spiel wurde noch nicht gestartet, somit kann keiner dieser Knöpfe gedrückt werden. \n");
         }
 
+        //erzeugt das Popup nach dem Klicken von "Beenden"
+        if(e.getSource() == spielFenster.knopfStopGeben())
+        {
+            popupBeendenFenster.popupFensterErzeugen("Beenden","Abbrechen");
+
+            popupBeendenFenster.popupJaKnopfGeben().addActionListener(this);
+            popupBeendenFenster.popupNeinKnopfGeben().addActionListener(this); 
+        }
+        
         //Bestätigen des Beenden im Popupfenster
         if(e.getSource() == popupBeendenFenster.popupNeinKnopfGeben())
         {
@@ -177,7 +168,7 @@ public class Spiel implements ActionListener
         {
             popupNeustartFenster.popupFensterErzeugenSchließen(); 
             spielFenster.textleiste.setText(" ");
-            //Neustartmethode hier einsetzen
+            neustart();
         }
         else if(e.getSource() == popupNeustartFenster.popupNeinKnopfGeben())
         {
@@ -200,6 +191,37 @@ public class Spiel implements ActionListener
         return spielGestartet;
     }
 
+    public void start()
+    {
+        spielGestartet = true;
+        spielFenster.textleiste.append("Spiel wurde gestartet. \n");
+
+        spieler.karteZiehen();
+        spieler.karteZiehen();
+        spielFenster.textleiste.append("Dein aktueller Kartenwert beträgt " + spieler.getKartenwert() + ".\n");
+        spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
+        if (spieler.getKartenwert() == 21)
+        {
+            spielFenster.textleiste.append("Du hast einen Blackjack und somit gewonnen!\nLust auf noch ein Spiel? \n"); 
+            spielBeendet();
+        }
+
+        dealer.karteZiehen();
+        dealer.karteZiehen();
+        spielFenster.textleiste.append("Der aktuelle Kartenwert vom Dealer beträgt " + dealer.getKartenwert() + ".\n");
+        spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
+        if (spieler.getKartenwert() == 21)
+        {
+            spielFenster.textleiste.append("Der Dealer hat einen Blackjack und somit hast du verloren...\nLust auf noch ein Spiel?\n");
+            //spielBeendet();
+            popupNeustartFenster.popupFensterErzeugen("Neustart","Beenden");
+            popupNeustartFenster.popupJaKnopfGeben().addActionListener(this);
+            popupNeustartFenster.popupNeinKnopfGeben().addActionListener(this); 
+        }
+
+        spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
+    }
+    
     public void spielBeendet()
     {
         spielGestartet = false;
@@ -207,14 +229,7 @@ public class Spiel implements ActionListener
 
     public boolean verloren()
     {
-        if(spieler.getKartenwert() > 21)
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return spieler.getKartenwert() > 21;
     }
 
     //ermöglicht einen Neustart, setzt alles auf Anfang
