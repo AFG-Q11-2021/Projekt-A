@@ -38,6 +38,7 @@ extends Gui
         Image hitIcon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\knopfHit.png"));
         knopfHit = new JButton(new ImageIcon(hitIcon));
         knopfHit.setFont(new Font("Arial", Font.PLAIN, 12));
+        
         //knopfHit.setPreferredSize(new Dimension(100, 40));
         leisteUnten.add(knopfHit);
 
