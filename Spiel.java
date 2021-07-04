@@ -167,7 +167,7 @@ public class Spiel implements ActionListener
         if(e.getSource() == popupNeustartFenster.popupJaKnopfGeben())
         {
             popupNeustartFenster.popupFensterErzeugenSchließen(); 
-            spielFenster.textleiste.setText(" ");
+            spielFenster.textleiste.setText("");
             neustart();
         }
         else if(e.getSource() == popupNeustartFenster.popupNeinKnopfGeben())
