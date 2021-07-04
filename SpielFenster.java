@@ -7,7 +7,9 @@
 
 import java.awt.*;
 import javax.swing.*;
-public class SpielFenster extends Gui
+
+public class SpielFenster 
+extends Gui 
 {
     private JButton knopfHit,knopfStand,knopfStart,knopfStop;
     private JPanel leisteUnten, leisteRechts;
@@ -44,17 +46,12 @@ public class SpielFenster extends Gui
         knopfStand.setFont(new Font("Arial", Font.PLAIN, 12));
         //knopfStand.setPreferredSize(new Dimension(100, 40));
         leisteUnten.add(knopfStand);
-
-        Image startIcon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\knopfSpielstart.png"));
-        knopfStart = new JButton(new ImageIcon(startIcon));
-        knopfStart.setFont(new Font("Arial", Font.PLAIN, 12));
-        leisteUnten.add(knopfStart);
-
+       
         Image beendenIcon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\knopfBeenden.png"));
         knopfStop = new JButton (new ImageIcon(beendenIcon));
         knopfStop.setFont(new Font("Arial", Font.PLAIN, 12));
-        //knopfStop.setPreferredSize(new Dimension(100, 40));
-        leisteUnten.add(knopfStop);
+        leisteUnten.add(knopfStop);     
+
 
         textleiste  = new JTextArea();
 
@@ -70,7 +67,7 @@ public class SpielFenster extends Gui
         super.fensterErzeugen(fensterName);
 
     }
-    
+ 
     public void fullscreenAktivieren()
     {
         fenster.setExtendedState(JFrame.MAXIMIZED_BOTH); 
