@@ -107,4 +107,9 @@ public class Spiel
     {
         return spielstatus;
     }
+    
+    public int getSpielerkartenwert()
+    {
+        return spieler.getKartenwert();
+    }
 }

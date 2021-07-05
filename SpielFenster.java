@@ -7,6 +7,8 @@
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
 
 import javax.imageio.ImageIO;
@@ -21,6 +23,9 @@ public class SpielFenster extends JPanel
     private ImageIcon dealertischIcon, karteIcon, knopfHitIcon, knopfStandIcon, knopfBeendenIcon;
     private JPanel knoepfe;
     private JButton knopfHit, knopfStand, knopfBeenden;
+    
+    public JTextArea textleiste;
+    private JScrollPane scrollTextleiste;
     /**
      * Konstruktor der Klasse SpielFenster
      */
@@ -31,9 +36,13 @@ public class SpielFenster extends JPanel
         knopfStandIcon = new ImageIcon(getClass().getResource("\\res\\knopfStand.png"));
         knopfBeendenIcon = new ImageIcon(getClass().getResource("\\res\\knopfBeenden.png"));
         
+        textleiste = new JTextArea();
+        
         knopfHit = new JButton();
         knopfStand = new JButton();
         knopfBeenden = new JButton();
+        
+        
         
         knoepfe = new JPanel();
     }
@@ -43,6 +52,12 @@ public class SpielFenster extends JPanel
      */
     public void paint(Graphics g){
         dealertischIcon.paintIcon(this, g, 0, 0);
+    }
+    
+    public JScrollPane textErzeugen(){
+        scrollTextleiste = new JScrollPane(textleiste);
+        scrollTextleiste.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        return scrollTextleiste;
     }
     
     public JPanel knoepfeErzeugen()

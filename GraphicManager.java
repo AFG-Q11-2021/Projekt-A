@@ -79,6 +79,7 @@ public class GraphicManager implements ActionListener
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         frame.setUndecorated(true);
         frame.add(spielfenster);
+        frame.add(spielfenster.textErzeugen());
         frame.add(BorderLayout.SOUTH, spielfenster.knoepfeErzeugen());
         frame.setVisible(true);
     }
@@ -100,6 +101,7 @@ public class GraphicManager implements ActionListener
         {
             updateFensterZuSpiel();
             spiel.setupSpiel();
+            spielfenster.textleiste.append("Start:" + spiel.getSpielerkartenwert());
         }
         
         else if(e.getSource() == hauptfenster.getKnopfMultiplayer())
@@ -130,8 +132,7 @@ public class GraphicManager implements ActionListener
             if(e.getSource() == spielfenster.getKnopfHit())
             {
                 spiel.karteZiehen();
-                
-                
+                spielfenster.textleiste.append("Knop Hit" + spiel.getSpielerkartenwert());
 
                 if(spiel.gewonnenMitBlackjack() == true)
                 {
@@ -144,6 +145,7 @@ public class GraphicManager implements ActionListener
             }
             else if(e.getSource() == spielfenster.getKnopfStand())
             {
+                spielfenster.textleiste.append("Knop Stand");
                 if(spiel.gewonnenMitDealerUeberzogen() == true)
                 {
                     
