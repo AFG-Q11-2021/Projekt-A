@@ -105,16 +105,7 @@ public class Gui
     }
     
     // Erzeugt Karten auf dem Spielertisch, sobald eine gezogen wurde.
-    public void kartenErzeugen(int farbe, int index)
-    {
-        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\karten\\" + farbe + "-" + index + ".png"));
-        kartenbild.setIconImage(image);
-        
-        kartenbild.setSize(80,116);
-        
-        kartenbild.pack();
-        kartenbild.setVisible(true);
-    }
+    
 
 }
 

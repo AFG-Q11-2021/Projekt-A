@@ -1,97 +1,90 @@
-/*
- * Erzeugt das Spielfenster
+/**
+ * Beschreiben Sie hier die Klasse SpielFenster.
  * 
- * von Raphael
- * am 28.06.2021
+ * @author (Rafael Marsmann, Paul Görner) 
+ * @version (05.07.2021)
  */
 
-import java.awt.*;
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
-public class SpielFenster 
-extends Gui 
+import javax.imageio.ImageIO;
+import java.io.IOException;
+
+import java.awt.image.BufferedImage;
+import java.awt.Font;
+import java.awt.Graphics;
+
+public class SpielFenster extends JPanel
 {
-    private JButton knopfHit,knopfStand,knopfStart,knopfStop;
-    private JPanel leisteUnten, leisteRechts;
-    private JScrollPane scrollTextleiste;
-    public JTextArea textleiste;
-    public JTextPane dealerWertPane, spielerWertPane;
-
+    private ImageIcon dealertischIcon, karteIcon, knopfHitIcon, knopfStandIcon, knopfBeendenIcon;
+    private JPanel knoepfe;
+    private JButton knopfHit, knopfStand, knopfBeenden;
+    /**
+     * Konstruktor der Klasse SpielFenster
+     */
     public SpielFenster()
     {
+        dealertischIcon = new ImageIcon(getClass().getResource("\\res\\dealertisch.png"));
+        knopfHitIcon = new ImageIcon(getClass().getResource("\\res\\knopfHit.png"));
+        knopfStandIcon = new ImageIcon(getClass().getResource("\\res\\knopfStand.png"));
+        knopfBeendenIcon = new ImageIcon(getClass().getResource("\\res\\knopfBeenden.png"));
+        
+        knopfHit = new JButton();
+        knopfStand = new JButton();
+        knopfBeenden = new JButton();
+        
+        knoepfe = new JPanel();
     }
-
-    @Override
-    public void fensterErzeugen(String fensterName)
-    {   
-        fenster = new JFrame(fensterName);
-
-        leisteRechts = new JPanel();
-        leisteUnten = new JPanel();
-        
-        dealerWertPane = new JTextPane();
-        leisteRechts.add(dealerWertPane);
-
-        spielerWertPane = new JTextPane();
-        leisteRechts.add(spielerWertPane);
-
-        Image hitIcon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\knopfHit.png"));
-        knopfHit = new JButton(new ImageIcon(hitIcon));
-        knopfHit.setFont(new Font("Arial", Font.PLAIN, 12));
-        
-        //knopfHit.setPreferredSize(new Dimension(100, 40));
-        leisteUnten.add(knopfHit);
-
-        Image standIcon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\knopfStand.png"));
-        knopfStand = new JButton(new ImageIcon(standIcon));
-        knopfStand.setFont(new Font("Arial", Font.PLAIN, 12));
-        //knopfStand.setPreferredSize(new Dimension(100, 40));
-        leisteUnten.add(knopfStand);
-       
-        Image beendenIcon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("\\res\\knopfBeenden.png"));
-        knopfStop = new JButton (new ImageIcon(beendenIcon));
-        knopfStop.setFont(new Font("Arial", Font.PLAIN, 12));
-        leisteUnten.add(knopfStop);     
-
-
-        textleiste  = new JTextArea();
-
-        scrollTextleiste = new JScrollPane(textleiste);
-        scrollTextleiste.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        fenster.add(scrollTextleiste);
-
-        fenster.add(BorderLayout.SOUTH, leisteUnten);
-        fenster.add(BorderLayout.EAST, leisteRechts);
-
-        
-        
-        super.fensterErzeugen(fensterName);
-
+    
+    /**
+     * Methode paint erzeugt das Hintergrundbild
+     */
+    public void paint(Graphics g){
+        dealertischIcon.paintIcon(this, g, 0, 0);
     }
- 
-    public void fullscreenAktivieren()
+    
+    public JPanel knoepfeErzeugen()
     {
-        fenster.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        fenster.setUndecorated(true);
-    }
+        knopfHit.setIcon(knopfHitIcon);
+        knopfHit.setFont(new Font("Arial", Font.PLAIN, 12));
 
-    public JButton knopfHitGeben()
+        knopfStand.setIcon(knopfStandIcon);
+        knopfStand.setFont(new Font("Arial", Font.PLAIN, 12));
+        
+        knopfBeenden.setIcon(knopfBeendenIcon);
+        knopfBeenden.setFont(new Font("Arial", Font.PLAIN, 12));     
+        
+        knoepfe.add(knopfHit);
+        knoepfe.add(knopfStand);
+        knoepfe.add(knopfBeenden);
+        
+        return knoepfe;
+    }
+    
+    public void karteErzeugen(int farbe, int index, int kartenanzahl)
+    {
+        
+    }
+    
+    private ImageIcon zeigeImage(int farbe, int index){
+        BufferedImage img = null;
+        try {
+           img = ImageIO.read(getClass().getResource("\\res\\karten\\" + farbe + "-" + index + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ImageIcon(img);
+    }
+    
+    public JButton getKnopfHit()
     {
         return knopfHit;
     }
 
-    public JButton knopfStandGeben()
+    public JButton getKnopfStand()
     {
         return knopfStand;
-    }
-
-    public JButton knopfStartGeben()
-    {
-        return knopfStart;
-    }
-
-    public JButton knopfStopGeben()
-    {
-        return knopfStop;
     }
 }
