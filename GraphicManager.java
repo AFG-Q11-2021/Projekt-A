@@ -75,7 +75,6 @@ public class GraphicManager implements ActionListener
     public void updateFensterZuSpiel()
     {
         setupFenster();
-        frame.setBackground(Color.decode("#D1D1D1"));
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         frame.setUndecorated(true);
         frame.add(spielfenster);
@@ -132,31 +131,36 @@ public class GraphicManager implements ActionListener
             if(e.getSource() == spielfenster.getKnopfHit())
             {
                 spiel.karteZiehen();
-                spielfenster.textleiste.append("Knop Hit" + spiel.getSpielerkartenwert());
+                spielfenster.textleiste.append("Knop Hit" + spiel.getSpielerkartenwert() + " \n");
 
                 if(spiel.gewonnenMitBlackjack() == true)
                 {
-                    
+                    popupfenster.popupFensterErzeugen("Du hast einen Blackjack!");
+                    spielfenster.textleiste.append("Knop Hit" + spiel.getSpielerkartenwert() + " \n");
                 }
                 if(spiel.verlorenWegenUeberzogen() == true)
                 {
-                    
+                    popupfenster.popupFensterErzeugen("Du hast leider überzogen!");
+                    spielfenster.textleiste.append("Knop Hit" + spiel.getSpielerkartenwert() + " \n");
                 }
             }
             else if(e.getSource() == spielfenster.getKnopfStand())
             {
-                spielfenster.textleiste.append("Knop Stand");
+                spielfenster.textleiste.append("Du ziehst keine weitere Karte! \n");
                 if(spiel.gewonnenMitDealerUeberzogen() == true)
                 {
-                    
+                    popupfenster.popupFensterErzeugen("Der Dealer hat überzogen!");
+                    spielfenster.textleiste.append("Der Dealer hat überzogen! \n");
                 }
                 if(spiel.gewonnenMitAugenzahl() == true)
                 {
-                
+                    popupfenster.popupFensterErzeugen("Du bist näher an 21 als der Dealer!");
+                    spielfenster.textleiste.append("Du bist näher an 21 als der Dealer! \n");
                 }
                 if(spiel.verlorenWegenAugenzahl() == true)
                 {
-                
+                    popupfenster.popupFensterErzeugen("Der Dealer ist näher an 21 dran!");
+                    spielfenster.textleiste.append("Der Dealer ist näher an 21 dran! \n");
                 }
             }
         }

@@ -32,6 +32,7 @@ public class SpielFenster extends JPanel
     public SpielFenster()
     {
         dealertischIcon = new ImageIcon(getClass().getResource("\\res\\dealertisch.png"));
+        
         knopfHitIcon = new ImageIcon(getClass().getResource("\\res\\knopfHit.png"));
         knopfStandIcon = new ImageIcon(getClass().getResource("\\res\\knopfStand.png"));
         knopfBeendenIcon = new ImageIcon(getClass().getResource("\\res\\knopfBeenden.png"));
