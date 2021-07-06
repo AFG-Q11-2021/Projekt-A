@@ -105,6 +105,7 @@ public class GraphicManager implements ActionListener
         {
             updateFensterZuSpiel();
             spiel.setupSpiel();
+            spielfenster.textleiste.append("Start:" + spiel.getSpielerkartenwert());
         }
         
         else if(e.getSource() == hauptfenster.getKnopfMultiplayer())
