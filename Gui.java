@@ -104,8 +104,6 @@ public class Gui
         beendenFenster.dispose();
     }
     
-    // Erzeugt Karten auf dem Spielertisch, sobald eine gezogen wurde.
-    
 
 }
 
