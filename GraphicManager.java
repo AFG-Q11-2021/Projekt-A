@@ -78,9 +78,14 @@ public class GraphicManager implements ActionListener
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         frame.setUndecorated(true);
         frame.add(spielfenster);
-        frame.add(spielfenster.textErzeugen());
+        //frame.add(spielfenster.textErzeugen());
         frame.add(BorderLayout.SOUTH, spielfenster.knoepfeErzeugen());
         frame.setVisible(true);
+    }
+    
+    public void updateFensterMitNeuerKarte()
+    {
+        frame.add(spielfenster.bildErzeugen(1,1));
     }
     
     public void updateFensterZuMenue()
@@ -101,11 +106,12 @@ public class GraphicManager implements ActionListener
             updateFensterZuSpiel();
             spiel.setupSpiel();
             spielfenster.textleiste.append("Start:" + spiel.getSpielerkartenwert());
+            
         }
         
         else if(e.getSource() == hauptfenster.getKnopfMultiplayer())
         {
-        
+            
         }
 
         else if(e.getSource() == hauptfenster.getKnopfProfil())
@@ -132,15 +138,14 @@ public class GraphicManager implements ActionListener
             {
                 spiel.karteZiehen();
                 spielfenster.textleiste.append("Knop Hit" + spiel.getSpielerkartenwert() + " \n");
-
+                updateFensterMitNeuerKarte();
                 if(spiel.gewonnenMitBlackjack() == true)
                 {
-                    popupfenster.popupFensterErzeugen("Du hast einen Blackjack!");
-                    spielfenster.textleiste.append("Knop Hit" + spiel.getSpielerkartenwert() + " \n");
+                    //popupfenster.popupFensterErzeugen("Du hast einen Blackjack!");
                 }
                 if(spiel.verlorenWegenUeberzogen() == true)
                 {
-                    popupfenster.popupFensterErzeugen("Du hast leider überzogen!");
+                    //popupfenster.popupFensterErzeugen("Du hast leider überzogen!");
                     spielfenster.textleiste.append("Knop Hit" + spiel.getSpielerkartenwert() + " \n");
                 }
             }
@@ -149,17 +154,17 @@ public class GraphicManager implements ActionListener
                 spielfenster.textleiste.append("Du ziehst keine weitere Karte! \n");
                 if(spiel.gewonnenMitDealerUeberzogen() == true)
                 {
-                    popupfenster.popupFensterErzeugen("Der Dealer hat überzogen!");
+                    //popupfenster.popupFensterErzeugen("Der Dealer hat überzogen!");
                     spielfenster.textleiste.append("Der Dealer hat überzogen! \n");
                 }
                 if(spiel.gewonnenMitAugenzahl() == true)
                 {
-                    popupfenster.popupFensterErzeugen("Du bist näher an 21 als der Dealer!");
+                    //popupfenster.popupFensterErzeugen("Du bist näher an 21 als der Dealer!");
                     spielfenster.textleiste.append("Du bist näher an 21 als der Dealer! \n");
                 }
                 if(spiel.verlorenWegenAugenzahl() == true)
                 {
-                    popupfenster.popupFensterErzeugen("Der Dealer ist näher an 21 dran!");
+                    //popupfenster.popupFensterErzeugen("Der Dealer ist näher an 21 dran!");
                     spielfenster.textleiste.append("Der Dealer ist näher an 21 dran! \n");
                 }
             }
