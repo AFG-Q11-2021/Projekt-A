@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
 import javax.imageio.ImageIO;
@@ -21,7 +22,7 @@ import java.awt.Graphics;
 public class SpielFenster extends JPanel
 {
     private ImageIcon dealertischIcon, karteIcon, knopfHitIcon, knopfStandIcon, knopfBeendenIcon;
-    private JPanel knoepfe;
+    private JPanel knoepfe, karten;
     private JButton knopfHit, knopfStand, knopfBeenden;
     
     public JTextArea textleiste;
@@ -29,7 +30,7 @@ public class SpielFenster extends JPanel
     /**
      * Konstruktor der Klasse SpielFenster
      */
-    public SpielFenster()
+    public SpielFenster() 
     {
         dealertischIcon = new ImageIcon(getClass().getResource("\\res\\dealertisch.png"));
         
@@ -46,6 +47,7 @@ public class SpielFenster extends JPanel
         
         
         knoepfe = new JPanel();
+        karten = new JPanel();
     }
     
     /**
@@ -53,12 +55,21 @@ public class SpielFenster extends JPanel
      */
     public void paint(Graphics g){
         dealertischIcon.paintIcon(this, g, 0, 0);
+        
+        
     }
     
     public JScrollPane textErzeugen(){
         scrollTextleiste = new JScrollPane(textleiste);
         scrollTextleiste.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         return scrollTextleiste;
+    }
+    
+    public JPanel bildErzeugen(int farbe, int index)
+    {
+        karten.add(new JLabel(zeigeImage(farbe, index)));
+        
+        return karten;
     }
     
     public JPanel knoepfeErzeugen()
@@ -81,8 +92,8 @@ public class SpielFenster extends JPanel
     
     public void karteErzeugen(int farbe, int index, int kartenanzahl)
     {
-        
     }
+    
     
     private ImageIcon zeigeImage(int farbe, int index){
         BufferedImage img = null;
