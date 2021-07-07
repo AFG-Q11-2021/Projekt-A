@@ -8,12 +8,16 @@
 import javax.swing.*;
 import java.awt.*;
 
+import javax.imageio.ImageIO;
+import java.io.IOException;
+
 public class HauptFenster extends JFrame
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private JPanel knoepfePanel;
     private JFrame frame;
     private JButton knopfSingleplayer, knopfMultiplayer, knopfProfil, knopfBeenden;
+    private JTextArea blackjack;
     
     private ImageIcon knopfSingelplayerIcon, knopfMultiplayerIcon, knopfProfilIcon, knopfBeendenIcon;
 
@@ -38,8 +42,8 @@ public class HauptFenster extends JFrame
     public void erzeugen()
     {
         frame.setName("Blackjack-Hauptmenü");
-        frame.setSize(1000,1000);
-        
+        frame.setSize(400,600);
+        frame.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-300);
         frame.add(erzeugeHintergrundPanel());
         frame.setVisible(true);
     }
@@ -51,23 +55,21 @@ public class HauptFenster extends JFrame
     
     private JPanel erzeugeHintergrundPanel()
     {   
-        /*Image image = null;
-         * try {
-         *     image = ImageIO.read(getClass().getResource("\\res\\dealertisch.png"));
-         *  } catch(IOException ioe) {
-         *      JOptionPane.showMessageDialog(null,
-         *      "Das Hintergrundbild konnte nicht geladen werden!\n" + ioe.getLocalizedMessage(),
-         *      ioe.getClass().getName(),
-         *      JOptionPane.WARNING_MESSAGE);
-         *  }
+        Image image = null;
+        try {
+            image = ImageIO.read(getClass().getResource("\\res\\hauptmenü.png"));
+        } catch(IOException ioe) {
+            JOptionPane.showMessageDialog(null,
+            "Das Hintergrundbild konnte nicht geladen werden!\n" + ioe.getLocalizedMessage(),
+            ioe.getClass().getName(),
+            JOptionPane.WARNING_MESSAGE);
+           }
 
-         *  BackgroundImagePanel mainPanel = new BackgroundImagePanel(new BorderLayout());
-         *  mainPanel.setImage(image); //hier kann man einstellen, ob das Bild im Original oder eingepasst ausgegeben werden soll (true/false)
-         */
+        BackgroundImagePanel mainPanel = new BackgroundImagePanel(new BorderLayout());
+        mainPanel.setImage(image); //hier kann man einstellen, ob das Bild im Original oder eingepasst ausgegeben werden soll (true/false)
         
-        JPanel mainPanel = new JPanel();
-        mainPanel.setOpaque(true);
-        mainPanel.add(erzeugeKnoepfePanel(mainPanel.isOpaque()));
+        mainPanel.setOpaque(false);
+        mainPanel.add(erzeugeKnoepfePanel(mainPanel.isOpaque()), BorderLayout.CENTER);
         
         return mainPanel;
     }

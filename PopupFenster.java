@@ -5,25 +5,27 @@
  * @version (eine Versionsnummer oder ein Datum)
  */
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 
 public class PopupFenster
 {
     private JDialog beendenFenster;
     private JPanel knoepfe;
     private JButton knopfBestaetigen,knopfAbbrechen;
+    private ImageIcon knopfBestaetigenIcon, knopfAbbrechenIcon;
     
     public PopupFenster()
     {
         beendenFenster = new JDialog();
         knoepfe = new JPanel();
         
+        //knopfBestaetigenIcon = new ImageIcon(getClass().getResource("\\res\\knopfBestätigen.png"));
+        knopfAbbrechenIcon = new ImageIcon(getClass().getResource("\\res\\knopfAbbrechen.png"));
+        
+        //knopfBestaetigen = new JButton(knopfBestaetigenIcon);
         knopfBestaetigen = new JButton("Bestätigen");
-        knopfAbbrechen = new JButton("Abbrechen");
+        knopfAbbrechen = new JButton(knopfAbbrechenIcon);
     }
     
     public void popupFensterErzeugen(String text){
@@ -35,7 +37,8 @@ public class PopupFenster
         
         beendenFenster.add(BorderLayout.CENTER,knoepfe);
         
-        beendenFenster.setLocation(500,350);
+        
+        beendenFenster.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-300);
         beendenFenster.setSize(250,250);
         beendenFenster.setVisible(true);
         beendenFenster.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
