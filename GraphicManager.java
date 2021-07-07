@@ -1,7 +1,7 @@
 /**
  * Beschreiben Sie hier die Klasse SpielFenster.
  * 
- * @author (Paul Görner, Rafael Marsmann, )
+ * @author (Paul Görner, Rafael Marsmann)
  * @version (04.07.2021)
  */
 
@@ -51,7 +51,7 @@ public class GraphicManager implements ActionListener
         popupfenster.getKnopfBestaetigen().addActionListener(this);
         popupfenster.getKnopfAbbrechen().addActionListener(this);
         
-        updateFensterZuMenue();
+        hauptfenster.erzeugen();
     }
     
     /**
@@ -61,51 +61,14 @@ public class GraphicManager implements ActionListener
      * @return        die Summe aus x und y
      */
     
-    public void setupFenster()
-    {
-        frame.getContentPane().removeAll();
-        frame.setExtendedState(JFrame.NORMAL);
-        //frame.remove(hauptfenster);
-        //frame.remove(hauptfenster.knoepfeErzeugen());
-        //frame.remove(spielfenster);
-        //frame.remove(spielfenster);
-        frame.dispose();
-    }
-    
-    public void updateFensterZuSpiel()
-    {
-        setupFenster();
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        frame.setUndecorated(true);
-        frame.add(spielfenster);
-        //frame.add(spielfenster.textErzeugen());
-        frame.add(BorderLayout.SOUTH, spielfenster.knoepfeErzeugen());
-        frame.setVisible(true);
-    }
-    
-    public void updateFensterMitNeuerKarte()
-    {
-        frame.add(spielfenster.bildErzeugen(1,1));
-    }
-    
-    public void updateFensterZuMenue()
-    {
-        setupFenster();
-        frame.setSize(0, 0);
-        frame.add(hauptfenster);
-        frame.add(hauptfenster.knoepfeErzeugen());
-        frame.pack();
-        frame.setVisible(true);
-    }
-    
     public void actionPerformed(ActionEvent e)
     {   
         //erzeugt das Spielfenster und die dafür benötigten Knöpfe; schließt das Startmenü
         if(e.getSource() == hauptfenster.getKnopfSingleplayer())
         {
-            updateFensterZuSpiel();
+            hauptfenster.schließen();
+            spielfenster.erzeugen();
             spiel.setupSpiel();
-            spielfenster.textleiste.append("Start:" + spiel.getSpielerkartenwert());
         }
         
         else if(e.getSource() == hauptfenster.getKnopfMultiplayer())
@@ -123,7 +86,7 @@ public class GraphicManager implements ActionListener
             popupfenster.popupFensterErzeugen("Möchtest du das Spiel beenden?");
             if(e.getSource() == popupfenster.getKnopfBestaetigen())
             {
-                setupFenster();
+                spielfenster.schließen();
                 popupfenster.closePopupFenster();
             }
             else if(e.getSource() == popupfenster.getKnopfAbbrechen())
@@ -136,8 +99,6 @@ public class GraphicManager implements ActionListener
             if(e.getSource() == spielfenster.getKnopfHit())
             {
                 spiel.karteZiehen();
-                spielfenster.textleiste.append("Knop Hit" + spiel.getSpielerkartenwert() + " \n");
-                updateFensterMitNeuerKarte();
                 if(spiel.gewonnenMitBlackjack() == true)
                 {
                     //popupfenster.popupFensterErzeugen("Du hast einen Blackjack!");
@@ -145,26 +106,21 @@ public class GraphicManager implements ActionListener
                 if(spiel.verlorenWegenUeberzogen() == true)
                 {
                     //popupfenster.popupFensterErzeugen("Du hast leider überzogen!");
-                    spielfenster.textleiste.append("Knop Hit" + spiel.getSpielerkartenwert() + " \n");
                 }
             }
             else if(e.getSource() == spielfenster.getKnopfStand())
             {
-                spielfenster.textleiste.append("Du ziehst keine weitere Karte! \n");
                 if(spiel.gewonnenMitDealerUeberzogen() == true)
                 {
                     //popupfenster.popupFensterErzeugen("Der Dealer hat überzogen!");
-                    spielfenster.textleiste.append("Der Dealer hat überzogen! \n");
                 }
                 if(spiel.gewonnenMitAugenzahl() == true)
                 {
                     //popupfenster.popupFensterErzeugen("Du bist näher an 21 als der Dealer!");
-                    spielfenster.textleiste.append("Du bist näher an 21 als der Dealer! \n");
                 }
                 if(spiel.verlorenWegenAugenzahl() == true)
                 {
                     //popupfenster.popupFensterErzeugen("Der Dealer ist näher an 21 dran!");
-                    spielfenster.textleiste.append("Der Dealer ist näher an 21 dran! \n");
                 }
             }
         }

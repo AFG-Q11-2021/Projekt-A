@@ -5,104 +5,118 @@
  * @version (05.07.2021)
  */
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
+import javax.swing.*;
+import java.awt.*;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-import java.awt.image.BufferedImage;
-import java.awt.Font;
-import java.awt.Graphics;
-
-public class SpielFenster extends JPanel
+public class SpielFenster extends JFrame
 {
+    private JFrame frame;
+    
     private ImageIcon dealertischIcon, karteIcon, knopfHitIcon, knopfStandIcon, knopfBeendenIcon;
-    private JPanel knoepfe, karten;
+    
     private JButton knopfHit, knopfStand, knopfBeenden;
     
-    public JTextArea textleiste;
-    private JScrollPane scrollTextleiste;
     /**
      * Konstruktor der Klasse SpielFenster
      */
     public SpielFenster() 
     {
-        dealertischIcon = new ImageIcon(getClass().getResource("\\res\\dealertisch.png"));
+        super("Blackjack");
+        frame = new JFrame();
         
         knopfHitIcon = new ImageIcon(getClass().getResource("\\res\\knopfHit.png"));
         knopfStandIcon = new ImageIcon(getClass().getResource("\\res\\knopfStand.png"));
         knopfBeendenIcon = new ImageIcon(getClass().getResource("\\res\\knopfBeenden.png"));
         
-        textleiste = new JTextArea();
         
-        knopfHit = new JButton();
-        knopfStand = new JButton();
-        knopfBeenden = new JButton();
-        
-        
-        
-        knoepfe = new JPanel();
-        karten = new JPanel();
+        knopfHit = new JButton(knopfHitIcon);
+        knopfStand = new JButton(knopfStandIcon);
+        knopfBeenden = new JButton(knopfBeendenIcon);
     }
     
-    /**
-     * Methode paint erzeugt das Hintergrundbild
-     */
-    public void paint(Graphics g){
-        dealertischIcon.paintIcon(this, g, 0, 0);
-        
-        
-    }
-    
-    public JScrollPane textErzeugen(){
-        scrollTextleiste = new JScrollPane(textleiste);
-        scrollTextleiste.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        return scrollTextleiste;
-    }
-    
-    public JPanel bildErzeugen(int farbe, int index)
+    public void erzeugen()
     {
-        karten.add(new JLabel(zeigeImage(farbe, index)));
+        frame.setName("Blackjack");
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
         
-        return karten;
+        frame.add(erzeugeHintergrundPanel());
+        frame.setVisible(true);
     }
     
-    public JPanel knoepfeErzeugen()
+    public void schließen()
     {
-        knopfHit.setIcon(knopfHitIcon);
-        knopfHit.setFont(new Font("Arial", Font.PLAIN, 12));
+        frame.dispose();
+    }
+    
+    private JPanel erzeugeHintergrundPanel()
+    {   
+        Image image = null;
+        try {
+            image = ImageIO.read(getClass().getResource("\\res\\dealertisch.png"));
+        } catch(IOException ioe) {
+            JOptionPane.showMessageDialog(null,
+            "Das Hintergrundbild konnte nicht geladen werden!\n" + ioe.getLocalizedMessage(),
+            ioe.getClass().getName(),
+            JOptionPane.WARNING_MESSAGE);
+        }
 
-        knopfStand.setIcon(knopfStandIcon);
-        knopfStand.setFont(new Font("Arial", Font.PLAIN, 12));
-        
-        knopfBeenden.setIcon(knopfBeendenIcon);
-        knopfBeenden.setFont(new Font("Arial", Font.PLAIN, 12));     
-        
-        knoepfe.add(knopfHit);
-        knoepfe.add(knopfStand);
-        knoepfe.add(knopfBeenden);
-        
-        return knoepfe;
+        BackgroundImagePanel mainPanel = new BackgroundImagePanel(new BorderLayout());
+        mainPanel.setImage(image); //hier kann man einstellen, ob das Bild im Original oder eingepasst ausgegeben werden soll (true/false)
+
+        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        southPanel.setOpaque(false); //entscheidet, ob das Button-Panel durchsichtig sein soll
+        southPanel.add(erzeugeKnoepfePanel(southPanel.isOpaque()));
+
+        mainPanel.add(southPanel, BorderLayout.SOUTH);
+        return mainPanel;
+    }
+    
+    public JButton erzeugeKnopfHit()
+    {
+        return knopfHit;
+    }
+    
+    public JButton erzeugeKnopfStand()
+    {
+        return knopfHit;
+    }
+    
+    public JButton erzeugeKnopfBeenden()
+    {
+        return knopfHit;
+    }
+    
+    public JPanel erzeugeKnoepfePanel(boolean opaque)
+    {
+        JPanel knoepfePanel = new JPanel(new GridLayout(1, 0, 5, 5));
+        knoepfePanel.setOpaque(opaque);
+        knoepfePanel.add(knopfHit);
+        knoepfePanel.add(knopfStand);
+        //Ereignisverarbeitung fehlt!
+        return knoepfePanel;
+    }
+
+    public static void main(String[] args)
+    {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception e) {
+            System.err.println(e);
+        }
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run()
+            {
+                new SpielFenster();
+            }
+        });
     }
     
     public void karteErzeugen(int farbe, int index, int kartenanzahl)
     {
-    }
-    
-    
-    private ImageIcon zeigeImage(int farbe, int index){
-        BufferedImage img = null;
-        try {
-           img = ImageIO.read(getClass().getResource("\\res\\karten\\" + farbe + "-" + index + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new ImageIcon(img);
     }
     
     public JButton getKnopfHit()
@@ -113,5 +127,10 @@ public class SpielFenster extends JPanel
     public JButton getKnopfStand()
     {
         return knopfStand;
+    }
+    
+    public JButton getKnopfBeenden()
+    {
+        return knopfBeenden;
     }
 }

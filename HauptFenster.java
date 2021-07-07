@@ -1,4 +1,3 @@
-
 /**
  * Beschreiben Sie hier die Klasse HauptFenster.
  * 
@@ -6,19 +5,16 @@
  * @version (05.07.2021)
  */
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
+import javax.swing.*;
+import java.awt.*;
 
-public class HauptFenster extends JPanel
+public class HauptFenster extends JFrame
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private JPanel knoepfePanel;
+    private JFrame frame;
     private JButton knopfSingleplayer, knopfMultiplayer, knopfProfil, knopfBeenden;
+    
     private ImageIcon knopfSingelplayerIcon, knopfMultiplayerIcon, knopfProfilIcon, knopfBeendenIcon;
 
     /**
@@ -26,48 +22,61 @@ public class HauptFenster extends JPanel
      */
     public HauptFenster()
     {
+        super("Blackjack");
+        frame = new JFrame();
         // Instanzvariable initialisieren
         knopfSingelplayerIcon = new ImageIcon(getClass().getResource("\\res\\knopfSpielstart.png"));
         knopfBeendenIcon = new ImageIcon(getClass().getResource("\\res\\knopfBeenden.png"));
         
         
-        knopfSingleplayer = new JButton();
+        knopfSingleplayer = new JButton(knopfSingelplayerIcon);
         knopfMultiplayer = new JButton("Multiplayer");
         knopfProfil = new JButton("Profil");
-        knopfBeenden = new JButton();
+        knopfBeenden = new JButton(knopfBeendenIcon);
+    }
+    
+    public void erzeugen()
+    {
+        frame.setName("Blackjack-Hauptmenü");
+        frame.setSize(1000,1000);
         
-        knoepfePanel = new JPanel();
+        frame.add(erzeugeHintergrundPanel());
+        frame.setVisible(true);
     }
     
-    public void paint(Graphics g)
+    public void schließen()
     {
-        //knopfSingleplayer = new RoundButton("Singleplayer", 75);
+        frame.dispose();
     }
     
-    /**
-     * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
-     * 
-     * @param  y    ein Beispielparameter für eine Methode
-     * @return        die Summe aus x und y
-     */
-    public JPanel knoepfeErzeugen()
+    private JPanel erzeugeHintergrundPanel()
+    {   
+        /*Image image = null;
+         * try {
+         *     image = ImageIO.read(getClass().getResource("\\res\\dealertisch.png"));
+         *  } catch(IOException ioe) {
+         *      JOptionPane.showMessageDialog(null,
+         *      "Das Hintergrundbild konnte nicht geladen werden!\n" + ioe.getLocalizedMessage(),
+         *      ioe.getClass().getName(),
+         *      JOptionPane.WARNING_MESSAGE);
+         *  }
+
+         *  BackgroundImagePanel mainPanel = new BackgroundImagePanel(new BorderLayout());
+         *  mainPanel.setImage(image); //hier kann man einstellen, ob das Bild im Original oder eingepasst ausgegeben werden soll (true/false)
+         */
+        
+        JPanel mainPanel = new JPanel();
+        mainPanel.setOpaque(true);
+        mainPanel.add(erzeugeKnoepfePanel(mainPanel.isOpaque()));
+        
+        return mainPanel;
+    }
+    
+    public JPanel erzeugeKnoepfePanel(boolean opaque)
     {
-        knoepfePanel.setLayout(new GridBagLayout());
+        JPanel knoepfePanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        
-        knopfSingleplayer.setIcon(knopfSingelplayerIcon);
-        //knopfSingleplayer.setFont(new Font("Arial", Font.PLAIN, 24));
-        
-        //knopfMultiplayer.setIcon(knopfMultiplayerIcon);
-        knopfMultiplayer.setFont(new Font("Arial", Font.PLAIN, 24));
-        
-        //knopfProfil.setIcon(knopfProfilIcon);
-        knopfProfil.setFont(new Font("Arial", Font.PLAIN, 24));
-        
-        knopfBeenden.setIcon(knopfBeendenIcon);
-        //knopfBeenden.setFont(new Font("Arial", Font.PLAIN, 24));
-        
-        
+        knoepfePanel.setOpaque(opaque);
         
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
@@ -90,7 +99,7 @@ public class HauptFenster extends JPanel
         gbc.gridx = 0;
         gbc.gridy = 2;
         knoepfePanel.add(knopfBeenden, gbc);
-        
+        //Ereignisverarbeitung fehlt!
         return knoepfePanel;
     }
     
