@@ -68,7 +68,6 @@ public class GraphicManager implements ActionListener
         {
             hauptfenster.schließen();
             spielfenster.erzeugen();
-            spiel.setupSpiel();
         }
         
         else if(e.getSource() == hauptfenster.getKnopfMultiplayer())
@@ -86,7 +85,7 @@ public class GraphicManager implements ActionListener
             popupfenster.popupFensterErzeugen("Möchtest du das Spiel beenden?");
             if(e.getSource() == popupfenster.getKnopfBestaetigen())
             {
-                spielfenster.schließen();
+                hauptfenster.schließen();
                 popupfenster.closePopupFenster();
             }
             else if(e.getSource() == popupfenster.getKnopfAbbrechen())
@@ -99,6 +98,7 @@ public class GraphicManager implements ActionListener
             if(e.getSource() == spielfenster.getKnopfHit())
             {
                 spiel.karteZiehen();
+                spielfenster.erzeugen();
                 if(spiel.gewonnenMitBlackjack() == true)
                 {
                     //popupfenster.popupFensterErzeugen("Du hast einen Blackjack!");

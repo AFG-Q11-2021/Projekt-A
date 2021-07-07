@@ -44,19 +44,4 @@ public class Kartendeck
             }
         }
     }
-    
-    public void testen(){
-        for(int i = 0; i < 52; i++){
-            kartendeck[i].indexGeben();
-            kartendeck[i].farbeGeben();
-            System.out.print("Index: " + kartendeck[i].indexGeben() + " + ");
-            System.out.print("Farbe: " + kartendeck[i].farbeGeben() + "\n");
-        }
-    }
-    
-    public void testen2(){
-        System.out.print("Test 2 ergab: \n");
-        System.out.print("Index: " + karteZiehen().indexGeben() + " + ");
-        System.out.print("Farbe: " + karteZiehen().farbeGeben() + "\n");
-    }
 }

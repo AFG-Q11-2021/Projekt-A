@@ -21,13 +21,13 @@ public class Karte
     }
     
     // Methode zum Geben des Index
-    public int indexGeben()
+    public int getIndex()
     {
         return index;
     }
     
     // Methode zum Geben der Farbe
-    public int farbeGeben(){
+    public int getFarbe(){
         return farbe;
     }
 }

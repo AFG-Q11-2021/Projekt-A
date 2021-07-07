@@ -7,6 +7,7 @@
 public class SpielerManager
 {
     private Kartendeck kartendeck;
+    private Karte gezogeneKarte;
     private int kartenanzahl;
     public int kartenwert;
     
@@ -19,16 +20,21 @@ public class SpielerManager
 
     public void karteZiehen()
     {
-        Karte gezogeneKarte = kartendeck.karteZiehen();
-        if(gezogeneKarte.indexGeben() >= 11)
+        gezogeneKarte = kartendeck.karteZiehen();
+        if(gezogeneKarte.getIndex() >= 11)
         {
             kartenwert = kartenwert + 10;
         }
         else
         {
-            kartenwert = kartenwert + gezogeneKarte.indexGeben();
+            kartenwert = kartenwert + gezogeneKarte.getIndex();
         }
         kartenanzahl++;
+    }
+    
+    public Karte getKarte()
+    {
+        return gezogeneKarte;
     }
 
     public int getKartenwert()

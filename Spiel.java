@@ -28,12 +28,6 @@ public class Spiel
         if(getSpielstatus() == false){
             setSpielstatus(true);
         }
-        
-        spieler.karteZiehen();
-        spieler.karteZiehen();
-        
-        dealer.karteZiehen();
-        dealer.karteZiehen();
     }
     
     public void remakeSpiel()
@@ -46,6 +40,14 @@ public class Spiel
         spieler.karteZiehen();
     }
     
+    public int getKartenindex(){
+        return spieler.getKarte().getIndex();
+    }
+    
+    public int getKartenfarbe(){
+        return spieler.getKarte().getFarbe();
+    }
+    
     public void dealerSpielt()
     {
         while(dealer.getKartenwert() <17){
@@ -55,47 +57,27 @@ public class Spiel
     
     public boolean gewonnenMitBlackjack()
     {
-        if(spieler.getKartenwert() == 21)
-        {
-            return true;
-        }
-        return false;
+        return spieler.getKartenwert() == 21;
     }
     
     public boolean verlorenWegenUeberzogen()
     {
-        if(spieler.getKartenwert() > 21)
-        {
-            return true;
-        }
-        return false;
+        return spieler.getKartenwert() > 21;
     }
     
     public boolean gewonnenMitDealerUeberzogen()
     {
-        if(dealer.getKartenwert() > 21 && spieler.getKartenwert() < 21)
-        {
-            return true;
-        }
-        return false;
+        return dealer.getKartenwert() > 21 && spieler.getKartenwert() < 21;
     }
     
     public boolean gewonnenMitAugenzahl()
     {
-        if(dealer.getKartenwert() < 21 && spieler.getKartenwert() < 21 && spieler.getKartenwert() > dealer.getKartenwert())
-        {
-            return true;
-        }
-        return false;
+        return dealer.getKartenwert() < 21 && spieler.getKartenwert() < 21 && spieler.getKartenwert() > dealer.getKartenwert();
     }
     
     public boolean verlorenWegenAugenzahl()
     {
-        if(dealer.getKartenwert() > spieler.getKartenwert() && dealer.getKartenwert() < 21)
-        {
-            return true;
-        }
-        return false;
+        return dealer.getKartenwert() > spieler.getKartenwert() && dealer.getKartenwert() < 21;
     }
     
     public void setSpielstatus(boolean spielstatusNeu)

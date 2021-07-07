@@ -14,10 +14,9 @@ import java.io.IOException;
 public class SpielFenster extends JFrame
 {
     private JFrame frame;
-    
     private ImageIcon dealertischIcon, karteIcon, knopfHitIcon, knopfStandIcon, knopfBeendenIcon;
-    
     private JButton knopfHit, knopfStand, knopfBeenden;
+    private BackgroundImagePanel mainPanel;
     
     /**
      * Konstruktor der Klasse SpielFenster
@@ -35,6 +34,23 @@ public class SpielFenster extends JFrame
         knopfHit = new JButton(knopfHitIcon);
         knopfStand = new JButton(knopfStandIcon);
         knopfBeenden = new JButton(knopfBeendenIcon);
+        
+        mainPanel = new BackgroundImagePanel(new BorderLayout());
+    }
+
+    public static void main(String[] args)
+    {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception e) {
+            System.err.println(e);
+        }
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run()
+            {
+                new SpielFenster();
+            }
+        });
     }
     
     public void erzeugen()
@@ -44,7 +60,34 @@ public class SpielFenster extends JFrame
         frame.setUndecorated(true);
         
         frame.add(erzeugeHintergrundPanel());
+        frame.add(erzeugeKartenLayout());
+        
         frame.setVisible(true);
+    }
+    
+    public JPanel erzeugeKartenLayout()
+    {
+    
+        JPanel northcenterPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        northcenterPanel.setOpaque(false);
+        northcenterPanel.add(erzeugeKartenwertPane(northcenterPanel.isOpaque()));
+        northcenterPanel.add(erzeugeKartenPanel());
+        northcenterPanel.add(erzeugeKartenPanel());
+        
+        JPanel southcenterPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        southcenterPanel.setOpaque(false);
+        southcenterPanel.add(erzeugeKartenwertPane(southcenterPanel.isOpaque()));
+        southcenterPanel.add(erzeugeKartenPanel());
+        southcenterPanel.add(erzeugeKartenPanel());
+        
+        JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel.setOpaque(false); //entscheidet, ob das Button-Panel durchsichtig sein soll
+        centerPanel.add(northcenterPanel, BorderLayout.CENTER);
+        centerPanel.add(southcenterPanel, BorderLayout.SOUTH);
+        
+        mainPanel.add(northcenterPanel, BorderLayout.NORTH);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        return mainPanel;
     }
     
     public void schließen()
@@ -63,31 +106,18 @@ public class SpielFenster extends JFrame
             ioe.getClass().getName(),
             JOptionPane.WARNING_MESSAGE);
         }
-
-        BackgroundImagePanel mainPanel = new BackgroundImagePanel(new BorderLayout());
         mainPanel.setImage(image); //hier kann man einstellen, ob das Bild im Original oder eingepasst ausgegeben werden soll (true/false)
-
+        
+        
+        
+        
         JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         southPanel.setOpaque(false); //entscheidet, ob das Button-Panel durchsichtig sein soll
         southPanel.add(erzeugeKnoepfePanel(southPanel.isOpaque()));
-
+        
+       
         mainPanel.add(southPanel, BorderLayout.SOUTH);
         return mainPanel;
-    }
-    
-    public JButton erzeugeKnopfHit()
-    {
-        return knopfHit;
-    }
-    
-    public JButton erzeugeKnopfStand()
-    {
-        return knopfHit;
-    }
-    
-    public JButton erzeugeKnopfBeenden()
-    {
-        return knopfHit;
     }
     
     public JPanel erzeugeKnoepfePanel(boolean opaque)
@@ -99,24 +129,32 @@ public class SpielFenster extends JFrame
         //Ereignisverarbeitung fehlt!
         return knoepfePanel;
     }
-
-    public static void main(String[] args)
+    
+    public JPanel erzeugeKartenPanel()
     {
+        Image image = null;
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch(Exception e) {
-            System.err.println(e);
+            image = ImageIO.read(getClass().getResource("\\res\\karten\\1-1.png"));
+        } catch(IOException ioe) {
+            JOptionPane.showMessageDialog(null,
+            "Das Bild konnte nicht geladen werden!\n" + ioe.getLocalizedMessage(),
+            ioe.getClass().getName(),
+            JOptionPane.WARNING_MESSAGE);
         }
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run()
-            {
-                new SpielFenster();
-            }
-        });
+        
+        BackgroundImagePanel kartenPanel = new BackgroundImagePanel(new GridLayout(0, 5, 5, 5));
+        kartenPanel.setOpaque(true);
+        kartenPanel.setImage(image);
+        
+        return kartenPanel;
     }
     
-    public void karteErzeugen(int farbe, int index, int kartenanzahl)
+    public JTextPane erzeugeKartenwertPane(boolean opaque)
     {
+        JTextPane kartenwertPane = new JTextPane();
+        kartenwertPane.setText("22");
+        kartenwertPane.setOpaque(opaque);
+        return kartenwertPane;
     }
     
     public JButton getKnopfHit()
