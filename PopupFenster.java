@@ -21,11 +21,11 @@ public class PopupFenster
         knoepfe = new JPanel();
         
         //knopfBestaetigenIcon = new ImageIcon(getClass().getResource("\\res\\knopfBestätigen.png"));
-        knopfAbbrechenIcon = new ImageIcon(getClass().getResource("\\res\\knopfAbbrechen.png"));
+        //knopfAbbrechenIcon = new ImageIcon(getClass().getResource("\\res\\knopfAbbrechen.jpg"));
         
         //knopfBestaetigen = new JButton(knopfBestaetigenIcon);
         knopfBestaetigen = new JButton("Bestätigen");
-        knopfAbbrechen = new JButton(knopfAbbrechenIcon);
+        knopfAbbrechen = new JButton("Abbrechen");
     }
     
     public void popupFensterErzeugen(String text){

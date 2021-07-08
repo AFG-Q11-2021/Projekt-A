@@ -26,9 +26,9 @@ public class SpielFenster extends JFrame
         super("Blackjack");
         frame = new JFrame();
         
-        knopfHitIcon = new ImageIcon(getClass().getResource("\\res\\knopfHit.png"));
-        knopfStandIcon = new ImageIcon(getClass().getResource("\\res\\knopfStand.png"));
-        knopfBeendenIcon = new ImageIcon(getClass().getResource("\\res\\knopfBeenden.png"));
+        knopfHitIcon = new ImageIcon(getClass().getResource("\\res\\knopfHit.jpg"));
+        knopfStandIcon = new ImageIcon(getClass().getResource("\\res\\knopfStand.jpg"));
+        knopfBeendenIcon = new ImageIcon(getClass().getResource("\\res\\knopfClose.jpg"));
         
         
         knopfHit = new JButton(knopfHitIcon);
