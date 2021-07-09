@@ -46,4 +46,14 @@ public class SpielerManager
     {
         return kartenanzahl;
     }
+    
+    public void setKartenwert(int newKartenwert)
+    {
+        kartenwert = newKartenwert;
+    }
+    
+    public void setKartenanzahl(int newKartenanzahl)
+    {
+        kartenanzahl = newKartenanzahl;
+    }
 }

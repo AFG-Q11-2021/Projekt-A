@@ -47,9 +47,10 @@ public class GraphicManager implements ActionListener
         
         spielfenster.getKnopfHit().addActionListener(this);
         spielfenster.getKnopfStand().addActionListener(this);
+        spielfenster.getKnopfBeenden().addActionListener(this);
         
-        popupfenster.getKnopfBestaetigen().addActionListener(this);
-        popupfenster.getKnopfAbbrechen().addActionListener(this);
+        popupfenster.getKnopfJa().addActionListener(this);
+        popupfenster.getKnopfNein().addActionListener(this);
         
         hauptfenster.erzeugen();
     }
@@ -63,13 +64,19 @@ public class GraphicManager implements ActionListener
     
     public void actionPerformed(ActionEvent e)
     {   
-        //erzeugt das Spielfenster und die dafür benötigten Knöpfe; schließt das Startmenü
+        /*
+         * Beobachtet, ob folgende Knöpfe auf dem Hauptmenü gedrückt werden.
+         */
         if(e.getSource() == hauptfenster.getKnopfSingleplayer())
         {
             hauptfenster.schließen();
             spielfenster.erzeugen();
+            spiel.setSpielstatus(true);
+            spiel.karteZiehen();
+            spielfenster.spielerKarteHinzufügen(spiel.getKartenfarbe(), spiel.getKartenindex(), spiel.getSpielerkartenwert());
+            spiel.karteZiehen();
+            spielfenster.spielerKarteHinzufügen(spiel.getKartenfarbe(), spiel.getKartenindex(), spiel.getSpielerkartenwert());
         }
-        
         else if(e.getSource() == hauptfenster.getKnopfMultiplayer())
         {
             
@@ -82,167 +89,64 @@ public class GraphicManager implements ActionListener
         
         else if(e.getSource() == hauptfenster.getKnopfBeenden())
         {
-            popupfenster.popupFensterErzeugen("Möchtest du das Spiel beenden?");
-            if(e.getSource() == popupfenster.getKnopfBestaetigen())
-            {
-                hauptfenster.schließen();
-                popupfenster.closePopupFenster();
-            }
-            else if(e.getSource() == popupfenster.getKnopfAbbrechen())
-            {
-                popupfenster.closePopupFenster();
-            }
+            popupfenster.popupFensterErzeugen(0);
         }
+        
         if(spiel.getSpielstatus() == true)
         {
             if(e.getSource() == spielfenster.getKnopfHit())
             {
                 spiel.karteZiehen();
-                spielfenster.erzeugen();
+                spielfenster.spielerKarteHinzufügen(spiel.getKartenfarbe(), spiel.getKartenindex(), spiel.getSpielerkartenwert());
                 if(spiel.gewonnenMitBlackjack() == true)
                 {
-                    //popupfenster.popupFensterErzeugen("Du hast einen Blackjack!");
+                    spiel.setSpielstatus(false);
+                    popupfenster.popupFensterErzeugen(1);
                 }
                 if(spiel.verlorenWegenUeberzogen() == true)
                 {
-                    //popupfenster.popupFensterErzeugen("Du hast leider überzogen!");
+                    spiel.setSpielstatus(false);
+                    popupfenster.popupFensterErzeugen(2);
                 }
             }
             else if(e.getSource() == spielfenster.getKnopfStand())
             {
+                spielfenster.dealerKarteHinzufügen(1,1,1);
                 if(spiel.gewonnenMitDealerUeberzogen() == true)
                 {
-                    //popupfenster.popupFensterErzeugen("Der Dealer hat überzogen!");
+                    spiel.setSpielstatus(false);
+                    popupfenster.popupFensterErzeugen(3);
                 }
                 if(spiel.gewonnenMitAugenzahl() == true)
                 {
-                    //popupfenster.popupFensterErzeugen("Du bist näher an 21 als der Dealer!");
+                    spiel.setSpielstatus(false);
+                    popupfenster.popupFensterErzeugen(4);
                 }
                 if(spiel.verlorenWegenAugenzahl() == true)
                 {
-                    //popupfenster.popupFensterErzeugen("Der Dealer ist näher an 21 dran!");
+                    spiel.setSpielstatus(false);
+                    popupfenster.popupFensterErzeugen(5);
                 }
-            }
-        }
-        /*
-        if(s==true) 
-        {
-            if(e.getSource() == spielFenster.knopfHitGeben())
-            {
-                spieler.karteZiehen();
-                spielFenster.textleiste.append("Dein aktueller Kartenwert: " + spieler.getKartenwert() + "\n");
-                spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
-                spielFenster.textleiste.append("Möchtest du eine Karte ziehen? \n");
-
-                if(verloren() == true)
-                {
-                    spielFenster.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
-                    spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
-
-                    spielFenster.textleiste.append("Du hast leider über 21 und somit verloren ... \nLust auf noch ein Spiel? \n");
-                    
-                    popupNeustartFenster.popupFensterErzeugen("Neustart","Beenden");
-                    popupNeustartFenster.popupJaKnopfGeben().addActionListener(this);
-                    popupNeustartFenster.popupNeinKnopfGeben().addActionListener(this); 
-                }
-            }
-
-            if(e.getSource() == spielFenster.knopfStandGeben())
-            {
-                while(dealer.getKartenwert() <17){
-                    dealer.karteZiehen();
-                }
-
-                if(dealer.getKartenwert() > spieler.getKartenwert() && dealer.getKartenwert() < 21)
-                {
-                    spielFenster.textleiste.append("Dein Kartenwert: " + spieler.getKartenwert() + "\n");
-                    spielFenster.spielerWertPane.setText(String.valueOf(spieler.getKartenwert()));
-                    spielFenster.textleiste.append("Der Dealer hat: "+ dealer.getKartenwert()+ "\n");
-                    spielFenster.textleiste.append("Du hast gegen den Dealer verloren.\nLust auf noch ein Spiel? \n");
-                    //spielBeendet();
-                    popupNeustartFenster.popupFensterErzeugen("Neustart","Beenden");
-                    popupNeustartFenster.popupJaKnopfGeben().addActionListener(this);
-                    popupNeustartFenster.popupNeinKnopfGeben().addActionListener(this); 
-                }
-
-                else if(dealer.getKartenwert() > 21)
-                {
-                    spielFenster.textleiste.append("Dealer hat überzogen. Er hat: "+ dealer.getKartenwert() +"\n");
-                    spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
-                    spielFenster.textleiste.append("Du hast gewonnen!\nLust auf noch ein Spiel? \n");
-                    //spielBeendet();
-                    popupNeustartFenster.popupFensterErzeugen("Neustart","Beenden");
-                    popupNeustartFenster.popupJaKnopfGeben().addActionListener(this);
-                    popupNeustartFenster.popupNeinKnopfGeben().addActionListener(this); 
-                }
-
-                else
-                {
-                    spielFenster.textleiste.append("Dealer hat: " + dealer.getKartenwert()+ "\n");
-                    spielFenster.dealerWertPane.setText(String.valueOf(dealer.getKartenwert()));
-                    spielFenster.textleiste.append("Du hast gewonnen!\nLust auf noch ein Spiel? \n");
-                    //spielBeendet();
-                    popupNeustartFenster.popupFensterErzeugen("Neustart","Beenden");
-                    popupNeustartFenster.popupJaKnopfGeben().addActionListener(this);
-                    popupNeustartFenster.popupNeinKnopfGeben().addActionListener(this); 
-                }
-            } 
-        }
-        else 
-        {
-            spielFenster.textleiste.append("ERROR \nDas Spiel wurde noch nicht gestartet, somit kann keiner dieser Knöpfe gedrückt werden. \n");
-        }
-
-        //erzeugt das Popup nach dem Klicken von "Beenden"
-        if(e.getSource() == spielFenster.knopfStopGeben())
-        {
-            popupBeendenFenster.popupFensterErzeugen("Beenden","Abbrechen");
-
-            popupBeendenFenster.popupJaKnopfGeben().addActionListener(this);
-            popupBeendenFenster.popupNeinKnopfGeben().addActionListener(this); 
+            }    
         }
         
-        //Bestätigen des Beenden im Popupfenster
-        if(e.getSource() == popupBeendenFenster.popupNeinKnopfGeben())
+        if(e.getSource() == spielfenster.getKnopfBeenden())
         {
-            spielFenster.textleiste.append("Beenden abgebrochen \n");
-            popupBeendenFenster.popupFensterErzeugenSchließen();            
+            popupfenster.popupFensterErzeugen(0);
         }
-        else if(e.getSource() == popupBeendenFenster.popupJaKnopfGeben())
+        
+        if(e.getSource() == popupfenster.getKnopfJa())
         {
-            spielFenster.textleiste.append("Beende \n");
-            popupBeendenFenster.popupFensterErzeugenSchließen();
-            spielFenster.fenster.setVisible(false);
-            spielFenster.fenster.dispose();
-            spielBeendet();
+            //hauptfenster.erzeugen();
+            //spielfenster.kartenEntfernen();
+            spielfenster.schließen();
+            //spiel.remake();
+            new GraphicManager();
+            popupfenster.closePopupFenster();
         }
-
-        //Neustart/Beenden nach Velieren(PopupFenster)
-        if(e.getSource() == popupNeustartFenster.popupJaKnopfGeben())
+        else if(e.getSource() == popupfenster.getKnopfNein())
         {
-            popupNeustartFenster.popupFensterErzeugenSchließen(); 
-            spielFenster.textleiste.setText("");
-            neustart();
+            popupfenster.closePopupFenster();
         }
-        else if(e.getSource() == popupNeustartFenster.popupNeinKnopfGeben())
-        {
-            spielFenster.textleiste.append("Beende \n");
-            popupNeustartFenster.popupFensterErzeugenSchließen();
-            spielFenster.fenster.setVisible(false);
-            spielFenster.fenster.dispose();
-            spielBeendet();
-        }*/
     }
-    /*
-    public boolean getSpielGestartet()
-    {
-        spielFenster.textleiste.append("Beende \n");
-        spielFenster.popupFensterErzeugenSchließen();
-        spielFenster.fenster.setVisible(false);
-        spielFenster.fenster.dispose();
-        spielBeendet();
-
-        return spielGestartet;
-    }
-    */
 }

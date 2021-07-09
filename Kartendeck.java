@@ -15,7 +15,7 @@ public class Kartendeck
         kartendeck = new Karte[52];
         kartendeckGroeße = 52;
         int zaehler = 0;
-        for(int farbe = 1; farbe<=4; farbe++){
+        for(int farbe = 0; farbe<=3; farbe++){
             for(int index = 1; index<=13; index++){
                 kartendeck[zaehler]= new Karte(farbe, index);
                 zaehler++;

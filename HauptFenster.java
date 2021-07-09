@@ -11,7 +11,7 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-public class HauptFenster extends JFrame
+public class HauptFenster
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private JPanel knoepfePanel;
@@ -26,7 +26,6 @@ public class HauptFenster extends JFrame
      */
     public HauptFenster()
     {
-        super("Blackjack");
         frame = new JFrame();
         // Instanzvariable initialisieren
         knopfSingleplayerIcon = new ImageIcon(getClass().getResource("\\res\\knopfStart.jpg"));
@@ -39,14 +38,13 @@ public class HauptFenster extends JFrame
         knopfMultiplayer = new JButton(knopfMultiplayerIcon);
         knopfProfil = new JButton(knopfProfilIcon);
         knopfBeenden = new JButton(knopfBeendenIcon);
-        
-        knopfBeenden = new JButton(knopfBeendenIcon);
     }
     
     public void erzeugen()
     {
         frame.setName("Blackjack-Hauptmenü");
         frame.setSize(400,600);
+        frame.setResizable(false);
         frame.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-300);
         frame.add(erzeugeHintergrundPanel());
         frame.setVisible(true);

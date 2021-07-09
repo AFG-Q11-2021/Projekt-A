@@ -19,20 +19,16 @@ public class Spiel
         
         spielstatus = false;
         
-        //popupBeendenFenster = new PopupBeendenFenster();
-        //popupNeustartFenster = new PopupNeustartFenster();    
         kartendeck = new Kartendeck() ;
     }
     
-    public void setupSpiel(){
-        if(getSpielstatus() == false){
-            setSpielstatus(true);
-        }
-    }
-    
-    public void remakeSpiel()
+    public void remake()
     {
-    
+        kartendeck.kartenNeuMischen();
+        spieler.setKartenwert(0);
+        spieler.setKartenanzahl(0);
+        dealer.setKartenwert(0);
+        dealer.setKartenanzahl(0);
     }
     
     public void karteZiehen()
@@ -93,5 +89,10 @@ public class Spiel
     public int getSpielerkartenwert()
     {
         return spieler.getKartenwert();
+    }
+    
+    public int getDealerkartenwert()
+    {
+        return dealer.getKartenwert();
     }
 }

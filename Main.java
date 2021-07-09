@@ -1,7 +1,19 @@
+import javax.swing.*;
+
 public class Main
 {
-    public static void main(String args[])
+    public static void main(String[] args)
     {
-        new GraphicManager();
-    }    
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception e) {
+            System.err.println(e);
+        }
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run()
+            {
+                new GraphicManager();
+            }
+        });
+    }   
 }
