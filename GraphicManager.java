@@ -56,26 +56,28 @@ public class GraphicManager implements ActionListener
     }
     
     /**
-     * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
+     * Methode die beobachtet, ob bestimmte Knöpfe auf Haupt-, Spiel- oder PopupFenster gedrückt wurden.
      * 
-     * @param  y    ein Beispielparameter für eine Methode
-     * @return        die Summe aus x und y
+     * @param  e - 
      */
-    
     public void actionPerformed(ActionEvent e)
     {   
-        /*
-         * Beobachtet, ob folgende Knöpfe auf dem Hauptmenü gedrückt werden.
+        /**
+         * 
          */
         if(e.getSource() == hauptfenster.getKnopfSingleplayer())
         {
             hauptfenster.schließen();
             spielfenster.erzeugen();
             spiel.setSpielstatus(true);
-            spiel.karteZiehen();
-            spielfenster.spielerKarteHinzufügen(spiel.getKartenfarbe(), spiel.getKartenindex(), spiel.getSpielerkartenwert());
-            spiel.karteZiehen();
-            spielfenster.spielerKarteHinzufügen(spiel.getKartenfarbe(), spiel.getKartenindex(), spiel.getSpielerkartenwert());
+            spiel.spielerZiehtKarte();
+            spielfenster.spielerKarteHinzufügen(spiel.getSpielerKartenfarbe(), spiel.getSpielerKartenindex(), spiel.getSpielerkartenwert());
+            spiel.spielerZiehtKarte();
+            spielfenster.spielerKarteHinzufügen(spiel.getSpielerKartenfarbe(), spiel.getSpielerKartenindex(), spiel.getSpielerkartenwert());
+            spiel.dealerZiehtKarte();
+            spielfenster.dealerKarteHinzufügen(spiel.getDealerKartenfarbe(), spiel.getDealerKartenindex(), spiel.getDealerkartenwert());
+            spiel.dealerZiehtKarte();
+            spielfenster.dealerKarteHinzufügen(spiel.getDealerKartenfarbe(), spiel.getDealerKartenindex(), spiel.getDealerkartenwert());
         }
         else if(e.getSource() == hauptfenster.getKnopfMultiplayer())
         {
@@ -96,35 +98,47 @@ public class GraphicManager implements ActionListener
         {
             if(e.getSource() == spielfenster.getKnopfHit())
             {
-                spiel.karteZiehen();
-                spielfenster.spielerKarteHinzufügen(spiel.getKartenfarbe(), spiel.getKartenindex(), spiel.getSpielerkartenwert());
+                spiel.spielerZiehtKarte();
+                spielfenster.spielerKarteHinzufügen(spiel.getSpielerKartenfarbe(), spiel.getSpielerKartenindex(), spiel.getSpielerkartenwert());
                 if(spiel.gewonnenMitBlackjack() == true)
                 {
+                    sleep(3000);
                     spiel.setSpielstatus(false);
                     popupfenster.popupFensterErzeugen(1);
                 }
                 if(spiel.verlorenWegenUeberzogen() == true)
                 {
+                    sleep(3000);
                     spiel.setSpielstatus(false);
                     popupfenster.popupFensterErzeugen(2);
                 }
             }
             else if(e.getSource() == spielfenster.getKnopfStand())
             {
-                spielfenster.dealerKarteHinzufügen(1,1,1);
+                spiel.setSpielstatus(false);
+                while(17 > spiel.getDealerkartenwert()){
+                    sleep(2000);
+                    spiel.dealerZiehtKarte();
+                    spielfenster.dealerKarteHinzufügen(spiel.getDealerKartenfarbe(),spiel.getDealerKartenindex(),spiel.getDealerkartenwert());
+                }
                 if(spiel.gewonnenMitDealerUeberzogen() == true)
                 {
-                    spiel.setSpielstatus(false);
+                    sleep(3000);
                     popupfenster.popupFensterErzeugen(3);
                 }
                 if(spiel.gewonnenMitAugenzahl() == true)
                 {
-                    spiel.setSpielstatus(false);
+                    sleep(3000);
                     popupfenster.popupFensterErzeugen(4);
                 }
                 if(spiel.verlorenWegenAugenzahl() == true)
                 {
-                    spiel.setSpielstatus(false);
+                    sleep(3000);
+                    popupfenster.popupFensterErzeugen(5);
+                }
+                if(spiel.verlorenWegenGleicherAugenzahl())
+                {
+                    sleep(3000);
                     popupfenster.popupFensterErzeugen(5);
                 }
             }    
@@ -147,6 +161,18 @@ public class GraphicManager implements ActionListener
         else if(e.getSource() == popupfenster.getKnopfNein())
         {
             popupfenster.closePopupFenster();
+        }
+    }
+    /**
+     * Lässt den Thread eine bestimmte Zeit pausieren.
+     * 
+     * @param  millis    Gibt and, wie viele Millisekunden der Thread pausiert wird.
+     * @return        die Summe aus x und y
+     */
+    private static void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException ignored) {
         }
     }
 }

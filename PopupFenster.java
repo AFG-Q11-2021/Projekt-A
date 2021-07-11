@@ -19,9 +19,6 @@ public class PopupFenster
     {
         beendenFenster = new JDialog();
         
-        ereignisLabel = new JLabel();
-        beendenLabel = new JLabel();
-        
         knopfJaIcon = new ImageIcon(getClass().getResource("\\res\\knopfJa.jpg"));
         knopfNeinIcon = new ImageIcon(getClass().getResource("\\res\\knopfNein.jpg"));
         
@@ -51,6 +48,9 @@ public class PopupFenster
     }
     public JPanel verwaltenPanel(boolean opaque, int ereignis)
     {
+        ereignisLabel = new JLabel();
+        beendenLabel = new JLabel();
+        
         knopfJa.setOpaque(true);
         knopfJa.setPreferredSize(new Dimension(180,50));
         

@@ -1,7 +1,8 @@
 /**
- * Beschreiben Sie hier die Klasse Spiel.
+ * Organisiert das Spiel und dient als Schnittstelle zwischen SpielerManager und GraphicManager.
+ * Verwaltet die Bedingungen fürs Gewinnen und Verlieren.
  * 
- * @author (Paul Görner, Julian Kupfer) 
+ * @author (Paul Görner, Julian Kupfer, Joel Bitterlich) 
  * @version (05.07.2021)
  */
 public class Spiel
@@ -31,18 +32,31 @@ public class Spiel
         dealer.setKartenanzahl(0);
     }
     
-    public void karteZiehen()
+    public void spielerZiehtKarte()
     {
         spieler.karteZiehen();
     }
     
-    public int getKartenindex(){
+    public void dealerZiehtKarte()
+    {
+        dealer.karteZiehen();
+    }
+    
+    public int getSpielerKartenindex(){
         return spieler.getKarte().getIndex();
     }
     
-    public int getKartenfarbe(){
+    public int getSpielerKartenfarbe(){
         return spieler.getKarte().getFarbe();
     }
+    
+    public int getDealerKartenindex(){
+        return dealer.getKarte().getIndex();
+    }
+    
+    public int getDealerKartenfarbe(){
+        return dealer.getKarte().getFarbe();
+    } 
     
     public void dealerSpielt()
     {
@@ -74,6 +88,11 @@ public class Spiel
     public boolean verlorenWegenAugenzahl()
     {
         return dealer.getKartenwert() > spieler.getKartenwert() && dealer.getKartenwert() < 21;
+    }
+    
+    public boolean verlorenWegenGleicherAugenzahl()
+    {
+        return dealer.getKartenwert() == spieler.getKartenwert();
     }
     
     public void setSpielstatus(boolean spielstatusNeu)

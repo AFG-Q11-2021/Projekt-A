@@ -1,5 +1,6 @@
 /**
- * Beschreiben Sie hier die Klasse SpielFenster.
+ * Erzeugt das Spielfenster mit Hintergrund und Knöpfen.
+ * Verwalten das Hinzufügen und Entfernen der Karten.
  * 
  * @author (Rafael Marsmann, Paul Görner) 
  * @version (05.07.2021)
@@ -17,7 +18,7 @@ public class SpielFenster
     private ImageIcon dealertischIcon, karteIcon, knopfHitIcon, knopfStandIcon, knopfBeendenIcon;
     private JButton knopfHit, knopfStand, knopfBeenden;
     private JPanel northcenterPanel, southcenterPanel;
-    private JTextPane kartenwertPane;
+    private JTextPane spielerKartenwertPane, dealerKartenwertPane;
     private BackgroundImagePanel mainPanel;
     
     /**
@@ -39,11 +40,15 @@ public class SpielFenster
         northcenterPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         southcenterPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
-        kartenwertPane = new JTextPane();
+        spielerKartenwertPane = new JTextPane();
+        dealerKartenwertPane = new JTextPane();
         
         mainPanel = new BackgroundImagePanel(new BorderLayout());
     }
     
+    /**
+     * Erzeugt das Spielfenster.
+     */
     public void erzeugen()
     {
         frame.setName("Blackjack");
@@ -56,13 +61,18 @@ public class SpielFenster
         frame.setVisible(true);
     }
     
+    /**
+     * Erzeugt ein Panel mit dem Layout, auf welchem die Karten später eingefügt werden.
+     * 
+     * @return        das erzeugte Panel
+     */
     public JPanel erzeugeKartenLayout()
     {
         northcenterPanel.setOpaque(false);
-        northcenterPanel.add(erzeugeKartenwertPane());
+        northcenterPanel.add(erzeugeDealerKartenwertPane());
         
         southcenterPanel.setOpaque(false);
-        southcenterPanel.add(erzeugeKartenwertPane());
+        southcenterPanel.add(erzeugeSpielerKartenwertPane());
         
         JPanel centerPanel = new JPanel(new BorderLayout());
         centerPanel.setOpaque(false); //entscheidet, ob das Button-Panel durchsichtig sein soll
@@ -73,20 +83,30 @@ public class SpielFenster
         return mainPanel;
     }
     
+    /**
+     * Fügt Dealerkarte mit entsprechenden werden ein.
+     * 
+     * @param  farbe - Gibt die Farbe der einzufügenden Karte mit.
+     * @param index - Gibt den Index der einzufügenden Karte mit.
+     * @param kartenwert - Gibt den Kartenwert für das JTextPane an.
+     */
     public void dealerKarteHinzufügen(int farbe, int index, int kartenwert)
     {
-        updateKartenwertPane(kartenwert);
+        updateDealerKartenwertPane(kartenwert);
         northcenterPanel.add(erzeugeKartenPanel(farbe, index));
         northcenterPanel.revalidate();
     }
     
     public void spielerKarteHinzufügen(int farbe, int index, int kartenwert)
     {
-        updateKartenwertPane(kartenwert);
+        updateSpielerKartenwertPane(kartenwert);
         southcenterPanel.add(erzeugeKartenPanel(farbe, index));
         southcenterPanel.revalidate();
     }
     
+    /**
+     * Entfernt alle Karten auf dem Layout.
+     */
     public void kartenEntfernen()
     {
         northcenterPanel.removeAll();
@@ -94,11 +114,19 @@ public class SpielFenster
         northcenterPanel.revalidate();
     }
     
+    /**
+     * Schließt das Spielfenster.
+     */
     public void schließen()
     {
         frame.dispose();
     }
     
+    /**
+     * Erzeugt ein Panel mit Hintergrund und den Knöpfen für das Spielfenster.
+     * 
+     * @return - das erzeugte Panel
+     */
     private JPanel erzeugeHintergrundPanel()
     {   
         Image image = null;
@@ -125,6 +153,12 @@ public class SpielFenster
         return mainPanel;
     }
     
+    /**
+     * Erzeugt das Panel für den Knopf "Beenden".
+     * 
+     * @param  opaque - Legt fest, ob das Panel durchsichtig sein soll.
+     * @return - das erzeugte Panel
+     */
     public JPanel erzeugeBeendenPanel(boolean opaque)
     {
         JPanel beendenPanel = new JPanel(new GridLayout(1, 0, 5, 5));
@@ -134,6 +168,12 @@ public class SpielFenster
         return beendenPanel;
     }
     
+    /**
+     * Erzeugt das Panel für die Knöpfe "Hit" und "Stand"
+     * 
+     * @param  opaque - Legt fest, ob das Panel durchsichtig sein soll.
+     * @return - das erzeugte Panel
+     */
     public JPanel erzeugeKnoepfePanel(boolean opaque)
     {
         knopfHit.setOpaque(true);
@@ -151,6 +191,12 @@ public class SpielFenster
         return knoepfePanel;
     }
     
+    /**
+     * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
+     * 
+     * @param  y    ein Beispielparameter für eine Methode
+     * @return        die Summe aus x und y
+     */
     public JPanel erzeugeKartenPanel(int farbe, int index)
     {
         Image image = null;
@@ -170,16 +216,28 @@ public class SpielFenster
         return kartenPanel;
     }
     
-    public JTextPane erzeugeKartenwertPane()
+    public JTextPane erzeugeSpielerKartenwertPane()
     {
-        kartenwertPane.setText("0");
-        kartenwertPane.setOpaque(true);
-        return kartenwertPane;
+        spielerKartenwertPane.setText("0");
+        spielerKartenwertPane.setOpaque(true);
+        return spielerKartenwertPane;
     }
     
-    public void updateKartenwertPane(int kartenwert)
+    public JTextPane erzeugeDealerKartenwertPane()
     {
-        kartenwertPane.setText(Integer.toString(kartenwert));
+        dealerKartenwertPane.setText("0");
+        dealerKartenwertPane.setOpaque(true);
+        return dealerKartenwertPane;
+    }
+    
+    public void updateSpielerKartenwertPane(int kartenwert)
+    {
+        spielerKartenwertPane.setText(Integer.toString(kartenwert));
+    }
+    
+    public void updateDealerKartenwertPane(int kartenwert)
+    {
+        dealerKartenwertPane.setText(Integer.toString(kartenwert));
     }
     
     public JButton getKnopfHit()
