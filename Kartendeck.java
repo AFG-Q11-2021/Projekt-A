@@ -1,7 +1,8 @@
-/* 
- * Klasse Kartendeck:
- * Verwaltet alle Karten
- * von Paul und Joel
+/**
+ * Verwaltet alle 52 Karten im Kartendeck.
+ * 
+ * @author (Paul Görner, Joel Bitterlich)
+ * @version (04.07.2021)
  */
 import java.util.Random;
 
@@ -9,7 +10,11 @@ public class Kartendeck
 {
     private Karte[] kartendeck;
     private int kartendeckGroeße;
-
+    
+    /**
+     * Konstruktor für Objekte der Klasse Kartendeck
+     * Setzt alle 52 Karten mit einmaliger Farbe und Index in eine Liste.
+     */
     public Kartendeck()
     {
         kartendeck = new Karte[52];
@@ -24,6 +29,10 @@ public class Kartendeck
         kartenNeuMischen();
     }
     
+    /**
+     * Zeiht eine Karte von oben aus der Liste.
+     * Ist die Liste leer wird das Kartedeck neugemischt.
+     */
     public Karte karteZiehen(){
         if(kartendeckGroeße == 0){
             kartenNeuMischen();
@@ -32,6 +41,9 @@ public class Kartendeck
         return kartendeck[kartendeckGroeße];
     }
     
+    /**
+     * Mischt die Karte zufällig in der Liste.
+     */
     public void kartenNeuMischen(){
         Karte zwischenspeicher;
         Random random = new Random();     

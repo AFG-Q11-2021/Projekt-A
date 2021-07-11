@@ -1,10 +1,9 @@
 /**
- * Beschreiben Sie hier die Klasse PopupFenster.
+ * Erzeugt ein Popupfenster.
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * @author (Paul Görner) 
+ * @version (09.07.2021)
  */
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,6 +14,9 @@ public class PopupFenster
     private JLabel ereignisLabel, beendenLabel;
     private ImageIcon knopfJaIcon, knopfNeinIcon, ereignisIcon, beendenIcon;
     
+    /**
+     * Konstruktor für Objekte der Klasse PupupFenster.
+     */
     public PopupFenster()
     {
         beendenFenster = new JDialog();
@@ -27,7 +29,12 @@ public class PopupFenster
         knopfNein = new JButton(knopfNeinIcon);
     }
     
-    public void popupFensterErzeugen(int ereignis){
+    /**
+     * Erzeugt das PopupFenster.
+     * 
+     * @param ereignis - Gibt an mit welchem Bild das PopupFenster gefüllt wird
+     */
+    public void erzeugen(int ereignis){
         beendenFenster.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-300);
         if(ereignis == 0)
         {
@@ -41,11 +48,15 @@ public class PopupFenster
         beendenFenster.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         beendenFenster.setResizable(false);
     }
-
-    public void closePopupFenster()
+    
+    /**
+     * Schließt das Pupupfenster.
+     */
+    public void schließen()
     {
         beendenFenster.dispose();
     }
+    
     public JPanel verwaltenPanel(boolean opaque, int ereignis)
     {
         ereignisLabel = new JLabel();
@@ -71,6 +82,7 @@ public class PopupFenster
             ereignisLabel.setPreferredSize(new Dimension(360,50));
             ereignisLabel.setIcon(ereignisIcon);
             ereignisLabel.setOpaque(true);
+            
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.gridwidth = 2;
             gbc.gridx = 0;

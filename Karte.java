@@ -1,32 +1,32 @@
-/*
- *  Klasse Karte:
- *  Erzeugt die Karten
- *  Zeigt Bilder der Karten
- *  Von: Paul, Sachsa, Julian
+/**
+ * Erzeugt die Karte mit den Variablen Farbe und Index.
+ * 
+ * @author (Paul Görner, Sachsa Kuckelkorn, Julian Kupfer)
+ * @version (04.07.2021)
  */
-
 public class Karte
-{
-    private static int KREUZ=0, PIK=1, HERZ=2, KARO=3;
-    private static int BUBE=11, DAME=12, KOENIG=13, ASS=1; 
+{ 
     private int index, farbe;
-    
-    /*
-     * Konstruktor der Klasse Karte:
-     * Farbe und Index werden bei der Erzeugung mitgegeben.
+    /**
+     * Konstruktor für Objekte der Klasse Karte.
+     * Farbe und Index werden beim erzeugen einer Karte mitgegeben.
      */
     public Karte(int newFarbe, int newIndex){
         farbe = newFarbe;
         index = newIndex;
     }
     
-    // Methode zum Geben des Index
+    /**
+     * Gibt den Index einer Karte zurück.
+     */
     public int getIndex()
     {
         return index;
     }
     
-    // Methode zum Geben der Farbe
+    /**
+     * Gibt die Farbe einer Karte zurück.
+     */
     public int getFarbe(){
         return farbe;
     }

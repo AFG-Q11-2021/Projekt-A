@@ -56,15 +56,10 @@ public class GraphicManager implements ActionListener
     }
     
     /**
-     * Methode die beobachtet, ob bestimmte Knöpfe auf Haupt-, Spiel- oder PopupFenster gedrückt wurden.
-     * 
-     * @param  e - 
+     * Beobachtet, ob bestimmte Knöpfe auf Haupt-, Spiel- oder PopupFenster gedrückt werden.
      */
     public void actionPerformed(ActionEvent e)
     {   
-        /**
-         * 
-         */
         if(e.getSource() == hauptfenster.getKnopfSingleplayer())
         {
             hauptfenster.schließen();
@@ -91,7 +86,7 @@ public class GraphicManager implements ActionListener
         
         else if(e.getSource() == hauptfenster.getKnopfBeenden())
         {
-            popupfenster.popupFensterErzeugen(0);
+            popupfenster.erzeugen(0);
         }
         
         if(spiel.getSpielstatus() == true)
@@ -102,72 +97,72 @@ public class GraphicManager implements ActionListener
                 spielfenster.spielerKarteHinzufügen(spiel.getSpielerKartenfarbe(), spiel.getSpielerKartenindex(), spiel.getSpielerkartenwert());
                 if(spiel.gewonnenMitBlackjack() == true)
                 {
-                    sleep(3000);
                     spiel.setSpielstatus(false);
-                    popupfenster.popupFensterErzeugen(1);
+                    popupfenster.erzeugen(1);
                 }
                 if(spiel.verlorenWegenUeberzogen() == true)
                 {
-                    sleep(3000);
                     spiel.setSpielstatus(false);
-                    popupfenster.popupFensterErzeugen(2);
+                    popupfenster.erzeugen(2);
                 }
             }
             else if(e.getSource() == spielfenster.getKnopfStand())
             {
-                spiel.setSpielstatus(false);
                 while(17 > spiel.getDealerkartenwert()){
-                    sleep(2000);
                     spiel.dealerZiehtKarte();
                     spielfenster.dealerKarteHinzufügen(spiel.getDealerKartenfarbe(),spiel.getDealerKartenindex(),spiel.getDealerkartenwert());
                 }
+                spiel.setSpielstatus(false);
                 if(spiel.gewonnenMitDealerUeberzogen() == true)
                 {
-                    sleep(3000);
-                    popupfenster.popupFensterErzeugen(3);
+                    popupfenster.erzeugen(3);
                 }
                 if(spiel.gewonnenMitAugenzahl() == true)
                 {
-                    sleep(3000);
-                    popupfenster.popupFensterErzeugen(4);
+                    popupfenster.erzeugen(4);
                 }
                 if(spiel.verlorenWegenAugenzahl() == true)
                 {
-                    sleep(3000);
-                    popupfenster.popupFensterErzeugen(5);
+                    popupfenster.erzeugen(5);
                 }
-                if(spiel.verlorenWegenGleicherAugenzahl())
+                if(spiel.verlorenWegenGleicherAugenzahl() == true)
                 {
-                    sleep(3000);
-                    popupfenster.popupFensterErzeugen(5);
+                    popupfenster.erzeugen(5);
                 }
-            }    
+            }
+            if(e.getSource() == popupfenster.getKnopfJa())
+            {
+                spielfenster.schließen();
+                new GraphicManager();
+                popupfenster.schließen();
+            }
+            else if(e.getSource() == popupfenster.getKnopfNein())
+            {
+                popupfenster.schließen();
+            }
+        }
+        else
+        {
+            if(e.getSource() == popupfenster.getKnopfJa())
+            {
+                hauptfenster.schließen();
+                popupfenster.schließen();
+            }
+            else if(e.getSource() == popupfenster.getKnopfNein())
+            {
+                popupfenster.schließen();
+            }
         }
         
         if(e.getSource() == spielfenster.getKnopfBeenden())
         {
-            popupfenster.popupFensterErzeugen(0);
-        }
-        
-        if(e.getSource() == popupfenster.getKnopfJa())
-        {
-            //hauptfenster.erzeugen();
-            //spielfenster.kartenEntfernen();
-            spielfenster.schließen();
-            //spiel.remake();
-            new GraphicManager();
-            popupfenster.closePopupFenster();
-        }
-        else if(e.getSource() == popupfenster.getKnopfNein())
-        {
-            popupfenster.closePopupFenster();
+            popupfenster.erzeugen(0);
         }
     }
     /**
      * Lässt den Thread eine bestimmte Zeit pausieren.
      * 
-     * @param  millis    Gibt and, wie viele Millisekunden der Thread pausiert wird.
-     * @return        die Summe aus x und y
+     * @param  millis - Gibt an wie viele Millisekunden der Thread pausiert wird.
      */
     private static void sleep(long millis) {
         try {

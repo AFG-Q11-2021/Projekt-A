@@ -1,24 +1,16 @@
-/*
- * Amelie & Vroni
+/**
+ * Klasse Spieler erbt aus der Klasse SpielerManager und
+ * ergänzt wichtige Methoden für den Spieler.
+ * 
+ * @author (Amelie Kleber, Veronika Klobensteiner) 
+ * @version (30.05.2021)
  */
 public class Spieler extends SpielerManager
 {
-    private int budget;
-    
+    /**
+     * Konstruktor für Objekte der Klasse Spieler
+     */
     public Spieler()
     {
-        budget = 1000;
-    }
-    
-    public int budgetErhoehen(int erhoehung)
-    {
-        budget = budget + erhoehung;
-        return budget;
-    }
-    
-    public int budgetVerringern(int verringerung)
-    {
-        budget = budget - verringerung;
-        return budget;
     }
 }

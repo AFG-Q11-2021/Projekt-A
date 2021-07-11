@@ -1,3 +1,9 @@
+/**
+ * Klasse Main setzt das LookAndFeel und startet die GUI.
+ * 
+ * @author (Paul Görner) 
+ * @version (05.07.2021)
+ */
 import javax.swing.*;
 
 public class Main

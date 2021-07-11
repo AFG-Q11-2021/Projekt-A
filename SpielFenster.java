@@ -62,9 +62,55 @@ public class SpielFenster
     }
     
     /**
+     * Schließt das Spielfenster.
+     */
+    public void schließen()
+    {
+        frame.dispose();
+    }
+    
+    /**
+     * Fügt Spielerkarte mit entsprechenden werden ein.
+     * 
+     * @param farbe - Gibt die Farbe der einzufügenden Karte mit.
+     * @param index - Gibt den Index der einzufügenden Karte mit.
+     * @param kartenwert - Gibt den Kartenwert für das JTextPane an.
+     */
+    public void spielerKarteHinzufügen(int farbe, int index, int kartenwert)
+    {
+        updateSpielerKartenwertPane(kartenwert);
+        southcenterPanel.add(erzeugeKartenPanel(farbe, index));
+        southcenterPanel.revalidate();
+    }
+    
+    /**
+     * Fügt Dealerkarte mit entsprechenden werden ein.
+     * 
+     * @param farbe - Gibt die Farbe der einzufügenden Karte mit.
+     * @param index - Gibt den Index der einzufügenden Karte mit.
+     * @param kartenwert - Gibt den Kartenwert für das JTextPane an.
+     */
+    public void dealerKarteHinzufügen(int farbe, int index, int kartenwert)
+    {
+        updateDealerKartenwertPane(kartenwert);
+        northcenterPanel.add(erzeugeKartenPanel(farbe, index));
+        northcenterPanel.revalidate();
+    }
+    
+    /**
+     * Entfernt alle Karten auf dem Layout.
+     */
+    public void kartenEntfernen()
+    {
+        northcenterPanel.removeAll();
+        southcenterPanel.removeAll();
+        northcenterPanel.revalidate();
+    }
+    
+    /**
      * Erzeugt ein Panel mit dem Layout, auf welchem die Karten später eingefügt werden.
      * 
-     * @return        das erzeugte Panel
+     * @return - das erzeugte Panel
      */
     public JPanel erzeugeKartenLayout()
     {
@@ -81,45 +127,6 @@ public class SpielFenster
         
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         return mainPanel;
-    }
-    
-    /**
-     * Fügt Dealerkarte mit entsprechenden werden ein.
-     * 
-     * @param  farbe - Gibt die Farbe der einzufügenden Karte mit.
-     * @param index - Gibt den Index der einzufügenden Karte mit.
-     * @param kartenwert - Gibt den Kartenwert für das JTextPane an.
-     */
-    public void dealerKarteHinzufügen(int farbe, int index, int kartenwert)
-    {
-        updateDealerKartenwertPane(kartenwert);
-        northcenterPanel.add(erzeugeKartenPanel(farbe, index));
-        northcenterPanel.revalidate();
-    }
-    
-    public void spielerKarteHinzufügen(int farbe, int index, int kartenwert)
-    {
-        updateSpielerKartenwertPane(kartenwert);
-        southcenterPanel.add(erzeugeKartenPanel(farbe, index));
-        southcenterPanel.revalidate();
-    }
-    
-    /**
-     * Entfernt alle Karten auf dem Layout.
-     */
-    public void kartenEntfernen()
-    {
-        northcenterPanel.removeAll();
-        southcenterPanel.removeAll();
-        northcenterPanel.revalidate();
-    }
-    
-    /**
-     * Schließt das Spielfenster.
-     */
-    public void schließen()
-    {
-        frame.dispose();
     }
     
     /**
@@ -154,7 +161,7 @@ public class SpielFenster
     }
     
     /**
-     * Erzeugt das Panel für den Knopf "Beenden".
+     * Erzeugt ein JPanel für den Knopf "Beenden".
      * 
      * @param  opaque - Legt fest, ob das Panel durchsichtig sein soll.
      * @return - das erzeugte Panel
@@ -169,10 +176,10 @@ public class SpielFenster
     }
     
     /**
-     * Erzeugt das Panel für die Knöpfe "Hit" und "Stand"
+     * Erzeugt ein JPanel für die Knöpfe "Hit" und "Stand"
      * 
      * @param  opaque - Legt fest, ob das Panel durchsichtig sein soll.
-     * @return - das erzeugte Panel
+     * @return - das erzeugte JPanel
      */
     public JPanel erzeugeKnoepfePanel(boolean opaque)
     {
@@ -192,10 +199,11 @@ public class SpielFenster
     }
     
     /**
-     * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
+     * Erzeugt das JPanel für die eingefügten Karten
      * 
-     * @param  y    ein Beispielparameter für eine Methode
-     * @return        die Summe aus x und y
+     * @param farbe - Gibt die Farbe der einzufügenden Karte mit.
+     * @param index - Gibt den Index der einzufügenden Karte mit.
+     * @return - das erzeugte JPanel
      */
     public JPanel erzeugeKartenPanel(int farbe, int index)
     {
