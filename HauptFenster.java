@@ -127,9 +127,6 @@ public class HauptFenster
         knopfBeenden.setOpaque(true);
         knopfBeenden.setPreferredSize(new Dimension(180,50));
         
-        JPanel knoepfePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        knoepfePanel.setOpaque(opaque);
-        
         JPanel knoepfePanelLinks = new JPanel(new FlowLayout(FlowLayout.LEFT));
         knoepfePanelLinks.setOpaque(opaque);
         knoepfePanelLinks.add(knopfProfil);
@@ -138,8 +135,20 @@ public class HauptFenster
         knoepfePanelRechts.setOpaque(opaque);
         knoepfePanelRechts.add(knopfBeenden);
         
-        knoepfePanel.add(knoepfePanelLinks);
-        knoepfePanel.add(knoepfePanelRechts);
+        JPanel knoepfePanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        knoepfePanel.setOpaque(opaque);
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        knoepfePanel.add(knoepfePanelLinks, gbc);
+        
+        gbc.gridwidth = 1;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        knoepfePanel.add(knoepfePanelRechts, gbc);
         return knoepfePanel;
     }
     
@@ -152,7 +161,17 @@ public class HauptFenster
     {
         return knopfMultiplayer;
     }
-
+    
+    public JButton getKnopfRegeln()
+    {
+        return knopfRegeln;
+    }
+    
+    public JButton getKnopfCredits()
+    {
+        return knopfCredits;
+    }
+    
     public JButton getKnopfProfil()
     {
         return knopfProfil;

@@ -23,6 +23,7 @@ public class GraphicManager implements ActionListener
     private SpielFenster spielfenster;
     private HauptFenster hauptfenster;
     private PopupFenster popupfenster;
+    private SonstigeFenster regelnfenster, creditsfenster;
     
     private Spiel spiel;
 
@@ -39,9 +40,13 @@ public class GraphicManager implements ActionListener
         spielfenster = new SpielFenster();
         hauptfenster = new HauptFenster();
         popupfenster = new PopupFenster();
+        regelnfenster = new SonstigeFenster();
+        creditsfenster = new SonstigeFenster();
         
         hauptfenster.getKnopfSingleplayer().addActionListener(this);
         hauptfenster.getKnopfMultiplayer().addActionListener(this);
+        hauptfenster.getKnopfCredits().addActionListener(this);
+        hauptfenster.getKnopfRegeln().addActionListener(this);
         hauptfenster.getKnopfProfil().addActionListener(this);
         hauptfenster.getKnopfBeenden().addActionListener(this);
         
@@ -79,11 +84,18 @@ public class GraphicManager implements ActionListener
             
         }
 
+        else if(e.getSource() == hauptfenster.getKnopfRegeln())
+        {
+            regelnfenster.erzeugen(1);
+        }
+        else if(e.getSource() == hauptfenster.getKnopfCredits())
+        {
+            creditsfenster.erzeugen(2);
+        }
         else if(e.getSource() == hauptfenster.getKnopfProfil())
         {
             
         }
-        
         else if(e.getSource() == hauptfenster.getKnopfBeenden())
         {
             popupfenster.erzeugen(0);
