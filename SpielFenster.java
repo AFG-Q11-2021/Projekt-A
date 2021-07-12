@@ -194,7 +194,7 @@ public class SpielFenster
         knoepfePanel.setOpaque(opaque);
         knoepfePanel.add(knopfHit);
         knoepfePanel.add(knopfStand);
-        //Ereignisverarbeitung fehlt!
+        
         return knoepfePanel;
     }
     

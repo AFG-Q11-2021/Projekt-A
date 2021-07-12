@@ -16,10 +16,10 @@ public class HauptFenster
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private JPanel knoepfePanel;
     private JFrame frame;
-    private JButton knopfSingleplayer, knopfMultiplayer, knopfProfil, knopfBeenden;
+    private JButton knopfSingleplayer, knopfMultiplayer, knopfProfil, knopfCredits, knopfRegeln, knopfBeenden;
     private JTextArea blackjack;
     
-    private ImageIcon knopfSingleplayerIcon, knopfMultiplayerIcon, knopfProfilIcon, knopfBeendenIcon;
+    private ImageIcon knopfSingleplayerIcon, knopfMultiplayerIcon, knopfProfilIcon, knopfCreditsIcon, knopfRegelnIcon, knopfBeendenIcon;
 
     /**
      * Konstruktor für Objekte der Klasse HauptFenster
@@ -27,22 +27,24 @@ public class HauptFenster
     public HauptFenster()
     {
         frame = new JFrame();
-        // Instanzvariable initialisieren
+        
         knopfSingleplayerIcon = new ImageIcon(getClass().getResource("\\res\\knopfStart.jpg"));
         knopfMultiplayerIcon = new ImageIcon(getClass().getResource("\\res\\knopfMultiplayer.jpg"));
         knopfProfilIcon = new ImageIcon(getClass().getResource("\\res\\knopfProfil.jpg"));
+        knopfCreditsIcon = new ImageIcon(getClass().getResource("\\res\\knopfCredits.jpg"));
+        knopfRegelnIcon = new ImageIcon(getClass().getResource("\\res\\knopfRegeln.jpg"));
         knopfBeendenIcon = new ImageIcon(getClass().getResource("\\res\\knopfClose.jpg"));
-        
         
         knopfSingleplayer = new JButton(knopfSingleplayerIcon);
         knopfMultiplayer = new JButton(knopfMultiplayerIcon);
         knopfProfil = new JButton(knopfProfilIcon);
+        knopfCredits = new JButton(knopfCreditsIcon);
+        knopfRegeln = new JButton(knopfRegelnIcon);
         knopfBeenden = new JButton(knopfBeendenIcon);
     }
     
     public void erzeugen()
     {
-        frame.setName("Blackjack-Hauptmenü");
         frame.setSize(400,600);
         frame.setResizable(false);
         frame.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,Toolkit.getDefaultToolkit().getScreenSize().height/2-300);
@@ -71,49 +73,73 @@ public class HauptFenster
         mainPanel.setImage(image); //hier kann man einstellen, ob das Bild im Original oder eingepasst ausgegeben werden soll (true/false)
         
         mainPanel.setOpaque(false);
-        mainPanel.add(erzeugeKnoepfePanel(mainPanel.isOpaque()), BorderLayout.CENTER);
+        mainPanel.add(erzeugeKnoepfePanelTop(mainPanel.isOpaque()), BorderLayout.NORTH);
+        mainPanel.add(erzeugeKnoepfePanelCenter(mainPanel.isOpaque()), BorderLayout.CENTER);
         
         return mainPanel;
     }
     
-    public JPanel erzeugeKnoepfePanel(boolean opaque)
+    public JPanel erzeugeKnoepfePanelCenter(boolean opaque)
     {
         knopfSingleplayer.setOpaque(true);
         knopfSingleplayer.setPreferredSize(new Dimension(180,50));
         knopfMultiplayer.setOpaque(true);
         knopfMultiplayer.setPreferredSize(new Dimension(180,50));
-        knopfProfil.setOpaque(true);
-        knopfProfil.setPreferredSize(new Dimension(180,50));
-        knopfBeenden.setOpaque(true);
-        knopfBeenden.setPreferredSize(new Dimension(180,50));
+        knopfRegeln.setOpaque(true);
+        knopfRegeln.setPreferredSize(new Dimension(360,50));
+        knopfCredits.setOpaque(true);
+        knopfCredits.setPreferredSize(new Dimension(360,50));
         
         JPanel knoepfePanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         knoepfePanel.setOpaque(opaque);
         
-        //JPanel center1Panel = new JPanel(new FloLayout());
-        
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 0;
         knoepfePanel.add(knopfSingleplayer, gbc);
         
+        gbc.gridwidth = 1;
         gbc.gridx = 1;
         gbc.gridy = 0;
         knoepfePanel.add(knopfMultiplayer, gbc);
         
-        
+        gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        knoepfePanel.add(knopfProfil, gbc);
+        knoepfePanel.add(knopfRegeln, gbc);
         
-        
+        gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 2;
-        knoepfePanel.add(knopfBeenden, gbc);
-        //Ereignisverarbeitung fehlt!
+        knoepfePanel.add(knopfCredits, gbc);
+        
+        return knoepfePanel;
+    }
+    
+    public JPanel erzeugeKnoepfePanelTop(boolean opaque)
+    {
+        knopfProfil.setOpaque(true);
+        knopfProfil.setPreferredSize(new Dimension(180,50));
+        knopfBeenden.setOpaque(true);
+        knopfBeenden.setPreferredSize(new Dimension(180,50));
+        
+        JPanel knoepfePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        knoepfePanel.setOpaque(opaque);
+        
+        JPanel knoepfePanelLinks = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        knoepfePanelLinks.setOpaque(opaque);
+        knoepfePanelLinks.add(knopfProfil);
+        
+        JPanel knoepfePanelRechts = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        knoepfePanelRechts.setOpaque(opaque);
+        knoepfePanelRechts.add(knopfBeenden);
+        
+        knoepfePanel.add(knoepfePanelLinks);
+        knoepfePanel.add(knoepfePanelRechts);
         return knoepfePanel;
     }
     

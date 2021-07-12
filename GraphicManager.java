@@ -141,7 +141,7 @@ public class GraphicManager implements ActionListener
                 popupfenster.schließen();
             }
         }
-        else
+        else if(spiel.getSpielstatus() == false)
         {
             if(e.getSource() == popupfenster.getKnopfJa())
             {
@@ -153,7 +153,6 @@ public class GraphicManager implements ActionListener
                 popupfenster.schließen();
             }
         }
-        
         if(e.getSource() == spielfenster.getKnopfBeenden())
         {
             popupfenster.erzeugen(0);

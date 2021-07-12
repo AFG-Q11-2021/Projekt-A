@@ -1,7 +1,7 @@
 /**
  * Klasse SpielerManager enthält wichtige Methoden für Dealer und Spieler.
  * 
- * @author (Amelie Kleber, Veronika Klobensteiner) 
+ * @author (Paul Görner, Amelie Kleber, Veronika Klobensteiner) 
  * @version (30.05.2021)
  */
 public class SpielerManager
