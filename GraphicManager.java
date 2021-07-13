@@ -109,12 +109,10 @@ public class GraphicManager implements ActionListener
                 spielfenster.spielerKarteHinzufügen(spiel.getSpielerKartenfarbe(), spiel.getSpielerKartenindex(), spiel.getSpielerkartenwert());
                 if(spiel.gewonnenMitBlackjack() == true)
                 {
-                    spiel.setSpielstatus(false);
                     popupfenster.erzeugen(1);
                 }
                 if(spiel.verlorenWegenUeberzogen() == true)
                 {
-                    spiel.setSpielstatus(false);
                     popupfenster.erzeugen(2);
                 }
             }
@@ -124,7 +122,6 @@ public class GraphicManager implements ActionListener
                     spiel.dealerZiehtKarte();
                     spielfenster.dealerKarteHinzufügen(spiel.getDealerKartenfarbe(),spiel.getDealerKartenindex(),spiel.getDealerkartenwert());
                 }
-                spiel.setSpielstatus(false);
                 if(spiel.gewonnenMitDealerUeberzogen() == true)
                 {
                     popupfenster.erzeugen(3);

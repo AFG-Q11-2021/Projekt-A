@@ -145,7 +145,7 @@ public class SpielFenster
             ioe.getClass().getName(),
             JOptionPane.WARNING_MESSAGE);
         }
-        mainPanel.setImage(image); //hier kann man einstellen, ob das Bild im Original oder eingepasst ausgegeben werden soll (true/false)
+        mainPanel.setImage(image, true); //hier kann man einstellen, ob das Bild im Original oder eingepasst ausgegeben werden soll (true/false)
         
         JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         southPanel.setOpaque(false); //entscheidet, ob das Button-Panel durchsichtig sein soll
