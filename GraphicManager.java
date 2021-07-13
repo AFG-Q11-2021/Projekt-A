@@ -138,6 +138,10 @@ public class GraphicManager implements ActionListener
                 {
                     popupfenster.erzeugen(5);
                 }
+                if(spiel.verlorenWegenDealerBlackjack() == true)
+                {
+                    popupfenster.erzeugen(5);
+                }
             }
             if(e.getSource() == popupfenster.getKnopfJa())
             {
