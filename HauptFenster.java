@@ -14,10 +14,8 @@ import java.io.IOException;
 public class HauptFenster
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private JPanel knoepfePanel;
     private JFrame frame;
     private JButton knopfSingleplayer, knopfMultiplayer, knopfProfil, knopfCredits, knopfRegeln, knopfBeenden;
-    private JTextArea blackjack;
     
     private ImageIcon knopfSingleplayerIcon, knopfMultiplayerIcon, knopfProfilIcon, knopfCreditsIcon, knopfRegelnIcon, knopfBeendenIcon;
 
