@@ -4,22 +4,12 @@
  * @author (Paul Görner, Rafael Marsmann)
  * @version (04.07.2021)
  */
-
-import javax.swing.JFrame;
-import javax.swing.ImageIcon;
-import java.awt.Toolkit;
-import java.awt.Color;
-import java.awt.BorderLayout;
-
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 
 public class GraphicManager implements ActionListener
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private ImageIcon fensterIcon;
-    private JFrame frame;
-    
     private SpielFenster spielfenster;
     private HauptFenster hauptfenster;
     private PopupFenster popupfenster;
@@ -32,9 +22,6 @@ public class GraphicManager implements ActionListener
      */
     public GraphicManager()
     {
-        fensterIcon = new ImageIcon(getClass().getResource("\\res\\Icon.png"));
-        frame = new JFrame();
-        
         spiel = new Spiel();
         
         spielfenster = new SpielFenster();
@@ -169,17 +156,6 @@ public class GraphicManager implements ActionListener
         if(e.getSource() == spielfenster.getKnopfBeenden())
         {
             popupfenster.erzeugen(0);
-        }
-    }
-    /**
-     * Lässt den Thread eine bestimmte Zeit pausieren.
-     * 
-     * @param  millis - Gibt an wie viele Millisekunden der Thread pausiert wird.
-     */
-    private static void sleep(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException ignored) {
         }
     }
 }

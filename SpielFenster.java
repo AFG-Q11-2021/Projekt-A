@@ -15,7 +15,7 @@ import java.io.IOException;
 public class SpielFenster
 {
     private JFrame frame;
-    private ImageIcon dealertischIcon, karteIcon, knopfHitIcon, knopfStandIcon, knopfBeendenIcon;
+    private ImageIcon knopfHitIcon, knopfStandIcon, knopfBeendenIcon;
     private JButton knopfHit, knopfStand, knopfBeenden;
     private JPanel northcenterPanel, southcenterPanel;
     private JTextPane spielerKartenwertPane, dealerKartenwertPane;
